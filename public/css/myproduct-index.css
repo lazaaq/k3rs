@@ -1,0 +1,11 @@
+.wrap-box {
+    padding: 2vw;
+    margin: 1vw;
+    border: 1px black solid;
+    border-radius: 1vw;
+    background-color: white;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
