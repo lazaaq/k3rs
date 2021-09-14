@@ -1,4 +1,3 @@
-
 @extends('layouts/dashboard')
 
 @section('title', 'Briefing | Show')
@@ -21,6 +20,14 @@
 
 @section('contents')
 <section class="content pb-5 container">
+    @if(session()->has('success_update'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success_update') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
     <div class="row py-2">
         <div class="col-2">
             <b>Id</b>
@@ -49,6 +56,7 @@
         <div class="col-2">
             <b>Presence</b>
         </div>
+        @if(count($briefing_presence) != 0)
         <div class="col-10">
             <table class="table table-hover table-stripped">
                 <tr>
@@ -57,14 +65,19 @@
                     <th>Presence</th>
                 </tr>
                 @for($i = 0; $i < $employees->count(); $i++)
-                <tr>
-                    <td>{{ $employees[$i]->id }}</td>
-                    <td>{{ $employees[$i]->name }}</td>
-                    <td>@if( $briefing_presence[$i]->presence == '1') Hadir @else Tidak Hadir @endif</td>
-                </tr>
-                @endfor
+                    <tr>
+                        <td>{{ $employees[$i]->id }}</td>
+                        <td>{{ $employees[$i]->name }}</td>
+                        <td>@if( $briefing_presence[$i]->presence == '1') Hadir @else Tidak Hadir @endif</td>
+                    </tr>
+                    @endfor
             </table>
         </div>
+        @else
+        <div class="text-success">
+            Tidak ada
+        </div>
+        @endif
     </div>
     <div class="row py-2">
         <div class="col-2">
@@ -82,7 +95,7 @@
             {{ $briefing->updated_at }}
         </div>
     </div>
-    
+
     <a href="/dashboard/briefing" class="btn btn-primary mt-5">Back</a>
 </section>
 @endsection

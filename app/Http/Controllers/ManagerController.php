@@ -20,15 +20,32 @@ class ManagerController extends Controller
         ]);
     }
 
+    public function add(Request $request)
+    {
+        $validatedData = $request->validate([
+            'salary_id' => 'required',
+            'name' => 'required',
+            'email' => 'required',
+            'address' => 'required',
+            'birth' => 'required',
+            'gender' => 'required',
+
+        ]);
+        Manager::create($validatedData);
+        return redirect('/dashboard/manager')->with('success_added', 'Data berhasil ditambahkan!');
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    // public function create()
-    // {
-    //     //
-    // }
+    public function create()
+    {
+        return view('dashboard/manager/create', [
+            'active' => '',
+
+        ]);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -49,7 +66,7 @@ class ManagerController extends Controller
 
         Manager::where('id', $request->id)->update($validatedData);
 
-        return redirect('dashboard/manager')->with('success_update', 'Data berhasil diubah!');
+        return redirect('dashboard/manager/' . $request->id)->with('success_update', 'Data berhasil diubah!');
     }
 
     /**
@@ -58,11 +75,11 @@ class ManagerController extends Controller
      * @param  \App\Models\Manager  $manager
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Manager $manager)
     {
         return view('dashboard/manager/show', [
             'active' => '',
-            'manager' => Manager::find($id),
+            'manager' => $manager,
 
         ]);
     }
@@ -73,11 +90,11 @@ class ManagerController extends Controller
      * @param  \App\Models\Manager  $manager
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Manager $manager)
     {
         return view('dashboard/manager/edit', [
             'active' => '',
-            'manager' => Manager::find($id),
+            'manager' => $manager,
             
         ]);
     }
@@ -89,10 +106,10 @@ class ManagerController extends Controller
      * @param  \App\Models\Manager  $manager
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    // public function update(Request $request, $id)
+    // {
         
-    }
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -100,10 +117,9 @@ class ManagerController extends Controller
      * @param  \App\Models\Manager  $manager
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Manager $manager)
     {
-        $selectedData = Manager::find($id);
-        $selectedData->delete();
+        $manager->delete();
         return redirect('dashboard/manager')->with('success_delete', 'Data berhasil dihapus');
     }
 }

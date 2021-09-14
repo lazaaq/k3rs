@@ -35,7 +35,7 @@
             <textarea class="form-control" id="address" name="address" rows="5" required>{{ $employee->address }}</textarea>
         </div>
         <div class="mb-3">
-            <label for="brith" class="form-label">Birth</label>
+            <label for="birth" class="form-label">Birth</label>
             <input type="date" class="form-control" id="birth" name="birth" value="{{ $employee->birth }}" required>
         </div>
         <div class="mb-3">

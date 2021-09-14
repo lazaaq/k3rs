@@ -20,6 +20,14 @@
 
 @section('contents')
 <section class="content pb-5 container">
+    @if(session()->has('success_update'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success_update') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
     <div class="row justify-content-center my-5">
         <img src="{{ $apar->image }}" alt="Image" width="80%" height="auto">
     </div>

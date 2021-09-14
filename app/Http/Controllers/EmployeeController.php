@@ -15,21 +15,39 @@ class EmployeeController extends Controller
     public function index()
     {
         return view('dashboard/employee/index', [
-            'employees' => Employee::paginate(10),
+            'employees' => Employee::latest()->paginate(10),
             'active' => 'employee',
             
         ]);
     }
 
+    public function add(Request $request)
+    {
+        $validatedData = $request->validate([
+            'manager_id' => 'required',
+            'salary_id' => 'required',
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'address' => 'required',
+            'birth' => 'required',
+            'gender' => 'required',
+        ]);
+        Employee::create($validatedData);
+        return redirect('/dashboard/employee')->with('success_added', 'Data berhasil ditambahkan!');
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    // public function create()
-    // {
-    //     //
-    // }
+    public function create()
+    {
+        return view('dashboard/employee/create', [
+            'active' => '',
+
+        ]);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -47,7 +65,7 @@ class EmployeeController extends Controller
             'gender' => 'required',
         ]);
         Employee::where('id', $request->id)->update($validatedData);
-        return redirect('dashboard/employee')->with('success_update', 'Data berhasil diubah!');
+        return redirect('dashboard/employee/' . $request->id)->with('success_update', 'Data berhasil diubah!');
     }
 
     /**

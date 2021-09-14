@@ -21,15 +21,33 @@ class AparController extends Controller
         ]);
     }
 
+    public function add(Request $request)
+    {
+        $validatedData = $request->validate([
+            'image' => 'required',
+            'time' => 'required',
+            'location' => 'required',
+            'code' => 'required',
+            'expired' => 'required',
+            'condition' => 'required',
+            'detail' => 'required',
+        ]);
+
+        Apar::create($validatedData);
+        return redirect('/dashboard/apar')->with('success_added', 'Data berhasil ditambahkan!');
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    // public function create()
-    // {
-        
-    // }
+    public function create()
+    {
+        return view('dashboard/apar/create', [
+            'active' => '',
+
+        ]);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -53,7 +71,7 @@ class AparController extends Controller
 
         Apar::where('id', $request->id)->update($validatedData);
 
-        return redirect('/dashboard/apar')->with('success_update', 'Data Berhasil Diubah!');
+        return redirect('/dashboard/apar/' . $request->id)->with('success_update', 'Data Berhasil Diubah!');
     }
 
     /**

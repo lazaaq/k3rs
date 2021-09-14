@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\RegulasiController;
@@ -49,11 +50,15 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/dashboard/regulasi', RegulasiController::class);
     Route::post('/dashboard/regulasi/create/store', [RegulasiController::class, 'add']);
     Route::resource('/dashboard/apar', AparController::class);
+    Route::post('/dashboard/apar/create/store', [AparController::class, 'add']);
     Route::resource('/dashboard/news', NewsController::class);
     Route::post('/dashboard/news/create/store', [NewsController::class, 'add']);
     Route::resource('/dashboard/employee', EmployeeController::class);
+    Route::post('/dashboard/employee/create/store', [EmployeeController::class, 'add']);
     Route::resource('/dashboard/manager', ManagerController::class);
+    Route::post('/dashboard/manager/create/store', [ManagerController::class, 'add']);
     Route::resource('/dashboard/briefing', BriefingController::class);
+    Route::post('/dashboard/briefing/create/store', [BriefingController::class, 'add']);
     Route::resource('/dashboard/accident', AccidentController::class);
     Route::get('/dashboard/accident/{accident}/ve/{victim}', [AccidentVictimEmployeeController::class, 'index']);
     Route::get('/dashboard/accident/{accident}/vne/{victim}', [AccidentVictimNonEmployeeController::class, 'index']);
@@ -62,5 +67,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/disease/{disease}/ve/{victim}', [DiseaseVictimEmployeeController::class, 'index']);
     Route::get('/dashboard/disease/{disease}/vne/{victim}', [DiseaseVictimNonEmployeeController::class, 'index']);
     Route::get('/dashboard/disease/{disease}/w/{witness}', [DiseaseWitnessController::class, 'index']);
-});
 
+    //profil
+    Route::get('/profil', [ProfilController::class, 'index']);
+    Route::get('/profil/change', [ProfilController::class, 'change']);
+    Route::post('/profil', [ProfilController::class, 'change_profil']);
+    Route::get('/profil/check', [ProfilController::class, 'check']);
+    Route::post('/profil/check', [ProfilController::class, 'check_password']);
+    // Route::get('/profil/change_password', [ProfilController::class, 'change_password']);
+    // Route::post('/profil/change_password', [ProfilController::class, 'change_password_post']);
+
+});
