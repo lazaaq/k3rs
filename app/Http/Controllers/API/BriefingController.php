@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Briefing;
 use App\Models\BriefingPresence;
+use Faker\Provider\Lorem;
 use Illuminate\Http\Request;
 
 class BriefingController extends Controller
@@ -54,8 +55,8 @@ class BriefingController extends Controller
             for ($i=0; $i<count($request->presence); $i++){
                 $briefing_presence = BriefingPresence::create([
                     'briefing_id' => $briefing->id,
-                    'employee_id' => $request->presence[$i]->employee_id,
-                    'presence' => 1,
+                    'employee_id' => $request->presence[$i]['employee_id'],
+                    'presence' => $request->presence[$i]['presence'],
 
                 ]);
                 array_push($presences, $briefing_presence);

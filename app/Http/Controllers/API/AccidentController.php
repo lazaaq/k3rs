@@ -57,9 +57,9 @@ class AccidentController extends Controller
             'image' => $accidentValidate['accident_image'],
         ]);
 
-        if ($request->has('victim_employee_id')) {
+        if ($request->has('victim_employee')) {
             $victim_employee_validate = $request->validate([
-                'victim_employee_employee_id' => 'required',
+                'victim_employee_id' => 'required',
                 'victim_employee_salary_range' => 'required',
                 'victim_employee_chronology' => 'required',
                 'victim_employee_first_aid' => 'required',
@@ -78,7 +78,7 @@ class AccidentController extends Controller
             ]);
         }
 
-        if ($request->has('victim_non_employee_id')) {
+        if ($request->has('victim_non_employee')) {
             $victim_non_employee_validate = $request->validate([
                 'victim_non_employee_name' => 'required',
                 'victim_non_employee_birth' => 'required',
@@ -97,7 +97,7 @@ class AccidentController extends Controller
             ]);
         }
 
-        if ($request->has('witness_id')) {
+        if ($request->has('witness')) {
             $witness_validate = $request->validate([
                 'witness_name' => 'required',
                 'witness_birth' => 'required',
