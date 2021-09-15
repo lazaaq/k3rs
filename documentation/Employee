@@ -1,0 +1,52 @@
+Untuk login, gunakan credential berikut :
+email     : admin@gmail.com
+password  : admin
+
+
+1. Mendapatkan semua employee
+URL     : hostname/api/employee
+method  : GET
+Respon  : 
+{
+  'message' : 'Success',
+  'employees' : Employee::all(),
+}
+
+2. Mendapatkan employee (dengan id)
+URL     : hostname/api/employee/{employee} . 
+Ket     : {employee} diisi dengan id employee yang dipilih
+method  : GET
+Respon  : 
+{
+  'message' : 'Success',
+  'employee' : $employee,
+}
+
+3. Membuat employee
+URL     : hostname/api/employee
+Ket     : diperlukan data request dari user (manager_id, salary_id, name, email, password, address, birth, gender). 
+method  : POST
+Respon  : 
+{
+  'message' : 'Success',
+  'employee' : $employee,
+}
+
+4. Mengubah employee
+URL     : hostname/api/employee/{employee}
+Ket     : diperlukan data request dari user (manager_id, salary_id, name, email, password, address, birth, gender). {employee} diisi dengan id employee yang dipilih
+method  : PUT
+Respon  : 
+{
+  'message' : 'Success',
+  'employee' : $employee,
+}
+
+5. Menghapus employee
+URL     : hostname/api/employee/{employee}
+Ket     : {employee} diisi dengan id employee yang dipilih
+method  : DELETE
+Respon  : 
+{
+  'message' : 'Success',
+}

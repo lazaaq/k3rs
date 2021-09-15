@@ -1,0 +1,52 @@
+Untuk login, gunakan credential berikut :
+email     : admin@gmail.com
+password  : admin
+
+
+1. Mendapatkan semua regulasi
+URL     : hostname/api/regulasi
+method  : GET
+Respon  : 
+{
+  'message' : 'success',
+  'regulasis' : Regulasi::all(),
+}
+
+2. Mendapatkan regulasi (dengan id tertentu)
+URL     : hostname/api/regulasi/{regulasi} . 
+Ket     : {regulasi} diisi dengan id regulasi yang dipilih
+method  : GET
+Respon  : 
+{
+  'message' : 'Success',
+  'regulasi' : $regulasi,
+}
+
+3. Membuat Regulasi
+URL     : hostname/api/regulasi
+Ket     : diperlukan data request dari user (title, description, file)
+method  : POST
+Respon  : 
+{
+  'message' : 'Success',
+  'regulasi' : $regulasi,
+}
+
+4. Mengubah Regulasi
+URL     : hostname/api/regulasi/{regulasi}
+Ket     : diperlukan data request dari user (title, description, file). {regulasi} diisi dengan id regulasi yang dipilih.
+method  : PUT
+Respon  : 
+{
+  'message' : 'Success',
+  'regulasi' : $regulasi,
+}
+
+5. Menghapus Regulasi
+URL     : hostname/api/regulasi/{regulasi}
+Ket     : {regulasi} diisi dengan id regulasi yang dipilih.
+method  : DELETE
+Respon  : 
+{
+  'message' : 'Success',
+}

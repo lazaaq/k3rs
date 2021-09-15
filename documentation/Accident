@@ -1,0 +1,61 @@
+Untuk login, gunakan credential berikut :
+email     : admin@gmail.com
+password  : admin
+
+
+1. Mendapatkan semua accident
+URL     : hostname/api/accident
+method  : GET
+Respon  :
+{
+  'message' : 'Success',
+  'accidents' => Accident::all()
+}
+
+2. Mendapatkan accident (dengan id)
+URL     : hostname/api/accident/{accident}.
+Ket     : {accident} diisi dengan id accident yang dipilih
+method  : GET
+Respon  :
+{
+  'message' : 'Success',
+  'accident' : $accident,
+  'victim_employee' : $victim_employee,
+  'victim_non_employee' : $victim_non_employee,
+  'witness' : $witness
+}
+
+3. Membuat accident (Still working on it)
+URL     : hostname/api/accident
+Ket     : diperlukan data request dari user (accident_employee_id, accident_time, accident_location, accident_image)
+method  : POST
+Respon  :
+{
+  'message' : 'Success',
+  'accident' : $accident,
+  'victim_employee' : $victim_employee,
+  'victim_non_employee' : $victim_non_employee,
+  'witness' : $witness
+}
+
+4. Mengubah accident (Still working on it)
+URL     : hostname/api/accident/{accident}
+Ket     : diperlukan data request dari user (accident_employee_id, accident_time, accident_location, accident_image). {accident} diisi dengan id accident yang dipilih.
+method  : PUT
+Respon  :
+{
+  'message' : 'Success',
+  'accident' : $accident,
+  'victim_employee' : $victim_employee,
+  'victim_non_employee' : $victim_non_employee,
+  'witness' : $witness
+}
+
+5. Menghapus accident
+URL     : hostname/api/accident/{accident}
+Ket     : {accident} diisi dengan id accident yang dipilih
+method  : DELETE
+Respon  :
+{
+  'message' : 'Success',
+}

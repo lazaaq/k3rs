@@ -1,0 +1,59 @@
+Untuk login, gunakan credential berikut :
+email     : admin@gmail.com
+password  : admin
+
+
+1. Mendapatkan semua briefing
+URL     : hostname/api/briefing
+method  : GET
+Respon  : 
+{
+  'message' : 'Success',
+  'briefings' : Briefings::all(),
+}
+
+
+2. Mendapatkan briefing (dengan id)
+URL     : hostname/api/briefing/{briefing} . 
+Ket     : {briefing} diisi dengan id briefing yang dipilih
+method  : GET
+Respon  :
+{
+  'message' : 'Success',
+  'briefing' : $briefing,
+  'presences' : $presences,
+}
+
+3. Membuat briefing (still working on it)
+URL     : hostname/api/briefing
+Ket     : diperlukan data request dari user (time, result).
+method  : POST
+data tambahan (briefing_presence/kehadiran briefing) :
+harus menyertakan properti json bernama "presence" dengan isi berupa array.
+setiap objek di dalam array harus memuat data berikut -> briefing_id(foreignId -> Briefing), employee_id (foreignId -> Employee), presence (bool).
+Respon  :
+{
+  'message' : 'Success',
+  'briefing' : $briefing,
+  'presences' : $presences,
+}
+
+4. Mengubah briefing (Still working on it)
+URL     : hostname/api/briefing/{briefing}
+Ket     : diperlukan data request dari user (time, result). {briefing} diisi dengan id briefing yang dipilih.
+method  : PUT
+Respon  :
+{
+  'message' : 'Success',
+  'briefing' : $briefing,
+  'presences' : $presences,
+}
+
+5. Menghapus briefing
+URL     : hostname/api/briefing/{briefing}
+Ket     : {briefing} diisi dengan id briefing yang dipilih.
+method  : DELETE
+Respon  :
+{
+  'message' : 'Success',
+}

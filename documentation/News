@@ -1,0 +1,52 @@
+Untuk login, gunakan credential berikut :
+email     : admin@gmail.com
+password  : admin
+
+
+1. Mendapatkan semua News
+URL     : hostname/api/news
+method  : GET
+Respon  : 
+{
+  'message' : 'Success',
+  'newss' : News::all(),
+}
+
+2. Mendapatkan News (dengan id)
+URL     : hostname/api/news/{news}
+Ket     : {News} diisi dengan id News yang dipilih
+method  : GET
+Respon  : 
+{
+  'message' : 'Success',
+  'news' : $news,
+}
+
+3. Membuat News
+URL     : hostname/api/news
+Ket     : diperlukan data request dari user (title, author, image, excerpt, body).
+method  : POST
+Respon  : 
+{
+  'message' : 'Success',
+  'news' : $news,
+}
+
+4. Mengubah News
+URL     : hostname/api/news/{news}
+Ket     : diperlukan data request dari user (title, author, image, excerpt, body). {news} diisi dengan id News yang dipilih.
+method  : PUT
+Respon  : 
+{
+  'message' : 'Success',
+  'news' : $news,
+}
+
+5. Menghapus News
+URL     : hostname/api/news/{news}
+Ket     : {news} diisi dengan id News yang dipilih.
+method  : DELETE
+Respon  : 
+{
+  'message' : 'Success',
+}

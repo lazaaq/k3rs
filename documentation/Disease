@@ -1,0 +1,61 @@
+Untuk login, gunakan credential berikut :
+email     : admin@gmail.com
+password  : admin
+
+
+1. Mendapatkan semua disease
+URL     : hostname/api/disease
+method  : GET
+Respon  :
+{
+  'message' : 'Success',
+  'accidents' => Accident::all()
+}
+
+2. Mendapatkan disease (dengan id)
+URL     : hostname/api/disease/{disease} . 
+Ket     : {disease} diisi dengan id disease yang dipilih
+method  : GET
+Respon  :
+{
+  'message' : 'Success',
+  'disease' : $disease,
+  'victim_employee' : $victim_employee,
+  'victim_non_employee' : $victim_non_employee,
+  'witness' : $witness
+}
+
+3. Membuat disease (Still working on it)
+URL     : hostname/api/disease
+Ket     : diperlukan data request dari user (disease_employee_id, disease_time, disease_location, disease_image)
+method  : POST
+Respon  :
+{
+  'message' : 'Success',
+  'disease' : $disease,
+  'victim_employee' : $victim_employee,
+  'victim_non_employee' : $victim_non_employee,
+  'witness' : $witness
+}
+
+4. Mengubah disease (Still working on it)
+URL     : hostname/api/disease/{disease}
+Ket     : diperlukan data request dari user (disease_employee_id, disease_time, disease_location, disease_image). {disease} diisi dengan id disease yang dipilih.
+method  : PUT
+Respon  :
+{
+  'message' : 'Success',
+  'disease' : $disease,
+  'victim_employee' : $victim_employee,
+  'victim_non_employee' : $victim_non_employee,
+  'witness' : $witness
+}
+
+5. Menghapus disease
+URL     : hostname/api/disease/{disease}
+Ket     : {disease} diisi dengan id disease yang dipilih
+method  : DELETE
+Respon  :
+{
+  'message' : 'Success',
+}

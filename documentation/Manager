@@ -1,0 +1,52 @@
+Untuk login, gunakan credential berikut :
+email     : admin@gmail.com
+password  : admin
+
+
+1. Mendapatkan semua manager
+URL     : hostname/api/manager
+method  : GET
+Respon  : 
+{
+  'message' : 'Success',
+  'managers' : Manager::all(),
+}
+
+2. Mendapatkan manager (dengan id)
+URL     : hostname/api/manager/{manager}
+Ket     : {manager} diisi dengan id manager yang dipilih
+method  : GET
+Respon  : 
+{
+  'message' : 'Success',
+  'manager' : $manager,
+}
+
+3. Membuat manager
+URL     : hostname/api/manager
+Ket     : diperlukan data request dari user (salary_id, name, email, address, birth, gender).
+method  : POST
+Respon  : 
+{
+  'message' : 'Success',
+  'manager' : $manager,
+}
+
+4. Mengubah manager
+URL     : hostname/api/manager/{manager}
+Ket     : diperlukan data request dari user (salary_id, name, email, address, birth, gender). {manager} diisi dengan id manager yang dipilih.
+method  : PUT
+Respon  : 
+{
+  'message' : 'Success',
+  'manager' : $manager,
+}
+
+5. Menghapus manager
+URL     : hostname/api/manager/{manager}
+Ket     : {manager} diisi dengan id manager yang dipilih.
+method  : DELETE
+Respon  : 
+{
+  'message' : 'Success',
+}

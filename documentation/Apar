@@ -1,0 +1,52 @@
+Untuk login, gunakan credential berikut :
+email     : admin@gmail.com
+password  : admin
+
+
+1. Mendapatkan semua apar
+URL     : hostname/api/apar
+method  : GET
+Respon  : 
+{
+  'message' : 'Success',
+  'apars' : Apar::all(),
+}
+
+2. Mendapatkan apar (dengan id)
+URL     : hostname/api/apar/{apar}
+Ket     : {apar} diisi dengan id apar yang dipilih.
+method  : GET
+Respon  : 
+{
+  'message' : 'Success',
+  'apar' : $apar,
+}
+
+3. Membuat apar
+URL     : hostname/api/apar
+Ket     : diperlukan data request dari user (image, time, location, code, expired, condition, detail).
+method  : POST
+Respon  : 
+{
+  'message' : 'Success',
+  'apar' : $apar,
+}
+
+4. Mengubah apar
+URL     : hostname/api/apar/{apar}
+Ket     : diperlukan data request dari user (image, time, location, code, expired, condition, detail). {apar} diisi dengan id apar yang dipilih.
+method  : PUT
+Respon  : 
+{
+  'message' : 'Success',
+  'apar' : $apar,
+}
+
+5. Menghapus apar
+URL     : hostname/api/apar/{apar}
+Ket     : {apar} diisi dengan id apar yang dipilih.
+method  : DELETE
+Respon  : 
+{
+  'message' : 'Success',
+}
