@@ -15,16 +15,18 @@ class AuthController extends Controller
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
-                'message' => 'Unauthorized',
+                'success' => false,
+                'message' => 'Berhasil Login!',
             ],401);
         }
 
         $token = $user->createToken('token');
 
         return response()->json([
+            'success' => true,
             'message' => 'Authorized',
             'user' => $user,
-            'token' => $token
+            'token' => $token->plainTextToken
         ], 200);
     }
 
