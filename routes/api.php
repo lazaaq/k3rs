@@ -27,12 +27,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware => auth:sanctum'], function(){
-    Route::resource('/regulasi', RegulasiController::class);
-    Route::resource('/apar', AparController::class);
-    Route::resource('/news', NewsController::class);
-    Route::resource('/employee', EmployeeController::class);
-    Route::resource('/manager', ManagerController::class);
-    Route::resource('/briefing', BriefingController::class);
+    Route::resource('/regulasi', RegulasiController::class)->only(['index', 'show']);
+    Route::resource('/apar', AparController::class)->only(['index', 'show', 'update']);
+    Route::resource('/news', NewsController::class)->only(['index', 'show']);
+    Route::resource('/employee', EmployeeController::class)->only(['index', 'show', 'update']);
+    Route::put('/employee/{employee}/ganti_password', [EmployeeController::class, 'ganti_password']);
+    Route::resource('/manager', ManagerController::class)->only(['index', 'show']);
+    Route::resource('/briefing', BriefingController::class)->only(['index', 'show', 'update']);
     Route::resource('/accident', AccidentController::class);
     Route::resource('/disease', DiseaseController::class);
 });

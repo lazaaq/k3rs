@@ -27,10 +27,10 @@ class RegulasiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function create()
-    // {
-    //     //
-    // }
+    public function create()
+    {
+        //
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -75,10 +75,10 @@ class RegulasiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function edit(Regulasi $regulasi)
-    // {
+    public function edit(Regulasi $regulasi)
+    {
         
-    // }
+    }
 
     /**
      * Update the specified resource in storage.

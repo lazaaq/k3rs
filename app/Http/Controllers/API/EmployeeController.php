@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Employee;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
@@ -27,10 +28,10 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function create()
-    // {
-    //     //
-    // }
+    public function create()
+    {
+        //
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -80,10 +81,10 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function edit(Employee $employee)
-    // {
+    public function edit(Employee $employee)
+    {
         
-    // }
+    }
 
     /**
      * Update the specified resource in storage.
@@ -95,21 +96,48 @@ class EmployeeController extends Controller
     public function update(Request $request, Employee $employee)
     {
         $validatedData = $request->validate([
-            'manager_id' => 'required',
-            'salary_id' => 'required',
             'name' => 'required',
             'email' => 'required',
-            'password' => 'required',
             'address' => 'required',
-            'birth' => 'required',
-            'gender' => 'required',
         ]);
-        $employee->update($validatedData);
+        $employee->update([
+            'name' => $validatedData['name'],
+            'name' => $validatedData['email'],
+            'name' => $validatedData['address']
+        ]);
         return response()->json([
             'message' => 'Success',
             'employee' => $employee,
 
         ], 200);
+    }
+
+    public function ganti_password(Request $request, Employee $employee)
+    {
+        $validatedData = $request->validate([
+            'password_old' => 'required',
+            'password_new' => 'required',
+            'password_repass' => 'required',
+        ]);
+        if (!Hash::check($validatedData['password_old'], $employee->password)){
+            return response()->json([
+                'message' => 'Unauthorized',
+                'error' => 'Password_old salah!',
+            ],401);
+        }
+        if ($validatedData['password_new'] != $validatedData['password_repass']){
+            return response()->json([
+                'message' => 'Unauthorized',
+                'error' => 'Password_new dan password_repass tidak sama!',
+            ],401);
+        }
+        $employee->update([
+            'password' => Hash::make($validatedData['password_new'])
+        ]);
+        return response()->json([
+            'message' => 'Success',
+        ], 200);
+
     }
 
     /**
