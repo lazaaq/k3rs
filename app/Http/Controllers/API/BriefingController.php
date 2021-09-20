@@ -82,7 +82,7 @@ class BriefingController extends Controller
         return response()->json([
             'message' => 'Success',
             'briefing' => $briefing,
-            'presences' => BriefingPresence::where('briefing_id', $briefing->id)->get(),
+            'presences' => BriefingPresence::where('briefing_id', $briefing->id)->first()->get(),
 
         ], 200);
     }
