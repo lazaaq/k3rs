@@ -94,16 +94,15 @@ class AparController extends Controller
     public function update(Request $request, Apar $apar)
     {
         $validatedData = $request->validate([
-            'image' => 'required',
-            'time' => 'required',
-            'location' => 'required',
-            'code' => 'required',
-            'expired' => 'required',
             'condition' => 'required',
             'detail' => 'required',
         ]);
 
-        $apar->update($validatedData);
+        $apar->update([
+            'condition' => $validatedData['condition'],
+            'detail' => $validatedData['detail']
+        ]);
+
         return response()->json([
             'message' => 'Success',
             'apar' => $apar,

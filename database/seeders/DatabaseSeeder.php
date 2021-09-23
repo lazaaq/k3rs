@@ -7,12 +7,11 @@ use App\Models\User;
 use App\Models\Employee;
 use App\Models\Regulasi;
 use App\Models\Apar;
-use App\Models\Briefing;
-use App\Models\BriefingPresence;
 use App\Models\Manager;
 use App\Models\News;
 use App\Models\Salary;
 use App\Models\UserApi;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -44,6 +43,17 @@ class DatabaseSeeder extends Seeder
         UserApi::create([
             'email' => 'admin@gmail.com',
             'password' => 'admin'
+        ]);
+
+        Employee::create([
+            'manager_id' => '1',
+            'salary_id' => '1',
+            'name' => 'Lana Saiful Aqil',
+            'email' => 'lanasaiful411@gmail.com',
+            'password' => Hash::make('admin'),
+            'address' => 'address',
+            'birth' => '2002-11-04',
+            'gender' => 'L'
         ]);
 
     }

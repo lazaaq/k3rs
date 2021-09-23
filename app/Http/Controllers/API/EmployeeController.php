@@ -102,8 +102,8 @@ class EmployeeController extends Controller
         ]);
         $employee->update([
             'name' => $validatedData['name'],
-            'name' => $validatedData['email'],
-            'name' => $validatedData['address']
+            'email' => $validatedData['email'],
+            'address' => $validatedData['address']
         ]);
         return response()->json([
             'message' => 'Success',
@@ -112,7 +112,7 @@ class EmployeeController extends Controller
         ], 200);
     }
 
-    public function ganti_password(Request $request, Employee $employee)
+    public function change_password(Request $request, Employee $employee)
     {
         $validatedData = $request->validate([
             'password_old' => 'required',
@@ -122,20 +122,21 @@ class EmployeeController extends Controller
         if (!Hash::check($validatedData['password_old'], $employee->password)){
             return response()->json([
                 'message' => 'Unauthorized',
-                'error' => 'Password_old salah!',
+                'error' => 'Password_old salah!'
             ],401);
         }
         if ($validatedData['password_new'] != $validatedData['password_repass']){
             return response()->json([
-                'message' => 'Unauthorized',
+                'message' => 'Failed',
                 'error' => 'Password_new dan password_repass tidak sama!',
-            ],401);
+            ],402);
         }
         $employee->update([
             'password' => Hash::make($validatedData['password_new'])
         ]);
         return response()->json([
             'message' => 'Success',
+            'password_new' => $employee->password,
         ], 200);
 
     }

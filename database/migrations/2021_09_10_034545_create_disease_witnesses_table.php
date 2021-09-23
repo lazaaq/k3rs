@@ -16,12 +16,12 @@ class CreateDiseaseWitnessesTable extends Migration
         Schema::create('disease_witnesses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('disease_id');
-            $table->string('name');
-            $table->date('birth');
+            $table->string('name')->nullable();
+            $table->date('birth')->nullable();
             $table->char('nik', 16)->nullable();
-            $table->enum('gender', ['L', 'P']);
-            $table->text('address');
-            $table->string('job');
+            $table->enum('gender', ['L', 'P'])->nullable();
+            $table->text('address')->nullable();
+            $table->string('job')->nullable();
             $table->timestamps();
         });
     }

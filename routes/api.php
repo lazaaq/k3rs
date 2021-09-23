@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\RegulasiController;
 use App\Http\Controllers\API\AparController;
+use App\Http\Controllers\API\NewsController;
 use App\Http\Controllers\API\EmployeeController;
 use App\Http\Controllers\API\ManagerController;
 use App\Http\Controllers\API\BriefingController;
@@ -31,7 +32,7 @@ Route::group(['middleware => auth:sanctum'], function(){
     Route::resource('/apar', AparController::class)->only(['index', 'show', 'update']);
     Route::resource('/news', NewsController::class)->only(['index', 'show']);
     Route::resource('/employee', EmployeeController::class)->only(['index', 'show', 'update']);
-    Route::put('/employee/{employee}/ganti_password', [EmployeeController::class, 'ganti_password']);
+    Route::put('/employee/{employee}/change_password', [EmployeeController::class, 'change_password']);
     Route::resource('/manager', ManagerController::class)->only(['index', 'show']);
     Route::resource('/briefing', BriefingController::class)->only(['index', 'show', 'update']);
     Route::resource('/accident', AccidentController::class)->only(['index', 'show', 'store']);

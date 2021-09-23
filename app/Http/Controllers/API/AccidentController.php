@@ -61,23 +61,15 @@ class AccidentController extends Controller
         if ($request->has('victim_employee')) {
             for ($i = 0; $i < count($request->victim_employee); $i++) {
                 $victim = $request->victim_employee[$i];
-                // $victim_validate = $victim->validate([
-                //     'victim_employee_id' => 'required',
-                //     'victim_employee_salary_range' => 'required',
-                //     'victim_employee_chronology' => 'required',
-                //     'victim_employee_first_aid' => 'required',
-                //     'victim_employee_effect' => 'required',
-                //     'victim_employee_condition' => 'required',
-                // ]);
 
                 $victim_employee_ = AccidentVictimEmployee::create([
                     'accident_id' => $accident->id,
                     'employee_id' => $victim['victim_employee_id'],
-                    'salary_range' => $victim['victim_employee_salary_range'],
-                    'chronology' => $victim['victim_employee_chronology'],
-                    'first_aid' => $victim['victim_employee_first_aid'],
-                    'effect' => $victim['victim_employee_effect'],
-                    'condition' => $victim['victim_employee_condition'],
+                    'salary_range' => $victim['victim_employee_salary_range'] ?? NULL,
+                    'chronology' => $victim['victim_employee_chronology'] ?? NULL,
+                    'first_aid' => $victim['victim_employee_first_aid'] ?? NULL,
+                    'effect' => $victim['victim_employee_effect'] ?? NULL,
+                    'condition' => $victim['victim_employee_condition'] ?? NULL,
                 ]);
 
                 array_push($victim_employee, $victim_employee_);
@@ -88,21 +80,14 @@ class AccidentController extends Controller
         if ($request->has('victim_non_employee')) {
             for ($i = 0; $i < count($request->victim_non_employee); $i++) {
                 $victim = $request->victim_non_employee[$i];
-                // $victim_validate = $victim->validate([
-                //     'victim_non_employee_name' => 'required',
-                //     'victim_non_employee_birth' => 'required',
-                //     'victim_non_employee_gender' => 'required',
-                //     'victim_non_employee_address' => 'required',
-                //     'victim_non_employee_job' => 'required',
-                // ]);
 
                 $victim_non_employee_ = AccidentVictimNonEmployee::create([
                     'accident_id' => $accident->id,
-                    'name' => $victim['victim_non_employee_name'],
-                    'birth' => $victim['victim_non_employee_birth'],
-                    'gender' => $victim['victim_non_employee_gender'],
-                    'address' => $victim['victim_non_employee_address'],
-                    'job' => $victim['victim_non_employee_job'],
+                    'name' => $victim['victim_non_employee_name'] ?? NULL,
+                    'birth' => $victim['victim_non_employee_birth'] ?? NULL,
+                    'gender' => $victim['victim_non_employee_gender'] ?? NULL,
+                    'address' => $victim['victim_non_employee_address'] ?? NULL,
+                    'job' => $victim['victim_non_employee_job'] ?? NULL,
                 ]);
 
                 array_push($victim_non_employee, $victim_non_employee_);
@@ -114,27 +99,16 @@ class AccidentController extends Controller
         if ($request->has('witness')) {
             for ($i = 0; $i < count($request->witness); $i++) {
                 $this_witness = $request->witness[$i];
-                // $witness_validate = $this_witness->validate([
-                //     'witness_name' => 'required',
-                //     'witness_birth' => 'required',
-                //     'witness_address' => 'required',
-                //     'witness_gender' => 'required',
-                //     'witness_job' => 'required',
-                // ]);
 
                 $witness_ = AccidentWitness::create([
                     'accident_id' => $accident->id,
-                    'name' => $this_witness['witness_name'],
-                    'birth' => $this_witness['witness_birth'],
-                    'address' => $this_witness['witness_address'],
-                    'gender' => $this_witness['witness_gender'],
-                    'job' => $this_witness['witness_job'],
+                    'name' => $this_witness['witness_name'] ?? NULL,
+                    'birth' => $this_witness['witness_birth'] ?? NULL,
+                    'nik' => $this_witness['witness_nik'] ?? NULL,
+                    'address' => $this_witness['witness_address'] ?? NULL,
+                    'gender' => $this_witness['witness_gender'] ?? NULL,
+                    'job' => $this_witness['witness_job'] ?? NULL,
                 ]);
-                if (array_key_exists("witness_nik", $this_witness)){
-                    $witness_->update([
-                        'nik' => $this_witness['witness_nik'],
-                    ]);
-                }
 
                 array_push($witness, $witness_);
             }

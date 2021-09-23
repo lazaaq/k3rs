@@ -16,11 +16,11 @@ class CreateDiseaseVictimNonEmployeesTable extends Migration
         Schema::create('disease_victim_non_employees', function (Blueprint $table) {
             $table->id();
             $table->foreignId('disease_id');
-            $table->string('name');
-            $table->date('birth');
-            $table->enum('gender', ['L', 'P']);
-            $table->text('address');
-            $table->string('job');
+            $table->string('name')->nullable();
+            $table->date('birth')->nullable();
+            $table->enum('gender', ['L', 'P'])->nullable();
+            $table->text('address')->nullable();
+            $table->string('job')->nullable();
             $table->timestamps();
         });
     }

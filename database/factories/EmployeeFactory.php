@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Employee;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeFactory extends Factory
 {
@@ -26,7 +27,7 @@ class EmployeeFactory extends Factory
             'salary_id' => mt_rand(1,5),
             'name' => $this->faker->name(),
             'email' => $this->faker->email(),
-            'password' => $this->faker->sentence(),
+            'password' => Hash::make('password'),
             'address' => $this->faker->paragraph(3),
             'birth' => $this->faker->date(),
             'gender' => $this->faker->randomElement(['L', 'P']),
