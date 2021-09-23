@@ -2,17 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\BriefingPresence;
+use App\Models\AccidentWitnessEmployee;
+use App\Models\Accident;
+use App\Models\Employee;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class BriefingPresenceFactory extends Factory
+class AccidentWitnessEmployeeFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = BriefingPresence::class;
+    protected $model = AccidentWitnessEmployee::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +24,9 @@ class BriefingPresenceFactory extends Factory
     public function definition()
     {
         return [
-            'presence' => mt_rand(0, 1),
+            'accident_id' => mt_rand(1, Accident::all()->count()),
+            'employee_id' => mt_rand(1, Employee::all()->count()),
+            
         ];
     }
 }

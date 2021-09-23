@@ -61,23 +61,4 @@ class ProfilController extends Controller
         return redirect('/profil')->with('success_change_password', 'Password berhasil diubah!');
     }
 
-    // public function change_password()
-    // {
-    //     return view('dashboard/user/change_password', [
-    //         'active' => '',
-    //         'user' => Auth::user(),
-
-    //     ]);
-    // }
-
-    // public function change_password_post(Request $request)
-    // {
-    //     if ($request->password1 != $request->password2){
-    //         return back()->with('error_confirm_password', 'Password tidak sama!');
-    //     }
-    //     User::find($request->id)->update([
-    //         'password' => Hash::make($request->password1),
-    //     ]);
-    //     return redirect('/profil')->with('success_change_password', 'Password berhasil diubah!');
-    // }
 }

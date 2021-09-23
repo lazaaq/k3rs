@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Accident;
 use App\Models\AccidentVictimEmployee;
 use App\Models\AccidentVictimNonEmployee;
-use App\Models\AccidentWitness;
+use App\Models\AccidentWitnessEmployee;
+use App\Models\AccidentWitnessNonEmployee;
 use Illuminate\Http\Request;
 
 class AccidentController extends Controller
@@ -41,20 +42,21 @@ class AccidentController extends Controller
     {
         $victim_employee = array();
         $victim_non_employee = array();
-        $witness = array();
+        $witness_employee = array();
+        $witness_non_employee = array();
 
         $accidentValidate = $request->validate([
-            'accident_employee_id' => 'required',
-            'accident_time' => 'required',
-            'accident_location' => 'required',
-            'accident_image' => 'required',
+            'employee_id' => 'required',
+            'time' => 'required',
+            'location' => 'required',
+            'image' => 'required',
 
         ]);
         $accident = Accident::create([
-            'employee_id' => $accidentValidate['accident_employee_id'],
-            'time' => $accidentValidate['accident_time'],
-            'location' => $accidentValidate['accident_location'],
-            'image' => $accidentValidate['accident_image'],
+            'employee_id' => $accidentValidate['employee_id'],
+            'time' => $accidentValidate['time'],
+            'location' => $accidentValidate['location'],
+            'image' => $accidentValidate['image'],
         ]);
 
         // Victim Employee
@@ -64,12 +66,12 @@ class AccidentController extends Controller
 
                 $victim_employee_ = AccidentVictimEmployee::create([
                     'accident_id' => $accident->id,
-                    'employee_id' => $victim['victim_employee_id'],
-                    'salary_range' => $victim['victim_employee_salary_range'] ?? NULL,
-                    'chronology' => $victim['victim_employee_chronology'] ?? NULL,
-                    'first_aid' => $victim['victim_employee_first_aid'] ?? NULL,
-                    'effect' => $victim['victim_employee_effect'] ?? NULL,
-                    'condition' => $victim['victim_employee_condition'] ?? NULL,
+                    'employee_id' => $victim['employee_id'],
+                    'salary_range' => $victim['salary_range'] ?? NULL,
+                    'chronology' => $victim['chronology'] ?? NULL,
+                    'first_aid' => $victim['first_aid'] ?? NULL,
+                    'effect' => $victim['effect'] ?? NULL,
+                    'condition' => $victim['condition'] ?? NULL,
                 ]);
 
                 array_push($victim_employee, $victim_employee_);
@@ -83,11 +85,11 @@ class AccidentController extends Controller
 
                 $victim_non_employee_ = AccidentVictimNonEmployee::create([
                     'accident_id' => $accident->id,
-                    'name' => $victim['victim_non_employee_name'] ?? NULL,
-                    'birth' => $victim['victim_non_employee_birth'] ?? NULL,
-                    'gender' => $victim['victim_non_employee_gender'] ?? NULL,
-                    'address' => $victim['victim_non_employee_address'] ?? NULL,
-                    'job' => $victim['victim_non_employee_job'] ?? NULL,
+                    'name' => $victim['name'] ?? NULL,
+                    'birth' => $victim['birth'] ?? NULL,
+                    'gender' => $victim['gender'] ?? NULL,
+                    'address' => $victim['address'] ?? NULL,
+                    'job' => $victim['job'] ?? NULL,
                 ]);
 
                 array_push($victim_non_employee, $victim_non_employee_);
@@ -95,22 +97,36 @@ class AccidentController extends Controller
         }
 
 
-        // Witness
-        if ($request->has('witness')) {
-            for ($i = 0; $i < count($request->witness); $i++) {
-                $this_witness = $request->witness[$i];
+        // Witness Employee
+        if ($request->has('witness_employee')) {
+            for ($i = 0; $i < count($request->witness_employee); $i++) {
+                $witness = $request->witness_employee[$i];
 
-                $witness_ = AccidentWitness::create([
+                $witness_ = AccidentWitnessEmployee::create([
                     'accident_id' => $accident->id,
-                    'name' => $this_witness['witness_name'] ?? NULL,
-                    'birth' => $this_witness['witness_birth'] ?? NULL,
-                    'nik' => $this_witness['witness_nik'] ?? NULL,
-                    'address' => $this_witness['witness_address'] ?? NULL,
-                    'gender' => $this_witness['witness_gender'] ?? NULL,
-                    'job' => $this_witness['witness_job'] ?? NULL,
+                    'employee_id' => $witness['employee_id']
                 ]);
 
-                array_push($witness, $witness_);
+                array_push($witness_employee, $witness_);
+            }
+        }
+
+        // Witness Non Employee
+        if ($request->has('witness_non_employee')) {
+            for ($i = 0; $i < count($request->witness_non_employee); $i++) {
+                $witness = $request->witness_non_employee[$i];
+
+                $witness_ = AccidentWitnessNonEmployee::create([
+                    'accident_id' => $accident->id,
+                    'name' => $witness['name'] ?? NULL,
+                    'birth' => $witness['birth'] ?? NULL,
+                    'nik' => $witness['nik'] ?? NULL,
+                    'address' => $witness['address'] ?? NULL,
+                    'gender' => $witness['gender'] ?? NULL,
+                    'job' => $witness['job'] ?? NULL,
+                ]);
+
+                array_push($witness_non_employee, $witness_);
             }
         }
 
@@ -119,7 +135,8 @@ class AccidentController extends Controller
             'accident' => $accident,
             'victim_employee' => $victim_employee,
             'victim_non_employee' => $victim_non_employee,
-            'witness' => $witness
+            'witness_employee' => $witness_employee,
+            'witness_non_employee' => $witness_non_employee,
 
         ], 200);
     }
@@ -137,7 +154,8 @@ class AccidentController extends Controller
             'accident' => $accident,
             'victim_employee' => AccidentVictimEmployee::where('accident_id', $accident->id)->get(),
             'victim_non_employee' => AccidentVictimNonEmployee::where('accident_id', $accident->id)->get(),
-            'witness' => AccidentWitness::where('accident_id', $accident->id)->get(),
+            'witness_employee' => AccidentWitnessEmployee::where('accident_id', $accident->id)->get(),
+            'witness_non_employee' => AccidentWitnessNonEmployee::where('accident_id', $accident->id)->get(),
 
         ], 200);
     }
@@ -246,12 +264,12 @@ class AccidentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function destroy(Accident $accident)
-    // {
-    //     $accident->delete();
-    //     return response()->json([
-    //         'message' => 'Success',
+    public function destroy(Accident $accident)
+    {
+        $accident->delete();
+        return response()->json([
+            'message' => 'Success',
 
-    //     ], 200);
-    // }
+        ], 200);
+    }
 }

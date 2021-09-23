@@ -132,21 +132,46 @@
     </div>
     <div class="row py-2">
         <div class="col-2">
-            <b>Witness</b>
+            <b>Witness Employee</b>
         </div>
         <div class="col-10">
-            @if($witnesses->count() > 0)
+            @if($witness_employee->count() > 0)
             <table class="table table-hover table-stripped">
                 <tr>
                     <th>No</th>
                     <th>Nama</th>
                     <th>Aksi</th>
                 </tr>
-                @foreach($witnesses as $witness)
+                @foreach($witness_employee as $witness)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $witness->employee->name }}</td>
+                    <td><a href="/dashboard/disease/{{$disease->id}}/we/{{$witness->id}}" class="btn btn-success">Lihat</a></td>
+                </tr>
+                @endforeach
+            </table>
+            @else
+            <div class="text-success">Tidak Ada</div>
+            @endif
+        </div>
+    </div>
+    <div class="row py-2">
+        <div class="col-2">
+            <b>Witness</b>
+        </div>
+        <div class="col-10">
+            @if($witness_non_employee->count() > 0)
+            <table class="table table-hover table-stripped">
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Aksi</th>
+                </tr>
+                @foreach($witness_non_employee as $witness)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $witness->name }}</td>
-                    <td><a href="/dashboard/disease/{{$disease->id}}/w/{{$witness->id}}" class="btn btn-success">Lihat</a></td>
+                    <td><a href="/dashboard/disease/{{$disease->id}}/wne/{{$witness->id}}" class="btn btn-success">Lihat</a></td>
                 </tr>
                 @endforeach
             </table>

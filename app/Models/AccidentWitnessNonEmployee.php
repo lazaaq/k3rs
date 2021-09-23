@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BriefingPresence extends Model
+class AccidentWitnessNonEmployee extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
 
-    public function employee()
+    public function accident()
     {
-        return $this->belongsTo(Employee::class);
+        return $this->belongsTo(Accident::class);
     }
 }

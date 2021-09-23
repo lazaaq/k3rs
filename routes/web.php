@@ -13,11 +13,13 @@ use App\Http\Controllers\BriefingController;
 use App\Http\Controllers\AccidentController;
 use App\Http\Controllers\AccidentVictimEmployeeController;
 use App\Http\Controllers\AccidentVictimNonEmployeeController;
-use App\Http\Controllers\AccidentWitnessController;
+use App\Http\Controllers\AccidentWitnessEmployeeController;
+use App\Http\Controllers\AccidentWitnessNonEmployeeController;
 use App\Http\Controllers\DiseaseController;
 use App\Http\Controllers\DiseaseVictimEmployeeController;
 use App\Http\Controllers\DiseaseVictimNonEmployeeController;
-use App\Http\Controllers\DiseaseWitnessController;
+use App\Http\Controllers\DiseaseWitnessEmployeeController;
+use App\Http\Controllers\DiseaseWitnessNonEmployeeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -59,22 +61,26 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/dashboard/manager/create/store', [ManagerController::class, 'add']);
     Route::resource('/dashboard/briefing', BriefingController::class);
     Route::post('/dashboard/briefing/create/store', [BriefingController::class, 'add']);
+
+    //accident
     Route::resource('/dashboard/accident', AccidentController::class);
     Route::get('/dashboard/accident/{accident}/ve/{victim}', [AccidentVictimEmployeeController::class, 'index']);
     Route::get('/dashboard/accident/{accident}/vne/{victim}', [AccidentVictimNonEmployeeController::class, 'index']);
-    Route::get('/dashboard/accident/{accident}/w/{witness}', [AccidentWitnessController::class, 'index']);
+    Route::get('/dashboard/accident/{accident}/we/{witness}', [AccidentWitnessEmployeeController::class, 'index']);
+    Route::get('/dashboard/accident/{accident}/wne/{witness}', [AccidentWitnessNonEmployeeController::class, 'index']);
+
+    //disease
     Route::resource('/dashboard/disease', DiseaseController::class);
     Route::get('/dashboard/disease/{disease}/ve/{victim}', [DiseaseVictimEmployeeController::class, 'index']);
     Route::get('/dashboard/disease/{disease}/vne/{victim}', [DiseaseVictimNonEmployeeController::class, 'index']);
-    Route::get('/dashboard/disease/{disease}/w/{witness}', [DiseaseWitnessController::class, 'index']);
+    Route::get('/dashboard/disease/{disease}/we/{witness}', [DiseaseWitnessEmployeeController::class, 'index']);
+    Route::get('/dashboard/disease/{disease}/wne/{witness}', [DiseaseWitnessNonEmployeeController::class, 'index']);
 
-    //profil
+    //profil user admin
     Route::get('/profil', [ProfilController::class, 'index']);
     Route::get('/profil/change', [ProfilController::class, 'change']);
     Route::post('/profil', [ProfilController::class, 'change_profil']);
     Route::get('/profil/check', [ProfilController::class, 'check']);
     Route::post('/profil/check', [ProfilController::class, 'check_password']);
-    // Route::get('/profil/change_password', [ProfilController::class, 'change_password']);
-    // Route::post('/profil/change_password', [ProfilController::class, 'change_password_post']);
 
 });

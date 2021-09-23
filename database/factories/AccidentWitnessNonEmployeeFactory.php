@@ -2,18 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\Disease;
-use App\Models\DiseaseWitness;
+use App\Models\Accident;
+use App\Models\AccidentWitnessNonEmployee;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class DiseaseWitnessFactory extends Factory
+
+class AccidentWitnessNonEmployeeFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = DiseaseWitness::class;
+    protected $model = AccidentWitnessNonEmployee::class;
 
     /**
      * Define the model's default state.
@@ -23,7 +24,7 @@ class DiseaseWitnessFactory extends Factory
     public function definition()
     {
         return [
-            'disease_id' => mt_rand(1, Disease::all()->count()),
+            'accident_id' => mt_rand(1, Accident::all()->count()),
             'name' => $this->faker->name(),
             'birth' => $this->faker->date(),
             'nik' => '1234567890123456',

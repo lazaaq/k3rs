@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DiseaseWitness extends Model
+class DiseaseWitnessEmployee extends Model
 {
     use HasFactory;
 
@@ -14,5 +14,10 @@ class DiseaseWitness extends Model
     public function disease()
     {
         return $this->belongsTo(Disease::class);
+    }
+    
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
     }
 }

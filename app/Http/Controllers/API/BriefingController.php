@@ -40,35 +40,9 @@ class BriefingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Briefing $briefing)
     {
-        $validatedData = $request->validate([
-            'time' => 'required',
-            'result' => 'required',
-        ]);
         
-        $briefing = Briefing::create($validatedData);
-
-        $presences = array();
-
-        if ($request->has('presence')){
-            for ($i=0; $i<count($request->presence); $i++){
-                $briefing_presence = BriefingPresence::create([
-                    'briefing_id' => $briefing->id,
-                    'employee_id' => $request->presence[$i]['employee_id'],
-                    'presence' => $request->presence[$i]['presence'],
-
-                ]);
-                array_push($presences, $briefing_presence);
-            }
-        }
-
-        return response()->json([
-            'message' => 'Success',
-            'briefing' => $briefing,
-            'presences' => $presences,
-
-        ], 200);
     }
 
     /**
@@ -82,7 +56,7 @@ class BriefingController extends Controller
         return response()->json([
             'message' => 'Success',
             'briefing' => $briefing,
-            'presences' => BriefingPresence::where('briefing_id', $briefing->id)->first()->get(),
+            'presences' => BriefingPresence::where('briefing_id', $briefing->id)->get(),
 
         ], 200);
     }
@@ -108,30 +82,18 @@ class BriefingController extends Controller
     public function update(Request $request, Briefing $briefing)
     {
         $validatedData = $request->validate([
-            'time' => 'required',
-            'result' => 'required',
+            'employee_id' => 'required',
+            'presence' => 'required',
         ]);
 
-        $briefing->update($validatedData);
+        BriefingPresence::create([
+            'briefing_id' => $briefing->id,
+            'employee_id' => $validatedData['employee_id'],
+            'presence' => "1"
+        ]);
 
-        $presences = array();
-
-        if ($request->has('presence')){
-            for ($i=0; $i<count($request->presence); $i++){
-                $briefing_presence = BriefingPresence::find($request->presence[$i]->id);
-                $briefing_presence->update([
-                    'briefing_id' => $briefing->id,
-                    'employee_id' => $request->presence[$i]->employee_id,
-                    'presence' => 1,
-
-                ]);
-                array_push($presences, $briefing_presence);
-            }
-        }
         return response()->json([
-            'messsage' => 'Success',
-            'briefing' => $briefing,
-            'presences' => $presences
+            'messsage' => 'Success'
         ], 200);
     }
 

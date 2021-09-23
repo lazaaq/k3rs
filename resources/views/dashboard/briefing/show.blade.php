@@ -64,13 +64,15 @@
                     <th>Employee Name</th>
                     <th>Presence</th>
                 </tr>
-                @for($i = 0; $i < $employees->count(); $i++)
+                @for($i = 0; $i < $briefing_presence->count(); $i++)
+                    @if($briefing_presence[$i]->presence == '1')
                     <tr>
-                        <td>{{ $employees[$i]->id }}</td>
-                        <td>{{ $employees[$i]->name }}</td>
-                        <td>@if( $briefing_presence[$i]->presence == '1') Hadir @else Tidak Hadir @endif</td>
+                        <td>{{ $briefing_presence[$i]->employee->id }}</td>
+                        <td>{{ $briefing_presence[$i]->employee->name }}</td>
+                        <td>Hadir</td>
                     </tr>
-                    @endfor
+                    @endif
+                @endfor
             </table>
         </div>
         @else

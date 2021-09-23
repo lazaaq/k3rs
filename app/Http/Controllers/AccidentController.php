@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Accident;
 use App\Models\AccidentVictimEmployee;
 use App\Models\AccidentVictimNonEmployee;
-use App\Models\AccidentWitness;
+use App\Models\AccidentWitnessEmployee;
+use App\Models\AccidentWitnessNonEmployee;
 use Illuminate\Http\Request;
 
 class AccidentController extends Controller
@@ -66,7 +67,8 @@ class AccidentController extends Controller
             'accident' => Accident::with('employee')->find($accident->id),
             'victim_employees' => AccidentVictimEmployee::with('accident', 'employee')->where('accident_id', $accident->id)->get(),
             'victim_non_employees' => AccidentVictimNonEmployee::with('accident')->where('accident_id', $accident->id)->get(),
-            'witnesses' => AccidentWitness::with('accident')->where('accident_id', $accident->id)->get(),
+            'witness_employee' => AccidentWitnessEmployee::with(['accident', 'employee'])->where('accident_id', $accident->id)->get(),
+            'witness_non_employee' => AccidentWitnessNonEmployee::with('accident')->where('accident_id', $accident->id)->get(),
 
         ]);
     }

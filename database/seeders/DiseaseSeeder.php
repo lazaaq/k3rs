@@ -5,7 +5,9 @@ namespace Database\Seeders;
 use App\Models\Disease;
 use App\Models\DiseaseVictimEmployee;
 use App\Models\DiseaseVictimNonEmployee;
-use App\Models\DiseaseWitness;
+use App\Models\DiseaseWitnessEmployee;
+use App\Models\DiseaseWitnessNonEmployee;
+use App\Models\Employee;
 use Illuminate\Database\Seeder;
 
 class DiseaseSeeder extends Seeder
@@ -32,8 +34,14 @@ class DiseaseSeeder extends Seeder
 
             ]);
             
-            // Witness
-            DiseaseWitness::factory(mt_rand(1,2))->create([
+            // Witness Employee
+            DiseaseWitnessEmployee::factory(1)->create([
+                'disease_id' => $i,
+                'employee_id' => mt_rand(1, Employee::all()->count())
+            ]);
+
+            // Witness Non Employee
+            DiseaseWitnessNonEmployee::factory(1)->create([
                 'disease_id' => $i,
 
             ]);

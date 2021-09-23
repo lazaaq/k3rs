@@ -5,7 +5,9 @@ namespace Database\Seeders;
 use App\Models\Accident;
 use App\Models\AccidentVictimEmployee;
 use App\Models\AccidentVictimNonEmployee;
-use App\Models\AccidentWitness;
+use App\Models\AccidentWitnessEmployee;
+use App\Models\AccidentWitnessNonEmployee;
+use App\Models\Employee;
 use Illuminate\Database\Seeder;
 
 class AccidentSeeder extends Seeder
@@ -32,12 +34,17 @@ class AccidentSeeder extends Seeder
 
             ]);
 
-            // Witness
-            AccidentWitness::factory(mt_rand(1, 2))->create([
+            // Witness Employee
+            AccidentWitnessEmployee::factory(1)->create([
+                'accident_id' => $i,
+                'employee_id' => mt_rand(1, Employee::all()->count())
+            ]);
+            
+            // Witness Non Employee
+            AccidentWitnessNonEmployee::factory(1)->create([
                 'accident_id' => $i,
 
             ]);
-
         }
     }
 }

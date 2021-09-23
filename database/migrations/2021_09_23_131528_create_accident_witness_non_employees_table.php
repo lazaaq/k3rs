@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAccidentWitnessesTable extends Migration
+class CreateAccidentWitnessNonEmployeesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAccidentWitnessesTable extends Migration
      */
     public function up()
     {
-        Schema::create('accident_witnesses', function (Blueprint $table) {
+        Schema::create('accident_witness_non_employees', function (Blueprint $table) {
             $table->id();
             $table->foreignId('accident_id');
             $table->string('name')->nullable();
@@ -33,6 +33,6 @@ class CreateAccidentWitnessesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('accident_witnesses');
+        Schema::dropIfExists('accident_witness_non_employees');
     }
 }

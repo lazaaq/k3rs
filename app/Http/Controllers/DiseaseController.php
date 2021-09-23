@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Disease;
 use App\Models\DiseaseVictimEmployee;
 use App\Models\DiseaseVictimNonEmployee;
-use App\Models\DiseaseWitness;
+use App\Models\DiseaseWitnessEmployee;
+use App\Models\DiseaseWitnessNonEmployee;
 use Illuminate\Http\Request;
 
 class DiseaseController extends Controller
@@ -66,7 +67,8 @@ class DiseaseController extends Controller
             'disease' => Disease::with('employee')->find($disease->id), 
             'victim_employees' => DiseaseVictimEmployee::with('disease', 'employee')->where('disease_id', $disease->id)->get(),
             'victim_non_employees' => DiseaseVictimNonEmployee::with('disease')->where('disease_id', $disease->id)->get(),
-            'witnesses' => DiseaseWitness::with('disease')->where('disease_id', $disease->id)->get(),
+            'witness_employee' => DiseaseWitnessEmployee::with(['disease', 'employee'])->where('disease_id', $disease->id)->get(),
+            'witness_non_employee' => DiseaseWitnessNonEmployee::with('disease')->where('disease_id', $disease->id)->get(),
 
         ]);
     }

@@ -68,12 +68,12 @@ class BriefingController extends Controller
      * @param  \App\Models\Briefing  $briefing
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Briefing $briefing)
     {
         return view('dashboard/briefing/show', [
             'active' => '',
-            'briefing' => Briefing::find($id),
-            'briefing_presence' => BriefingPresence::where('briefing_id', $id)->get(),
+            'briefing' => $briefing,
+            'briefing_presence' => BriefingPresence::with('employee')->where('briefing_id', $briefing->id)->get(),
             'employees' => Employee::all(),
 
         ]);
