@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Manager;
+use App\Models\Salary;
 use Illuminate\Http\Request;
 
 class ManagerController extends Controller
@@ -15,7 +16,7 @@ class ManagerController extends Controller
     public function index()
     {
         return view('dashboard/manager/index', [
-            'managers' => Manager::paginate(10),
+            'managers' => Manager::with(['salary'])->latest()->paginate(10),
             'active' => 'manager',
         ]);
     }
@@ -43,6 +44,7 @@ class ManagerController extends Controller
     {
         return view('dashboard/manager/create', [
             'active' => '',
+            'salaries' => Salary::all()->sortBy('salary_amount'),
 
         ]);
     }
@@ -57,6 +59,7 @@ class ManagerController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required',
+            'salary_id' => 'required',
             'email' => 'required',
             'address' => 'required',
             'birth' => 'required',
@@ -95,7 +98,8 @@ class ManagerController extends Controller
         return view('dashboard/manager/edit', [
             'active' => '',
             'manager' => $manager,
-            
+            'salaries' => Salary::all()->sortBy('salary_amount'),
+
         ]);
     }
 

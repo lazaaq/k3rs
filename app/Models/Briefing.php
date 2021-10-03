@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+
 
 class Briefing extends Model
 {
@@ -14,6 +16,11 @@ class Briefing extends Model
     public function briefing_presence()
     {
         return $this->belongsTo(BriefingPresence::class);
+    }
+
+    public function excerpt()
+    {
+        return Str::limit($this->result, 100);
     }
 }
 

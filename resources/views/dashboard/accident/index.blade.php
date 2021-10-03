@@ -1,6 +1,6 @@
 @extends('layouts/dashboard')
 
-@section('title', 'Accident')
+@section('title', 'Kecelakaan')
 
 @section('css')
 <style>
@@ -8,12 +8,12 @@
 </style>
 @endsection
 
-@section('page-name', 'Accident')
+@section('page-name', 'Kecelakaan')
 
 @section('breadcrumb')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-    <li class="breadcrumb-item active">Accident</li>
+    <li class="breadcrumb-item active">Kecelakaan</li>
 </ol>
 @endsection
 
@@ -30,11 +30,11 @@
     <table class="table table-hover m-2">
         <thead>
             <th>No</th>
-            <th>Employee ID</th>
-            <th>Time</th>
-            <th>Location</th>
-            <th>Image</th>
-            <th>Action</th>
+            <th>ID Employee</th>
+            <th>Waktu</th>
+            <th>Lokasi</th>
+            <th>Gambar</th>
+            <th>Aksi</th>
         </thead>
         <tbody>
             @foreach($accidents as $accident)
@@ -58,13 +58,13 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Delete Accident</h5>
+                                    <h5 class="modal-title">Hapus Kecelakan?</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="document.getElementById('modal').style.display='none'">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Are you sure to delete this accident?</p>
+                                    <p>Apakah Anda yakin ingin menghapus Kecelakaan ini?</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="document.getElementById('modal').style.display='none'">Cancel</button>

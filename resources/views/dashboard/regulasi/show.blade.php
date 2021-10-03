@@ -45,7 +45,7 @@
         </div>
         <div class="row py-2">
             <div class="col-2">
-                <b>Title</b>
+                <b>Judul</b>
             </div>
             <div class="col-10">
                 {{ $regulasi->title }}
@@ -53,7 +53,7 @@
         </div>
         <div class="row py-2">
             <div class="col-2">
-                <b>Description</b>
+                <b>Deskripsi</b>
             </div>
             <div class="col-10">
                 {{ $regulasi->description }}
@@ -68,15 +68,15 @@
             </div>
         </div>
         <div class="row">
-            <a href="/dashboard/regulasi" class="btn btn-secondary mr-2">Back</a>
+            <a href="/dashboard/regulasi" class="btn btn-secondary mr-2">Kembali</a>
             <a href="{{ $regulasi->file }}" class="btn btn-info">View File</a>
             <a class="btn btn-warning mx-2" href="/dashboard/regulasi/{{ $regulasi->id }}/edit">
-                <ion-icon name="pencil-outline"></ion-icon>
+                <!-- <ion-icon name="pencil-outline"></ion-icon> -->
                 Edit
             </a>
             <button class="btn btn-danger" onclick="document.getElementById('modal').style.display='block'">
-                <ion-icon name="trash-outline"></ion-icon>
-                Delete
+                <!-- <ion-icon name="trash-outline"></ion-icon> -->
+                Hapus
             </button>
             <div class="modal" tabindex="-1" id="modal">
                 <div class="modal-dialog">
@@ -96,7 +96,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-primary" type="submit" title="Hapus" id="hapus">
-                                    Delete
+                                    Hapus
                                 </button>
                             </form>
                         </div>

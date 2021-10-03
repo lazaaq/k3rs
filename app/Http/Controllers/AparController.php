@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Apar;
+use App\Models\AparHistory;
 
 class AparController extends Controller
 {
@@ -29,10 +30,8 @@ class AparController extends Controller
             'location' => 'required',
             'code' => 'required',
             'expired' => 'required',
-            'condition' => 'required',
-            'detail' => 'required',
         ]);
-
+ 
         Apar::create($validatedData);
         return redirect('/dashboard/apar')->with('success_added', 'Data berhasil ditambahkan!');
     }
@@ -64,12 +63,15 @@ class AparController extends Controller
                 'location' => 'required',
                 'code' => 'required',
                 'expired' => 'required',
-                'condition' => 'required',
-                'detail' => 'required',
             ]
         );
 
-        Apar::where('id', $request->id)->update($validatedData);
+        Apar::where('id', $request->id)->update([
+            'time' => $validatedData['time'],
+            'location' => $validatedData['location'],
+            'code' => $validatedData['code'],
+            'expired' => $validatedData['expired'],
+        ]);
 
         return redirect('/dashboard/apar/' . $request->id)->with('success_update', 'Data Berhasil Diubah!');
     }
@@ -85,6 +87,7 @@ class AparController extends Controller
         return view('dashboard/apar/show', [
             'active' => '',
             'apar' => Apar::find($id),
+            'history_apar' => AparHistory::where('apar_id', $id)->get()
         ]);
     }
 

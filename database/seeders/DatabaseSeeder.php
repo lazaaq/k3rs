@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Employee;
 use App\Models\Regulasi;
 use App\Models\Apar;
+use App\Models\AparHistory;
 use App\Models\Manager;
 use App\Models\News;
 use App\Models\Salary;
@@ -33,6 +34,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BriefingSeeder::class);
         $this->call(AccidentSeeder::class);
         $this->call(DiseaseSeeder::class);
+        $this->call(AparHistorySeeder::class);
 
         User::create([
             'name' => 'admin',

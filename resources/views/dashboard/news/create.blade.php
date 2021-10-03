@@ -1,6 +1,6 @@
 @extends('layouts/dashboard')
 
-@section('title', 'News | Create')
+@section('title', 'News | Buat')
 
 @section('css')
 <style>
@@ -14,13 +14,13 @@
 </style>
 @endsection
 
-@section('page-name', 'News | Create')
+@section('page-name', 'News | Buat')
 
 @section('breadcrumb')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
     <li class="breadcrumb-item"><a href="/dashboard/news">News</a></li>
-    <li class="breadcrumb-item active">Create</li>
+    <li class="breadcrumb-item active">Buat</li>
 </ol>
 @endsection
 
@@ -29,7 +29,7 @@
     <form action="/dashboard/news/create/store" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
+            <label for="title" class="form-label">Judul</label>
             <input type="text" class="form-control" id="title" name="title" required>
         </div>
         <div class="mb-3">
@@ -37,7 +37,7 @@
             <input type="text" class="form-control" id="author" name="author" required>
         </div>
         <div class="mb-3">
-            <label for="image" class="form-label">Image</label>
+            <label for="image" class="form-label">Gambar</label>
             <br>
             <input type="file" id="image" name="image" required>
         </div>

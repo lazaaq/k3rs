@@ -51,8 +51,8 @@
             @foreach($briefings as $briefing)
             <tr>
                 <th>{{ $loop->iteration }}</th>
-                <td>{{ $briefing->time }}</td>
-                <td>{{ $briefing->result }}</td>
+                <td>{{ Carbon\Carbon::parse($briefing->time, 2, ',', '.')->format('d F Y') }}</td>
+                <td>{{ $briefing->excerpt() }}</td>
                 <td>
                     <a class="btn btn-success" href="/dashboard/briefing/{{$briefing->id}}">
                         <ion-icon name="eye-outline"></ion-icon>

@@ -21,14 +21,13 @@ class AparFactory extends Factory
      */
     public function definition()
     {
+        $code = $this->faker->randomLetter() . $this->faker->randomDigit();
         return [
             'image' => '/img/placeholder/document.jpg',
             'time' => $this->faker->date(),
             'location' => $this->faker->sentence(),
-            'code' => $this->faker->randomElement(['a', 'b', 'c', 'd', 'e', 'f', 'g']),
+            'code' => $code,
             'expired' => $this->faker->date(),
-            'condition' => $this->faker->randomElement(['baik', 'tidak baik']),
-            'detail' => $this->faker->paragraph(3),
         ];
     }
 }

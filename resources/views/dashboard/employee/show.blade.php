@@ -1,6 +1,6 @@
 @extends('layouts/dashboard')
 
-@section('title', 'Employee | Show')
+@section('title', 'Pegawai | Detail')
 
 @section('css')
 <style>
@@ -8,13 +8,13 @@
 </style>
 @endsection
 
-@section('page-name', 'Employee | Show')
+@section('page-name', 'Pegawai | Detail')
 
 @section('breadcrumb')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="/dashboard/employee">Employee</a></li>
-    <li class="breadcrumb-item active">Show</li>
+    <li class="breadcrumb-item"><a href="/dashboard/employee">Pegawai</a></li>
+    <li class="breadcrumb-item active">Detail</li>
 </ol>
 @endsection
 
@@ -54,7 +54,7 @@
     </div>
     <div class="row py-2">
         <div class="col-2">
-            <b>Address</b>
+            <b>Alamat</b>
         </div>
         <div class="col-10">
             {{ $employee->address }}
@@ -62,15 +62,15 @@
     </div>
     <div class="row py-2">
         <div class="col-2">
-            <b>Birth</b>
+            <b>Tanggal Lahir</b>
         </div>
         <div class="col-10">
-            {{ $employee->birth }}
+            {{ Carbon\Carbon::parse($employee->birth)->format('d F Y') }}
         </div>
     </div>
     <div class="row py-2">
         <div class="col-2">
-            <b>Gender</b>
+            <b>Jenis Kelamin</b>
         </div>
         <div class="col-10">
             {{ $employee->gender }}
@@ -78,7 +78,7 @@
     </div>
     <div class="row py-2">
         <div class="col-2">
-            <b>Manager Name</b>
+            <b>Manager</b>
         </div>
         <div class="col-10">
             <a href="/dashboard/manager/{{ $employee->manager->id }}" class="btn btn-info">{{ $employee->manager->name }}</a>
@@ -86,7 +86,7 @@
     </div>
     <div class="row py-2">
         <div class="col-2">
-            <b>Salary</b>
+            <b>Gaji</b>
         </div>
         <div class="col-10">
             Rp{{ number_format($employee->salary->salary_amount, 0, ',', '.') }}
@@ -94,28 +94,28 @@
     </div>
     <div class="row py-2">
         <div class="col-2">
-            <b>Created At</b>
+            <b>Tanggal Dibuat</b>
         </div>
         <div class="col-10">
-            {{ $employee->created_at }}
+            {{ Carbon\Carbon::parse($employee->created_at)->format('d F Y - h:i:s') }}
         </div>
     </div>
     <div class="row py-2">
         <div class="col-2">
-            <b>Updated At</b>
+            <b>Terakhir Diupdate</b>
         </div>
         <div class="col-10">
-            {{ $employee->updated_at }}
+            {{ Carbon\Carbon::parse($employee->updated_at)->format('d F Y - h:i:s') }}
         </div>
     </div>
     <div class="row mt-5">
-        <a href="/dashboard/employee" class="btn btn-secondary">Back</a>
+        <a href="/dashboard/employee" class="btn btn-secondary">Kembali</a>
         <a class="btn btn-warning mx-2" href="/dashboard/employee/{{$employee->id}}/edit">
-            <ion-icon name="pencil-outline"></ion-icon>
+            <!-- <ion-icon name="pencil-outline"></ion-icon> -->
             Edit
         </a>
         <button class="btn btn-danger" onclick="document.getElementById('modal').style.display='block'">
-            <ion-icon name="trash-outline"></ion-icon>
+            <!-- <ion-icon name="trash-outline"></ion-icon> -->
             Delete
         </button>
         <div class="modal" tabindex="-1" id="modal">

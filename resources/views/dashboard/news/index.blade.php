@@ -1,6 +1,6 @@
 @extends('layouts/dashboard')
 
-@section('title', 'News')
+@section('title', 'Berita')
 
 @section('css')
 <style>
@@ -14,12 +14,12 @@
 </style>
 @endsection
 
-@section('page-name', 'News')
+@section('page-name', 'Berita')
 
 @section('breadcrumb')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-    <li class="breadcrumb-item active">News</li>
+    <li class="breadcrumb-item active">Berita</li>
 </ol>
 @endsection
 
@@ -42,19 +42,29 @@
     </div>
     @endif
     <div class="row">
-        <div class="col-2 ml-auto">
-            <a href="/dashboard/news/create" class="btn btn-primary">Tambah News</a>
+        <div class="col-2 ml-auto mb-3">
+            <a href="/dashboard/news/create" class="btn btn-primary">Tambah Berita</a>
         </div>
     </div>
     @foreach($newss as $news)
-    <div class="box">
-        <h3>{{ $news->title }}</h3>
-        <b>
-            <ion-icon name="person-outline"></ion-icon>{{ $news->author }}
-        </b>
-        <p>{{ $news->excerpt }}</p>
-        <a href="/dashboard/news/{{ $news->id }}" class="btn btn-primary">Read More</a>
+    <div class="card border">
+        <div class="card-header">
+            <h3 class="display-6">
+                {{ $news->title }}
+            </h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div class="d-flex mb-3">
+                <b><i class="bi bi-person-circle"></i> {{ $news->author  }}</b>
+                <b class="ml-auto">{{ Carbon\Carbon::parse($news->created_at)->format('d F Y - h:i:s')}}</b>
+            </div>
+            <p>{{ $news->excerpt }}</p>
+            <a href="/dashboard/news/{{ $news->id }}" class="btn btn-primary">Lihat Selengkapnya</a>
+        </div>
+        <!-- /.card-body -->
     </div>
+    <!-- /.card -->
     @endforeach
 
     <div class="d-flex">

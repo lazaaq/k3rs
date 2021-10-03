@@ -1,6 +1,6 @@
 @extends('layouts/dashboard')
 
-@section('title', 'News')
+@section('title', 'News | Edit')
 
 @section('css')
 <style>
@@ -14,12 +14,13 @@
 </style>
 @endsection
 
-@section('page-name', 'News')
+@section('page-name', 'News | Edit')
 
 @section('breadcrumb')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-    <li class="breadcrumb-item active">News</li>
+    <li class="breadcrumb-item"><a href="/dashboard/news">News</a></li>
+    <li class="breadcrumb-item active">Edit</li>
 </ol>
 @endsection
 
@@ -29,7 +30,7 @@
         @csrf
         <input type="hidden" name="id" id="id" value="{{ $news->id }}">
         <div class="form-group">
-            <label for="title">Title</label>
+            <label for="title">Judul</label>
             <input type="text" class="form-control" id="title" name="title" value="{{ $news->title }}" required>
         </div>
         <div class="form-group">
@@ -37,12 +38,8 @@
             <input type="text" class="form-control" id="author" name="author" value="{{ $news->author }}" required>
         </div>
         <div class="form-group">
-            <label for="image">Image</label>
+            <label for="image">Gambar</label>
             <input type="text" class="form-control" id="image" name="image" value="{{ $news->image }}" required>
-        </div>
-        <div class="form-group">
-            <label for="excerpt">Excerpt</label>
-            <textarea type="text" class="form-control" id="excerpt" name="excerpt" rows="3" required>{{ $news->excerpt }}</textarea>
         </div>
         <div class="form-group">
             <label for="body">Body</label>

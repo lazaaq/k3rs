@@ -34,31 +34,38 @@ use App\Http\Controllers\DiseaseWitnessNonEmployeeController;
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/about', function () {
-    return view('about');
-});
-Route::get('/contact', function () {
-    return view('contact');
-});
+// Route::get('/about', function () {
+//     return view('about');
+// });
+// Route::get('/contact', function () {
+//     return view('contact');
+// });
 
 // Login & Logout
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
-Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth');
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'authenticate']);
+});
 
 // Dashboard
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
-    Route::resource('/dashboard/regulasi', RegulasiController::class);
+    //regulasi
+    Route::resource('/dashboard/regulasi', RegulasiController::class)->except(['show']);
     Route::post('/dashboard/regulasi/create/store', [RegulasiController::class, 'add']);
+    //apar
     Route::resource('/dashboard/apar', AparController::class);
     Route::post('/dashboard/apar/create/store', [AparController::class, 'add']);
+    //news
     Route::resource('/dashboard/news', NewsController::class);
     Route::post('/dashboard/news/create/store', [NewsController::class, 'add']);
+    //employee
     Route::resource('/dashboard/employee', EmployeeController::class);
     Route::post('/dashboard/employee/create/store', [EmployeeController::class, 'add']);
+    //manager
     Route::resource('/dashboard/manager', ManagerController::class);
     Route::post('/dashboard/manager/create/store', [ManagerController::class, 'add']);
+    //briefing
     Route::resource('/dashboard/briefing', BriefingController::class);
     Route::post('/dashboard/briefing/create/store', [BriefingController::class, 'add']);
 
@@ -83,4 +90,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profil/check', [ProfilController::class, 'check']);
     Route::post('/profil/check', [ProfilController::class, 'check_password']);
 
+    Route::get('/logout', [LoginController::class, 'logout']);
 });

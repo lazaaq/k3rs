@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Manager;
+use App\Models\Salary;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -15,9 +17,9 @@ class EmployeeController extends Controller
     public function index()
     {
         return view('dashboard/employee/index', [
-            'employees' => Employee::latest()->paginate(10),
+            'employees' => Employee::with(['manager'])->latest()->paginate(10),
             'active' => 'employee',
-            
+
         ]);
     }
 
@@ -45,6 +47,8 @@ class EmployeeController extends Controller
     {
         return view('dashboard/employee/create', [
             'active' => '',
+            'managers' => Manager::all(),
+            'salaries' => Salary::all()->sortBy('salary_amount'),
 
         ]);
     }
@@ -58,8 +62,10 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' =>'required',
-            'email' => 'required', //fix this = email:dns
+            'name' => 'required',
+            'manager_id' => 'required',
+            'salary_id' => 'required',
+            'email' => 'required',
             'address' => 'required',
             'birth' => 'required',
             'gender' => 'required',
@@ -78,7 +84,7 @@ class EmployeeController extends Controller
     {
         return view('dashboard/employee/show', [
             'active' => '',
-            'employee' => Employee::find($id),
+            'employee' => Employee::with(['manager', 'salary'])->find($id),
         ]);
     }
 
@@ -92,7 +98,9 @@ class EmployeeController extends Controller
     {
         return view('dashboard/employee/edit', [
             'active' => '',
-            'employee' => Employee::find($id),
+            'employee' => Employee::with(['manager', 'salary'])->find($id),
+            'managers' => Manager::all(),
+            'salaries' => Salary::all()->sortBy('salary_amount'),
 
         ]);
     }

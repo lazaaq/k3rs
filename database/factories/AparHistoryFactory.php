@@ -2,17 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\BriefingPresence;
+use App\Models\Apar;
+use App\Models\AparHistory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class BriefingPresenceFactory extends Factory
+class AparHistoryFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = BriefingPresence::class;
+    protected $model = AparHistory::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +23,10 @@ class BriefingPresenceFactory extends Factory
     public function definition()
     {
         return [
-            'presence' => 1,
+            'apar_id' => mt_rand(1, Apar::all()->count()),
+            'condition' => $this->faker->randomElement(['baik', 'tidak baik']),
+            'detail' => $this->faker->sentence(7),
+            
         ];
     }
 }

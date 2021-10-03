@@ -1,6 +1,6 @@
 @extends('layouts/dashboard')
 
-@section('title', 'APAR | Show')
+@section('title', 'APAR | Detail')
 
 @section('css')
 <style>
@@ -8,13 +8,13 @@
 </style>
 @endsection
 
-@section('page-name', 'APAR | Show')
+@section('page-name', 'APAR | Detail')
 
 @section('breadcrumb')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
     <li class="breadcrumb-item"><a href="/dashboard/apar">APAR</a></li>
-    <li class="breadcrumb-item active">Show</li>
+    <li class="breadcrumb-item active">Detail</li>
 </ol>
 @endsection
 
@@ -41,7 +41,7 @@
     </div>
     <div class="row py-2">
         <div class="col-2">
-            <b>Image</b>
+            <b>Gambar</b>
         </div>
         <div class="col-10">
             {{ $apar->image }}
@@ -49,15 +49,15 @@
     </div>
     <div class="row py-2">
         <div class="col-2">
-            <b>Time</b>
+            <b>Waktu</b>
         </div>
         <div class="col-10">
-            {{ $apar->time }}
+            {{ Carbon\Carbon::parse($apar->time)->format('d F Y') }}
         </div>
     </div>
     <div class="row py-2">
         <div class="col-2">
-            <b>Location</b>
+            <b>Lokasi</b>
         </div>
         <div class="col-10">
             {{ $apar->location }}
@@ -65,7 +65,7 @@
     </div>
     <div class="row py-2">
         <div class="col-2">
-            <b>Code</b>
+            <b>Kode</b>
         </div>
         <div class="col-10">
             {{ $apar->code }}
@@ -73,52 +73,63 @@
     </div>
     <div class="row py-2">
         <div class="col-2">
-            <b>Expired</b>
+            <b>Kadaluwarsa</b>
         </div>
         <div class="col-10">
-            {{ $apar->expired }}
+            {{ Carbon\Carbon::parse($apar->expired)->format('d F Y') }}
         </div>
     </div>
     <div class="row py-2">
         <div class="col-2">
-            <b>Condition</b>
+            <b>Histori Apar</b>
+        </div>
+        @if(count($history_apar) != 0)
+        <div class="col-10">
+            <table class="table table-hover table-striped">
+                <tr>
+                    <th>Datetime</th>
+                    <th>Condition</th>
+                    <th>Detail</th>
+                </tr>
+                @for($i = 0; $i < $history_apar->count(); $i++)
+                    <tr>
+                        <td>{{ Carbon\Carbon::parse($history_apar[$i]->created_at)->format('d F Y - h:i:s') }}</td>
+                        <td>{{ $history_apar[$i]->condition }}</td>
+                        <td>{{ $history_apar[$i]->detail }}</td>
+                    </tr>
+                    @endfor
+            </table>
+        </div>
+        @else
+        <div class="text-success">
+            Tidak ada
+        </div>
+        @endif
+    </div>
+    <div class="row py-2">
+        <div class="col-2">
+            <b>Dibuat Pada</b>
         </div>
         <div class="col-10">
-            {{ $apar->condition }}
+            {{ Carbon\Carbon::parse($apar->created_at)->format('d F Y - h:i:s') }}
         </div>
     </div>
     <div class="row py-2">
         <div class="col-2">
-            <b>Detail</b>
+            <b>Diupdate Pada</b>
         </div>
         <div class="col-10">
-            {{ $apar->detail }}
-        </div>
-    </div>
-    <div class="row py-2">
-        <div class="col-2">
-            <b>Created At</b>
-        </div>
-        <div class="col-10">
-            {{ $apar->created_at }}
-        </div>
-    </div>
-    <div class="row py-2">
-        <div class="col-2">
-            <b>Updated At</b>
-        </div>
-        <div class="col-10">
-            {{ $apar->updated_at }}
+            {{ Carbon\Carbon::parse($apar->updated_at)->format('d F Y - h:i:s') }}
         </div>
     </div>
     <div class="row mt-5">
-        <a href="/dashboard/apar" class="btn btn-secondary">Back</a>
+        <a href="/dashboard/apar" class="btn btn-secondary">Kembali</a>
         <a class="btn btn-warning mx-2" href="/dashboard/apar/{{ $apar->id }}/edit">
-            <ion-icon name="pencil-outline"></ion-icon>
+            <!-- <ion-icon name="pencil-outline"></ion-icon> -->
             Edit
         </a>
         <button class="btn btn-danger" onclick="document.getElementById('modal').style.display='block'">
-            <ion-icon name="trash-outline"></ion-icon>
+            <!-- <ion-icon name="trash-outline"></ion-icon> -->
             Delete
         </button>
         <div class="modal" tabindex="-1" id="modal">

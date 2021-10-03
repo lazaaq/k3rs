@@ -9,6 +9,8 @@ use App\Http\Controllers\API\ManagerController;
 use App\Http\Controllers\API\BriefingController;
 use App\Http\Controllers\API\AccidentController;
 use App\Http\Controllers\API\DiseaseController;
+use App\Http\Controllers\API\HistoryController;
+use App\Http\Controllers\API\NotifController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +39,9 @@ Route::group(['middleware => auth:sanctum'], function(){
     Route::resource('/briefing', BriefingController::class)->only(['index', 'show', 'update']);
     Route::resource('/accident', AccidentController::class)->only(['index', 'show', 'store']);
     Route::resource('/disease', DiseaseController::class)->only(['index', 'show', 'store']);
+
+    Route::get('/history/{employee}', [HistoryController::class, 'index']);
+    Route::get('/notif', [NotifController::class, 'index']);
 });
 
 Route::post('/login', [AuthController::class, 'login']);

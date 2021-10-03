@@ -40,23 +40,23 @@
             <a href="/dashboard/apar/create" class="btn btn-primary">Tambah APAR</a>
         </div>
     </div>
-    <table class="table table-hover m-2">
+    <table class="table table-hover table-striped m-2">
         <thead>
-            <th>Time</th>
-            <th>Location</th>
-            <th>Code</th>
-            <th>Expired</th>
-            <th>Condition</th>
-            <th>Action</th>
+            <th>Id</th>
+            <th>Lokasi</th>
+            <th>Waktu</th>
+            <th>Kode</th>
+            <th>Kadaluwarsa</th>
+            <th>Aksi</th>
         </thead>
         <tbody>
             @foreach($apars as $apar)
             <tr>
                 <th>{{ $loop->iteration }}</th>
-                <td>{{ $apar->time }}</td>
+                <td>{{ $apar->location }}</td>
+                <td>{{ Carbon\Carbon::parse($apar->time)->format('d F Y') }}</td>
                 <td>{{ $apar->code }}</td>
-                <td>{{ $apar->expired }}</td>
-                <td>{{ $apar->condition }}</td>
+                <td>{{ Carbon\Carbon::parse($apar->expired)->format('d F Y') }}</td>
                 <td class="d-flex">
                     <a class="btn btn-success" href="/dashboard/apar/{{ $apar->id }}">
                         <ion-icon name="eye-outline"></ion-icon>

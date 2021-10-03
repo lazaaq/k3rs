@@ -1,6 +1,6 @@
 @extends('layouts/dashboard')
 
-@section('title', 'Regulasi')
+@section('title', 'Regulasi | Edit')
 
 @section('css')
 <style>
@@ -14,7 +14,7 @@
 </style>
 @endsection
 
-@section('page-name', 'Regulasi')
+@section('page-name', 'Regulasi | Edit')
 
 @section('breadcrumb')
 <ol class="breadcrumb float-sm-right">
@@ -30,19 +30,20 @@
         @csrf
         <input type="hidden" name="id" id="id" value="{{ $regulasi->id }}">
         <div class="form-group">
-            <label for="title">Title</label>
+            <label for="title">Judul</label>
             <input type="text" class="form-control" id="title" name="title" value="{{ $regulasi->title }}" required>
         </div>
         <div class="form-group">
-            <label for="description">Description</label>
+            <label for="description">Deskripsi</label>
             <input type="text" class="form-control" id="description" name="description" value="{{ $regulasi->description }}" required>
         </div>
         <div class="form-group">
-            <label for="file">File</label>
-            <input type="text" class="form-control" id="file" name="file" value="{{ $regulasi->file }}" required>
+            <label for="file">Pilih File</label>
+            <br>
+            <input type="file" class="" id="file" name="file" value="{{ $regulasi->file }}" required>
         </div>
-        <div class="row">
-            <a href="/dashboard/regulasi/{{ $regulasi->id }}" class="btn btn-secondary mr-2">Back</a>
+        <div class="row mt-5">
+            <a href="/dashboard/regulasi" class="btn btn-secondary mr-2">Kembali</a>
             <button type="submit" class="btn btn-primary">Simpan</button>
         </div>
     </form>

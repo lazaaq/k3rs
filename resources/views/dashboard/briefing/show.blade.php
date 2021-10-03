@@ -41,7 +41,7 @@
             <b>Time</b>
         </div>
         <div class="col-10">
-            {{ $briefing->time }}
+            {{ Carbon\Carbon::parse($briefing->time, 2, ',', '.')->format('d F Y') }}
         </div>
     </div>
     <div class="row py-2">
@@ -58,21 +58,19 @@
         </div>
         @if(count($briefing_presence) != 0)
         <div class="col-10">
-            <table class="table table-hover table-stripped">
+            <table class="table table-hover table-striped">
                 <tr>
-                    <th>Employee Id</th>
-                    <th>Employee Name</th>
-                    <th>Presence</th>
+                    <th>Id Employee</th>
+                    <th>Nama Employee</th>
+                    <th>Lihat Profil</th>
                 </tr>
                 @for($i = 0; $i < $briefing_presence->count(); $i++)
-                    @if($briefing_presence[$i]->presence == '1')
                     <tr>
                         <td>{{ $briefing_presence[$i]->employee->id }}</td>
                         <td>{{ $briefing_presence[$i]->employee->name }}</td>
-                        <td>Hadir</td>
+                        <td><a href="/dashboard/employee/{{$briefing_presence[$i]->employee->id}}" class="btn btn-success">Lihat</a></td>
                     </tr>
-                    @endif
-                @endfor
+                    @endfor
             </table>
         </div>
         @else
@@ -86,7 +84,7 @@
             <b>Created At</b>
         </div>
         <div class="col-10">
-            {{ $briefing->created_at }}
+            {{ Carbon\Carbon::parse($briefing->created_at, 2, ',', '.')->format('d F Y - h:i:s') }}
         </div>
     </div>
     <div class="row py-2">
@@ -94,11 +92,11 @@
             <b>Updated At</b>
         </div>
         <div class="col-10">
-            {{ $briefing->updated_at }}
+            {{ Carbon\Carbon::parse($briefing->updated_at, 2, ',', '.')->format('d F Y - h:i:s') }}
         </div>
     </div>
 
-    <a href="/dashboard/briefing" class="btn btn-primary mt-5">Back</a>
+    <a href="/dashboard/briefing" class="btn btn-secondary mt-5">Back</a>
 </section>
 @endsection
 

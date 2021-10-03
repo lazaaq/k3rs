@@ -61,7 +61,6 @@ class NewsController extends Controller
             'title' => 'required',
             'author' => 'required',
             'image' => 'required',
-            'excerpt' => 'required',
             'body' => 'required',
 
         ]);

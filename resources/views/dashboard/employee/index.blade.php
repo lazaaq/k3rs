@@ -1,6 +1,6 @@
 @extends('layouts/dashboard')
 
-@section('title', 'K3RS | Employee')
+@section('title', 'K3RS | Pegawai')
 
 @section('css')
 <style>
@@ -8,12 +8,12 @@
 </style>
 @endsection
 
-@section('page-name', 'Employee')
+@section('page-name', 'Pegawai')
 
 @section('breadcrumb')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-    <li class="breadcrumb-item active">Employee</li>
+    <li class="breadcrumb-item active">Pegawai</li>
 </ol>
 @endsection
 
@@ -37,16 +37,16 @@
     @endif
     <div class="row">
         <div class="col-2 ml-auto">
-            <a href="/dashboard/employee/create" class="btn btn-primary">Tambah Employee</a>
+            <a href="/dashboard/employee/create" class="btn btn-primary">Tambah Pegawai</a>
         </div>
     </div>
     <table class="table table-striped table-hover m-2">
         <thead>
             <th>No</th>
-            <th>Name</th>
+            <th>Nama</th>
             <th>Email</th>
-            <th>Manager Name</th>
-            <th>Salary Amount</th>
+            <th>Manager</th>
+            <th>Gaji</th>
             <th>Aksi</th>
         </thead>
         <tbody>
@@ -71,13 +71,13 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Delete Employee</h5>
+                                    <h5 class="modal-title">Hapus Pegawai</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="document.getElementById('modal').style.display='none'">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Are you sure to delete this Employee?</p>
+                                    <p>Apakah Anda yakin ingin menghapus Pegawai ini?</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="document.getElementById('modal').style.display='none'">Cancel</button>
@@ -85,7 +85,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-primary" type="submit" title="Hapus" id="hapus">
-                                            Delete
+                                            Hapus
                                         </button>
                                     </form>
                                 </div>

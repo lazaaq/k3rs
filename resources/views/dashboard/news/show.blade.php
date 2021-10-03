@@ -1,6 +1,6 @@
 @extends('layouts/dashboard')
 
-@section('title', 'News')
+@section('title', 'Berita | Detail')
 
 @section('css')
 <style>
@@ -14,13 +14,13 @@
 </style>
 @endsection
 
-@section('page-name', 'News')
+@section('page-name', 'Berita | Detail')
 
 @section('breadcrumb')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="/dashboard/news">News</a></li>
-    <li class="breadcrumb-item active">Single News</li>
+    <li class="breadcrumb-item"><a href="/dashboard/news">Berita</a></li>
+    <li class="breadcrumb-item active">Detail</li>
 </ol>
 @endsection
 
@@ -34,28 +34,29 @@
         </button>
     </div>
     @endif
-    <div class="container">
+    <div class="container mt-5">
         <h1 class="mb-3">{{ $news->title }}</h1>
+        <hr>
         <div class="row">
             <b>
                 <ion-icon name="person-outline"></ion-icon>{{ $news->author }}
             </b>
-            <b class="ml-auto">{{ $news->updated_at }}</b>
+            <b class="ml-auto">{{ Carbon\Carbon::parse($news->updated_at)->format('d F Y - h:i:s')}} </b>
         </div>
         <div class="row justify-content-center mt-5">
             <img src="{{ $news->image }}" alt="Gambar" width="80%" height="auto">
         </div>
-        <div class="row">
+        <div class="row text-justify">
             <p class="mt-3">{{ $news->body }}</p>
         </div>
         <div class="row">
             <a href="/dashboard/news" class="btn btn-secondary mr-2">Back</a>
             <a class="btn btn-warning mr-2" href="/dashboard/news/{{ $news->id }}/edit">
-                <ion-icon name="pencil-outline"></ion-icon>
+                <!-- <ion-icon name="pencil-outline"></ion-icon> -->
                 Edit
             </a>
             <button class="btn btn-danger" onclick="document.getElementById('modal').style.display='block'">
-                <ion-icon name="trash-outline"></ion-icon>
+                <!-- <ion-icon name="trash-outline"></ion-icon> -->
                 Delete
             </button>
             <div class="modal" tabindex="-1" id="modal">

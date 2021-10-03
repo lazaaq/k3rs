@@ -15,7 +15,7 @@ class RegulasiController extends Controller
     public function index()
     {
         return view('dashboard/regulasi/index', [
-            'regulasi' => Regulasi::latest()->paginate(10),
+            'regulasis' => Regulasi::latest()->paginate(10),
             'active' => 'regulasi',
         ]);
     }
@@ -43,6 +43,7 @@ class RegulasiController extends Controller
         ]);
 
         Regulasi::create($validatedData);
+        
         return redirect('/dashboard/regulasi')->with('success_added', 'Data berhasil ditambahkan!');
     }
 
@@ -65,7 +66,7 @@ class RegulasiController extends Controller
         $regulasi = Regulasi::find($request->id);
         $regulasi->update($validatedData);
         
-        return redirect('/dashboard/regulasi/' . $request->id)->with('success_update', 'Data berhasil diubah!');
+        return redirect('/dashboard/regulasi')->with('success_update', 'Data berhasil diubah!');
     }
 
     /**
@@ -74,14 +75,14 @@ class RegulasiController extends Controller
      * @param  \App\Models\Regulasi  $regulasi
      * @return \Illuminate\Http\Response
      */
-    public function show(Regulasi $regulasi)
-    {
-        return view('dashboard/regulasi/show', [
-            'active' => '',
-            'regulasi' => $regulasi,
+    // public function show(Regulasi $regulasi)
+    // {
+    //     return view('dashboard/regulasi/show', [
+    //         'active' => '',
+    //         'regulasi' => $regulasi,
 
-        ]);
-    }
+    //     ]);
+    // }
 
     /**
      * Show the form for editing the specified resource.
