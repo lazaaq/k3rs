@@ -35,6 +35,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AccidentSeeder::class);
         $this->call(DiseaseSeeder::class);
         $this->call(AparHistorySeeder::class);
+        $this->call(PcraSeeder::class);
+        $this->call(B3sSeeder::class);
 
         User::create([
             'name' => 'admin',
