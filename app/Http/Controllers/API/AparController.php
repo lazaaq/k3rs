@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Apar;
+use App\Models\AparHistory;
 
 class AparController extends Controller
 {
@@ -98,14 +99,15 @@ class AparController extends Controller
             'detail' => 'required',
         ]);
 
-        $apar->update([
+        AparHistory::create([
+            'apar_id' => $apar->id,
             'condition' => $validatedData['condition'],
             'detail' => $validatedData['detail']
         ]);
 
         return response()->json([
             'message' => 'Success',
-            'apar' => $apar,
+            'apar' => Apar::with(['history'])->find($apar->id),
 
         ], 200);
     }

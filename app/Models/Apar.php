@@ -10,4 +10,9 @@ class Apar extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function history()
+    {
+        return $this->hasMany(AparHistory::class);
+    }
 }
