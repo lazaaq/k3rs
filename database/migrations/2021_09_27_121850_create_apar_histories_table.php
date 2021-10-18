@@ -16,8 +16,9 @@ class CreateAparHistoriesTable extends Migration
         Schema::create('apar_histories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('apar_id');
-            $table->enum('condition', ['baik', 'tidak baik']);
-            $table->text('detail');
+            $table->text('image')->nullable();
+            $table->enum('condition', ['baik', 'tidak baik'])->nullable();
+            $table->text('detail')->nullable();
             $table->timestamps();
         });
     }

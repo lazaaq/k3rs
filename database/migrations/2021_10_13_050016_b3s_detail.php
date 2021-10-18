@@ -16,12 +16,12 @@ class B3sDetail extends Migration
         Schema::create('b3s_detail', function (Blueprint $table) {
             $table->id();
             $table->foreignId('b3s_id');
-            $table->text('human');
-            $table->enum('wash', ['ya', 'tidak']);
-            $table->enum('injury', ['ya', 'tidak']);
-            $table->string('tool');
-            $table->string('effect');
-            $table->text('follow_up');
+            $table->text('human')->nullable();
+            $table->enum('wash', ['ya', 'tidak'])->nullable();
+            $table->enum('injury', ['ya', 'tidak'])->nullable();
+            $table->string('tool')->nullable();
+            $table->string('effect')->nullable();
+            $table->text('follow_up')->nullable();
             $table->timestamps();
         });
     }

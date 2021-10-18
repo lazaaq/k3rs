@@ -4,9 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Disease;
+use App\Models\DiseaseDetail;
 use App\Models\DiseaseVictimEmployee;
 use App\Models\DiseaseVictimNonEmployee;
-use App\Models\DiseaseWitness;
 use App\Models\DiseaseWitnessEmployee;
 use App\Models\DiseaseWitnessNonEmployee;
 use Illuminate\Http\Request;
@@ -24,8 +24,7 @@ class DiseaseController extends Controller
     {
         return response()->json([
             'message' => 'Success',
-            'diseases' => Disease::all(),
-
+            'diseases' => Disease::with(['employee', 'disease_victim_employee', 'disease_victim_non_employee', 'disease_witness_employee', 'disease_witness_non_employee'])->get(),
         ], 200);
     }
 
@@ -47,18 +46,26 @@ class DiseaseController extends Controller
      */
     public function store(Request $request)
     {
-        $victim_employee = array();
-        $victim_non_employee = array();
-        $witness_employee = array();
-        $witness_non_employee = array();
-
         $diseaseValidate = $request->validate([
             'employee_id' => 'required',
             'time' => 'required',
             'location' => 'required',
             'image' => 'required',
-
         ]);
+
+        //store image
+        $folderPath = "storage/diseaseImage/";
+
+        $image_parts = explode(";base64,", $request->image);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        $image_base64 = base64_decode($image_parts[1]);
+        $file = $folderPath . uniqid() . '.' . $image_type;
+
+        file_put_contents($file, $image_base64);
+
+        $validatedData['image'] = $file;
+
         $disease = Disease::create([
             'employee_id' => $diseaseValidate['employee_id'],
             'time' => $diseaseValidate['time'],
@@ -70,17 +77,10 @@ class DiseaseController extends Controller
             for ($i = 0; $i < count($request->victim_employee); $i++) {
                 $victim = $request->victim_employee[$i];
 
-                $victim_employee_ = DiseaseVictimEmployee::create([
+                DiseaseVictimEmployee::create([
                     'disease_id' => $disease->id,
                     'employee_id' => $victim['employee_id'] ?? NULL,
-                    'salary_range' => $victim['salary_range'] ?? NULL,
-                    'chronology' => $victim['chronology'] ?? NULL,
-                    'first_aid' => $victim['first_aid'] ?? NULL,
-                    'effect' => $victim['effect'] ?? NULL,
-                    'condition' => $victim['condition'] ?? NULL,
                 ]);
-
-                array_push($victim_employee, $victim_employee_);
             }
         }
 
@@ -88,7 +88,7 @@ class DiseaseController extends Controller
             for ($i = 0; $i < count($request->victim_non_employee); $i++) {
                 $victim = $request->victim_non_employee[$i];
 
-                $victim_non_employee_ = DiseaseVictimNonEmployee::create([
+                DiseaseVictimNonEmployee::create([
                     'disease_id' => $disease->id,
                     'name' => $victim['name'] ?? NULL,
                     'birth' => $victim['birth'] ?? NULL,
@@ -96,8 +96,6 @@ class DiseaseController extends Controller
                     'address' => $victim['address'] ?? NULL,
                     'job' => $victim['job'] ?? NULL,
                 ]);
-
-                array_push($victim_non_employee, $victim_non_employee_);
             }
         }
 
@@ -105,13 +103,10 @@ class DiseaseController extends Controller
             for ($i = 0; $i < count($request->witness_employee); $i++) {
                 $witness = $request->witness_employee[$i];
 
-                $witness_ = DiseaseWitnessEmployee::create([
+                DiseaseWitnessEmployee::create([
                     'disease_id' => $disease->id,
                     'employee_id' => $witness['employee_id'],
-
                 ]);
-
-                array_push($witness_employee, $witness_);
             }
         }
 
@@ -119,28 +114,36 @@ class DiseaseController extends Controller
             for ($i = 0; $i < count($request->witness_non_employee); $i++) {
                 $witness = $request->witness_non_employee[$i];
 
-                $witness_ = DiseaseWitnessNonEmployee::create([
+                DiseaseWitnessNonEmployee::create([
                     'disease_id' => $disease->id,
                     'name' => $witness['name'] ?? NULL,
                     'birth' => $witness['birth'] ?? NULL,
                     'nik' => $witness['nik'] ?? NULL,
-                    'address' => $witness['address'] ?? NULL,
                     'gender' => $witness['gender'] ?? NULL,
+                    'address' => $witness['address'] ?? NULL,
                     'job' => $witness['job'] ?? NULL,
+                    'phone' => $witness['phone'] ?? NULL,
                 ]);
+            }
+        }
 
-                array_push($witness_non_employee, $witness_);
+        if ($request->has('detail')) {
+            for ($i = 0; $i < count($request->detail); $i++) {
+                $det = $request->detail[$i];
+
+                DiseaseDetail::create([
+                    'disease_id' => $disease->id,
+                    'chronology' => $det['chronology'] ?? NULL,
+                    'faskes' => $det['faskes'] ?? NULL,
+                    'cause' => $det['cause'] ?? NULL,
+                    'effect' => $det['effect'] ?? NULL
+                ]);
             }
         }
 
         return response()->json([
             'message' => 'Success',
-            'disease' => $disease,
-            'victim_employee' => $victim_employee,
-            'victim_non_employee' => $victim_non_employee,
-            'witness_employee' => $witness_employee,
-            'witness_non_employee' => $witness_non_employee
-
+            'diseases' => Disease::with(['employee', 'disease_victim_employee', 'disease_victim_non_employee', 'disease_witness_employee', 'disease_witness_non_employee'])->find($disease->id),
         ], 200);
     }
 
@@ -154,12 +157,7 @@ class DiseaseController extends Controller
     {
         return response()->json([
             'message' => 'Success',
-            'disease' => $disease,
-            'victim_employee' => DiseaseVictimEmployee::where('disease_id', $disease->id)->get(),
-            'victim_non_employee' => DiseaseVictimNonEmployee::where('disease_id', $disease->id)->get(),
-            'witness_employee' => DiseaseWitnessEmployee::where('disease_id', $disease->id)->get(),
-            'witness_non_employee' => DiseaseWitnessNonEmployee::where('disease_id', $disease->id)->get(),
-
+            'diseases' => Disease::with(['employee', 'disease_victim_employee', 'disease_victim_non_employee', 'disease_witness_employee', 'disease_witness_non_employee'])->find($disease->id),
         ], 200);
     }
 
@@ -171,7 +169,6 @@ class DiseaseController extends Controller
      */
     public function edit(Disease $disease)
     {
-
     }
 
     /**

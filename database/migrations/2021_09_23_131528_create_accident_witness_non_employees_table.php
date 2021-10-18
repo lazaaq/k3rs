@@ -18,10 +18,11 @@ class CreateAccidentWitnessNonEmployeesTable extends Migration
             $table->foreignId('accident_id');
             $table->string('name')->nullable();
             $table->date('birth')->nullable();
-            $table->char('nik', 16)->nullable();
+            $table->string('nik', 20)->nullable();
             $table->enum('gender', ['L', 'P'])->nullable();
             $table->text('address')->nullable();
             $table->string('job')->nullable();
+            $table->string('phone', 20)->nullable();
             $table->timestamps();
         });
     }

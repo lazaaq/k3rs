@@ -16,13 +16,13 @@ class PcrasDetail extends Migration
         Schema::create('pcras_detail', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pcras_id');
-            $table->text('not_eligible');
-            $table->string('reported');
-            $table->date('reporting_date');
-            $table->date('re_survey_date');
-            $table->string('surveyor');
-            $table->enum('accordance', ['ada', 'tidak']);
-            $table->text('further_action');
+            $table->text('not_eligible')->nullable();
+            $table->string('reported')->nullable();
+            $table->date('reporting_date')->nullable();
+            $table->date('re_survey_date')->nullable();
+            $table->string('surveyor')->nullable();
+            $table->enum('accordance', ['ada', 'tidak'])->nullable();
+            $table->text('further_action')->nullable();
             $table->timestamps();
         });
     }

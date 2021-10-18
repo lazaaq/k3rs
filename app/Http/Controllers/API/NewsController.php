@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\News;
+use Illuminate\Support\Str;
 
 class NewsController extends Controller
 {
@@ -47,6 +48,7 @@ class NewsController extends Controller
             'excerpt' => 'required',
             'body' => 'required',
         ]);
+        $validatedData['slug'] = Str::of($validatedData['title'])->slug('-');
         $news = News::create($validatedData);
         return response()->json([
             'message' => 'Success',

@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         Employee::factory(20)->create();
         Manager::factory(20)->create();
         Salary::factory(15)->create();
-        
+
         $this->call(BriefingSeeder::class);
         $this->call(AccidentSeeder::class);
         $this->call(DiseaseSeeder::class);
@@ -43,22 +43,5 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin')
         ]);
-
-        UserApi::create([
-            'email' => 'admin@gmail.com',
-            'password' => 'admin'
-        ]);
-
-        Employee::create([
-            'manager_id' => '1',
-            'salary_id' => '1',
-            'name' => 'Lana Saiful Aqil',
-            'email' => 'lanasaiful411@gmail.com',
-            'password' => Hash::make('admin'),
-            'address' => 'address',
-            'birth' => '2002-11-04',
-            'gender' => 'L'
-        ]);
-
     }
 }

@@ -17,11 +17,6 @@ class CreateDiseaseVictimEmployeesTable extends Migration
             $table->id();
             $table->foreignId('disease_id');
             $table->foreignId('employee_id');
-            $table->enum('salary_range', ['day', 'month', 'wholesale'])->nullable();
-            $table->text('chronology')->nullable();
-            $table->string('first_aid')->nullable();
-            $table->string('effect')->nullable();
-            $table->enum('condition', ['inap', 'jalan'])->nullable();
             $table->timestamps();
         });
     }

@@ -46,7 +46,6 @@
             <th>Nama</th>
             <th>Email</th>
             <th>Manager</th>
-            <th>Gaji</th>
             <th>Aksi</th>
         </thead>
         <tbody>
@@ -56,7 +55,6 @@
                 <td>{{ $employee->name }}</td>
                 <td>{{ $employee->email }}</td>
                 <td>{{ $employee->manager->name }}</td>
-                <td>Rp{{number_format($employee->salary->salary_amount, 0, ',', '.')}}</td>
                 <td>
                     <a class="btn btn-success" href="/dashboard/employee/{{$employee->id}}">
                         <ion-icon name="eye-outline"></ion-icon>

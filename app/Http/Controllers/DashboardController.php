@@ -9,7 +9,9 @@ use App\Models\Employee;
 use App\Models\Manager;
 use App\Models\Briefing;
 use App\Models\Accident;
+use App\Models\B3s;
 use App\Models\Disease;
+use App\Models\Pcras;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -27,7 +29,8 @@ class DashboardController extends Controller
             'briefing_count' => Briefing::all()->count(),
             'accident_count' => Accident::all()->count(),
             'disease_count' => Disease::all()->count(),
-
+            'pcra_count' => Pcras::all()->count(),
+            'b3s_count' => B3s::all()->count(),
         ]);
     }
 }

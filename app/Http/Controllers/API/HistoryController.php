@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Accident;
 use App\Models\Disease;
 use App\Models\Employee;
-use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 
 class HistoryController extends Controller

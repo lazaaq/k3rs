@@ -15,7 +15,7 @@ class Briefing extends Model
     
     public function briefing_presence()
     {
-        return $this->belongsTo(BriefingPresence::class);
+        return $this->hasMany(BriefingPresence::class);
     }
 
     public function excerpt()

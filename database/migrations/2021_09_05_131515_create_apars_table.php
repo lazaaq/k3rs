@@ -15,10 +15,9 @@ class CreateAparsTable extends Migration
     {
         Schema::create('apars', function (Blueprint $table) {
             $table->id();
-            $table->string('image');
             $table->date('time')->nullable();
-            $table->text('location');
-            $table->string('code', 2);
+            $table->text('location')->nullable();
+            $table->string('code', 2)->nullable();
             $table->date('expired')->nullable();
             $table->timestamps();
         });

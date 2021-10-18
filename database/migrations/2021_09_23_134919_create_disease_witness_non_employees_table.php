@@ -22,6 +22,7 @@ class CreateDiseaseWitnessNonEmployeesTable extends Migration
             $table->enum('gender', ['L', 'P'])->nullable();
             $table->text('address')->nullable();
             $table->string('job')->nullable();
+            $table->string('phone', 20)->nullable();
             $table->timestamps();
         });
     }

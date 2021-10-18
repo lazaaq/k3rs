@@ -17,11 +17,11 @@ class B3sAction extends Migration
         Schema::create('b3s_action', function (Blueprint $table) {
             $table->id();
             $table->foreignId('b3s_id');
-            $table->enum('supervisor_room', ['ya', 'tidak']);
-            $table->enum('supervisor_sanitasi', ['ya', 'tidak']);
-            $table->enum('eliminate', ['ya', 'tidak']);
-            $table->enum('glove', ['ya', 'tidak']);
-            $table->enum('waste', ['ya', 'tidak']);
+            $table->enum('supervisor_room', ['ya', 'tidak'])->nullable();
+            $table->enum('supervisor_sanitasi', ['ya', 'tidak'])->nullable();
+            $table->enum('eliminate', ['ya', 'tidak'])->nullable();
+            $table->enum('glove', ['ya', 'tidak'])->nullable();
+            $table->enum('waste', ['ya', 'tidak'])->nullable();
             $table->timestamps();
         });
     }

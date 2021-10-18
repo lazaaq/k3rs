@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Accident;
+use App\Models\AccidentDetail;
 use App\Models\AccidentVictimEmployee;
 use App\Models\AccidentVictimNonEmployee;
 use App\Models\AccidentWitnessEmployee;
@@ -21,7 +22,7 @@ class AccidentController extends Controller
     {
         return response()->json([
             'message' => 'Success',
-            'accidents' => Accident::all(),
+            'accidents' => Accident::with(['employee', 'accident_victim_employee', 'accident_victim_non_employee', 'accident_witness_employee', 'accident_witness_non_employee'])->get(),
 
         ], 200);
     }
@@ -40,18 +41,26 @@ class AccidentController extends Controller
      */
     public function store(Request $request)
     {
-        $victim_employee = array();
-        $victim_non_employee = array();
-        $witness_employee = array();
-        $witness_non_employee = array();
-
         $accidentValidate = $request->validate([
             'employee_id' => 'required',
             'time' => 'required',
             'location' => 'required',
             'image' => 'required',
-
         ]);
+
+        //store image
+        $folderPath = "storage/accidentImage/";
+
+        $image_parts = explode(";base64,", $request->image);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        $image_base64 = base64_decode($image_parts[1]);
+        $file = $folderPath . uniqid() . '.' . $image_type;
+
+        file_put_contents($file, $image_base64);
+
+        $validatedData['image'] = $file;
+
         $accident = Accident::create([
             'employee_id' => $accidentValidate['employee_id'],
             'time' => $accidentValidate['time'],
@@ -64,7 +73,7 @@ class AccidentController extends Controller
             for ($i = 0; $i < count($request->victim_employee); $i++) {
                 $victim = $request->victim_employee[$i];
 
-                $victim_employee_ = AccidentVictimEmployee::create([
+                AccidentVictimEmployee::create([
                     'accident_id' => $accident->id,
                     'employee_id' => $victim['employee_id'],
                     'salary_range' => $victim['salary_range'] ?? NULL,
@@ -73,8 +82,6 @@ class AccidentController extends Controller
                     'effect' => $victim['effect'] ?? NULL,
                     'condition' => $victim['condition'] ?? NULL,
                 ]);
-
-                array_push($victim_employee, $victim_employee_);
             }
         }
 
@@ -83,7 +90,7 @@ class AccidentController extends Controller
             for ($i = 0; $i < count($request->victim_non_employee); $i++) {
                 $victim = $request->victim_non_employee[$i];
 
-                $victim_non_employee_ = AccidentVictimNonEmployee::create([
+                AccidentVictimNonEmployee::create([
                     'accident_id' => $accident->id,
                     'name' => $victim['name'] ?? NULL,
                     'birth' => $victim['birth'] ?? NULL,
@@ -91,23 +98,18 @@ class AccidentController extends Controller
                     'address' => $victim['address'] ?? NULL,
                     'job' => $victim['job'] ?? NULL,
                 ]);
-
-                array_push($victim_non_employee, $victim_non_employee_);
             }
         }
-
 
         // Witness Employee
         if ($request->has('witness_employee')) {
             for ($i = 0; $i < count($request->witness_employee); $i++) {
                 $witness = $request->witness_employee[$i];
 
-                $witness_ = AccidentWitnessEmployee::create([
+                AccidentWitnessEmployee::create([
                     'accident_id' => $accident->id,
                     'employee_id' => $witness['employee_id']
                 ]);
-
-                array_push($witness_employee, $witness_);
             }
         }
 
@@ -116,7 +118,7 @@ class AccidentController extends Controller
             for ($i = 0; $i < count($request->witness_non_employee); $i++) {
                 $witness = $request->witness_non_employee[$i];
 
-                $witness_ = AccidentWitnessNonEmployee::create([
+                AccidentWitnessNonEmployee::create([
                     'accident_id' => $accident->id,
                     'name' => $witness['name'] ?? NULL,
                     'birth' => $witness['birth'] ?? NULL,
@@ -125,18 +127,27 @@ class AccidentController extends Controller
                     'gender' => $witness['gender'] ?? NULL,
                     'job' => $witness['job'] ?? NULL,
                 ]);
+            }
+        }
 
-                array_push($witness_non_employee, $witness_);
+        // Detail PAK
+        if ($request->has('detail')) {
+            for ($i = 0; $i < count($request->detail); $i++) {
+                $det = $request->detail[$i];
+
+                AccidentDetail::create([
+                    'accident_id' => $accident->id,
+                    'chronology' => $det['chronology'] ?? NULL,
+                    'faskes' => $det['faskes'] ?? NULL,
+                    'effect' => $det['effect'] ?? NULL,
+                    'condition' => $det['condition'] ?? NULL,
+                ]);
             }
         }
 
         return response()->json([
             'message' => 'Success',
-            'accident' => $accident,
-            'victim_employee' => $victim_employee,
-            'victim_non_employee' => $victim_non_employee,
-            'witness_employee' => $witness_employee,
-            'witness_non_employee' => $witness_non_employee,
+            'accident' => Accident::with(['employee', 'accident_victim_employee', 'accident_victim_non_employee', 'accident_witness_employee', 'accident_witness_non_employee'])->find($accident->id),
 
         ], 200);
     }
@@ -151,11 +162,7 @@ class AccidentController extends Controller
     {
         return response()->json([
             'message' => 'Success',
-            'accident' => $accident,
-            'victim_employee' => AccidentVictimEmployee::where('accident_id', $accident->id)->get(),
-            'victim_non_employee' => AccidentVictimNonEmployee::where('accident_id', $accident->id)->get(),
-            'witness_employee' => AccidentWitnessEmployee::where('accident_id', $accident->id)->get(),
-            'witness_non_employee' => AccidentWitnessNonEmployee::where('accident_id', $accident->id)->get(),
+            'accidents' => Accident::with(['employee', 'accident_victim_employee', 'accident_victim_non_employee', 'accident_witness_employee', 'accident_witness_non_employee'])->find($accident->id),
 
         ], 200);
     }

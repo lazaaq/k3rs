@@ -16,10 +16,10 @@ class B3s extends Migration
         Schema::create('b3s', function (Blueprint $table) {
             $table->id();
             $table->foreignId('employee_id');
-            $table->string('location');
-            $table->dateTime('datetime');
-            $table->string('type');
-            $table->text('chronology');
+            $table->string('location')->nullable();
+            $table->dateTime('datetime')->nullable();
+            $table->string('type')->nullable();
+            $table->text('chronology')->nullable();
             $table->timestamps();
         });
     }

@@ -18,16 +18,14 @@ class PcraController extends Controller
         return response()->json([
             'message' => 'Success',
             'pcras' => Pcras::with(['construction', 'access_areas', 'traffic', 'detail', 'documentation'])->get(),
-
         ]);
     }
 
     public function show($id)
     {
-        $pcra = Pcras::with(['construction', 'access_areas', 'traffic', 'detail', 'documentation'])->find($id);
         return response()->json([
             'message' => 'Success',
-            'pcra' => $pcra
+            'pcra' => Pcras::with(['construction', 'access_areas', 'traffic', 'detail', 'documentation'])->find($id)
         ]);
     }
 

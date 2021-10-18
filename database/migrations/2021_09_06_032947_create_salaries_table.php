@@ -15,7 +15,9 @@ class CreateSalariesTable extends Migration
     {
         Schema::create('salaries', function (Blueprint $table) {
             $table->id();
-            $table->float('salary_amount', 15, 2);
+            $table->float('day', 15, 2)->nullable();
+            $table->float('month', 15, 2)->nullable();
+            $table->float('wholesale', 15, 2)->nullable();
             $table->timestamps();
         });
     }

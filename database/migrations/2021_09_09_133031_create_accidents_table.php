@@ -16,9 +16,9 @@ class CreateAccidentsTable extends Migration
         Schema::create('accidents', function (Blueprint $table) {
             $table->id();
             $table->foreignId('employee_id');
-            $table->date('time');
-            $table->string('location');
-            $table->string('image');
+            $table->dateTime('time')->nullable();
+            $table->string('location')->nullable();
+            $table->text('image')->nullable();
             $table->timestamps();
         });
     }

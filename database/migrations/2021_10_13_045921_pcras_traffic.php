@@ -16,11 +16,11 @@ class PcrasTraffic extends Migration
         Schema::create('pcras_traffic', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pcras_id');
-            $table->enum('barrier', ['ada', 'tidak', 'lainnya']);
-            $table->enum('remove_puing', ['ada', 'tidak', 'lainnya']);
-            $table->enum('route', ['ada', 'tidak', 'lainnya']);
-            $table->enum('access', ['ada', 'tidak', 'lainnya']);
-            $table->text('comment');
+            $table->enum('barrier', ['ada', 'tidak', 'lainnya'])->nullable();
+            $table->enum('remove_puing', ['ada', 'tidak', 'lainnya'])->nullable();
+            $table->enum('route', ['ada', 'tidak', 'lainnya'])->nullable();
+            $table->enum('access', ['ada', 'tidak', 'lainnya'])->nullable();
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

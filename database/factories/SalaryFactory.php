@@ -22,7 +22,9 @@ class SalaryFactory extends Factory
     public function definition()
     {
         return [
-            'salary_amount' => $this->faker->randomNumber(7, true),
+            'day' => $this->faker->randomNumber(7, true),
+            'month' => $this->faker->randomNumber(7, true),
+            'wholesale' => $this->faker->randomNumber(7, true),
         ];
     }
 }

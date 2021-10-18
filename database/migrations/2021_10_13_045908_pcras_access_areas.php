@@ -16,12 +16,12 @@ class PcrasAccessAreas extends Migration
         Schema::create('pcras_access_areas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pcras_id');
-            $table->enum('plafon', ['ada', 'tidak', 'lainnya']);
-            $table->enum('floor_clean', ['ada', 'tidak', 'lainnya']);
-            $table->enum('wall', ['ada', 'tidak', 'lainnya']);
-            $table->enum('floor_dustfree', ['ada', 'tidak', 'lainnya']);
-            $table->enum('vent', ['ada', 'tidak', 'lainnya']);
-            $table->enum('insect', ['ada', 'tidak', 'lainnya']);
+            $table->enum('plafon', ['ada', 'tidak', 'lainnya'])->nullable();
+            $table->enum('floor_clean', ['ada', 'tidak', 'lainnya'])->nullable();
+            $table->enum('wall', ['ada', 'tidak', 'lainnya'])->nullable();
+            $table->enum('floor_dustfree', ['ada', 'tidak', 'lainnya'])->nullable();
+            $table->enum('vent', ['ada', 'tidak', 'lainnya'])->nullable();
+            $table->enum('insect', ['ada', 'tidak', 'lainnya'])->nullable();
             $table->text('comment');
             $table->timestamps();
         });

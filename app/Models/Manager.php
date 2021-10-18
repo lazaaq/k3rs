@@ -18,6 +18,6 @@ class Manager extends Model
 
     public function salary()
     {
-        return $this->belongsTo(Salary::class);
+        return $this->hasOne(Salary::class);
     }
 }

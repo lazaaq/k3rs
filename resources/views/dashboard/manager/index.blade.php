@@ -45,7 +45,7 @@
             <th>No</th>
             <th>Name</th>
             <th>Email</th>
-            <th>Salary Amount</th>
+            <th>Alamat</th>
             <th>Aksi</th>
         </thead>
         <tbody>
@@ -54,7 +54,7 @@
                 <th>{{ $loop->iteration }}</th>
                 <td>{{ $manager->name }}</td>
                 <td>{{ $manager->email }}</td>
-                <td>Rp{{ number_format($manager->salary->salary_amount, 0, ',', '.') }}</td>
+                <td>{{ $manager->address }}</td>
                 <td>
                     <a class="btn btn-success" href="/dashboard/manager/{{ $manager->id }}">
                         <ion-icon name="eye-outline"></ion-icon>

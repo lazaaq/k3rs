@@ -23,7 +23,6 @@ class AparFactory extends Factory
     {
         $code = $this->faker->randomLetter() . $this->faker->randomDigit();
         return [
-            'image' => '/img/placeholder/document.jpg',
             'time' => $this->faker->date(),
             'location' => $this->faker->sentence(),
             'code' => $code,

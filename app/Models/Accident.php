@@ -15,4 +15,24 @@ class Accident extends Model
     {
         return $this->belongsTo(Employee::class);
     }
+
+    public function accident_victim_employee()
+    {
+        return $this->hasMany(AccidentVictimEmployee::class);
+    }
+    
+    public function accident_victim_non_employee()
+    {
+        return $this->hasMany(AccidentVictimNonEmployee::class);
+    }
+
+    public function accident_witness_employee()
+    {
+        return $this->hasMany(AccidentWitnessEmployee::class);
+    }
+    
+    public function accident_witness_non_employee()
+    {
+        return $this->hasMany(AccidentWitnessNonEmployee::class);
+    }
 }

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Apar;
 use App\Models\AparHistory;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class AparController extends Controller
 {
@@ -18,8 +20,8 @@ class AparController extends Controller
     {
         return response()->json([
             'message' => 'Success',
-            'apars' => Apar::all(),
-            
+            'apars' => Apar::with(['history'])->get(),
+
         ], 200);
     }
 
@@ -42,13 +44,10 @@ class AparController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'image' => 'required',
             'time' => 'required',
             'location' => 'required',
             'code' => 'required',
             'expired' => 'required',
-            'condition' => 'required',
-            'detail' => 'required',
         ]);
 
         $apar = Apar::create($validatedData);
@@ -69,7 +68,7 @@ class AparController extends Controller
     {
         return response()->json([
             'message' => 'Success',
-            'apar' => $apar,
+            'apar' => Apar::with(['history'])->find($apar->id),
 
         ], 200);
     }
@@ -97,12 +96,27 @@ class AparController extends Controller
         $validatedData = $request->validate([
             'condition' => 'required',
             'detail' => 'required',
+            'image' => 'required'
         ]);
+
+        //store image
+        $folderPath = "storage/aparImage/";
+
+        $image_parts = explode(";base64,", $request->image);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        $image_base64 = base64_decode($image_parts[1]);
+        $file = $folderPath . uniqid() . '.' . $image_type;
+
+        file_put_contents($file, $image_base64);
+
+        $validatedData['image'] = $file;
 
         AparHistory::create([
             'apar_id' => $apar->id,
             'condition' => $validatedData['condition'],
-            'detail' => $validatedData['detail']
+            'detail' => $validatedData['detail'],
+            'image' => $validatedData['image']
         ]);
 
         return response()->json([
@@ -123,7 +137,7 @@ class AparController extends Controller
         $apar->delete();
         return response()->json([
             'message' => 'Success',
-            
+
         ], 200);
     }
 }

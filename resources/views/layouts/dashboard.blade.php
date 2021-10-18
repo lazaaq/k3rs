@@ -184,6 +184,18 @@
                                 <p>Disease</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="/dashboard/pcra" class="nav-link @if($active === 'pcra') active @endif">
+                                <i class="bi bi-file-medical mx-2"></i>
+                                <p>PCRA</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/dashboard/b3s" class="nav-link @if($active === 'b3s') active @endif">
+                                <i class="bi bi-file-earmark-medical mx-2"></i>
+                                <p>B3S</p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

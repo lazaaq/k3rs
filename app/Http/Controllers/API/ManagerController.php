@@ -17,7 +17,7 @@ class ManagerController extends Controller
     {
         return response()->json([
             'message' => 'Success',
-            'manager' => Manager::all(),
+            'manager' => Manager::with(['employee', 'salary'])->get(),
             
         ], 200);
     }
@@ -47,13 +47,15 @@ class ManagerController extends Controller
             'address' => 'required',
             'birth' => 'required',
             'gender' => 'required',
+            'telp' => 'required',
         ]);
 
         $manager = Manager::create($validatedData);
+
         return response()->json([
             'message' => 'Success',
-            'manager' => $manager,
-
+            'manager' => Manager::with(['employee', 'salary'])->find($manager->id),
+            
         ], 200);
     }
 
@@ -67,7 +69,7 @@ class ManagerController extends Controller
     {
         return response()->json([
             'message' => 'Success',
-            'manager' => $manager,
+            'manager' => Manager::with(['employee', 'salary'])->find($manager->id),
 
         ], 200);
     }

@@ -26,12 +26,6 @@ class AccidentVictimEmployeeFactory extends Factory
         return [
             'accident_id' => mt_rand(1, Accident::all()->count()),
             'employee_id' => mt_rand(1, Employee::all()->count()),
-            'salary_range' => $this->faker->randomElement(['day', 'month', 'wholesale']),
-            'chronology' => $this->faker->paragraphs(3, true),
-            'first_aid' => $this->faker->sentence(),
-            'effect' => $this->faker->sentence(),
-            'condition' => $this->faker->randomElement(['inap', 'jalan']),
-            
         ];
     }
 }

@@ -30,6 +30,7 @@ class DiseaseWitnessNonEmployeeFactory extends Factory
             'gender' => $this->faker->randomElement(['L', 'P']),
             'address' => $this->faker->paragraphs(2, true),
             'job' => $this->faker->sentence(),
+            'phone' => $this->faker->phoneNumber(),
         ];
     }
 }

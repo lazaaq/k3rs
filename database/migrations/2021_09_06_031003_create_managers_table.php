@@ -16,11 +16,12 @@ class CreateManagersTable extends Migration
         Schema::create('managers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('salary_id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->text('address');
-            $table->date('birth');
-            $table->enum('gender', ['L', 'P']);
+            $table->string('name')->nullable();
+            $table->string('email')->unique()->nullable();
+            $table->text('address')->nullable();
+            $table->date('birth')->nullable();
+            $table->enum('gender', ['L', 'P'])->nullable();
+            $table->string('telp', 20)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

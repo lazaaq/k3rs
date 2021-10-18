@@ -24,7 +24,7 @@ class AccidentFactory extends Factory
     {
         return [
             'employee_id' => mt_rand(1, Employee::all()->count()),
-            'time' => $this->faker->date(),
+            'time' => $this->faker->dateTime(),
             'location' => $this->faker->sentence(),
             'image' => '/img/placeholder/document.jpg',
             

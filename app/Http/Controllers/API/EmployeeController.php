@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Employee;
+use App\Models\Manager;
+use App\Models\Salary;
 use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
@@ -16,10 +18,38 @@ class EmployeeController extends Controller
      */
     public function index()
     {
+        $employees = array();
+        foreach (Employee::all() as $employee) {
+            $emp['id'] = $employee->id;
+            $emp['manager_id'] = $employee->manager_id;
+            $emp['salary_id'] = $employee->salary_id;
+            $emp['name'] = $employee->name;
+            $emp['email'] = $employee->email;
+            $emp['address'] = $employee->address;
+            $emp['birth'] = $employee->birth;
+            $emp['gender'] = $employee->gender;
+            $emp['job'] = $employee->job;
+            $emp['position'] = $employee->position;
+            $emp['telp'] = $employee->telp;
+
+            $manager = Manager::where('employee_id', $employee->id)->get();
+            $mngr['name'] = $manager->name;
+            $mngr['address'] = $manager->address;
+            $mngr['telp'] = $manager->telp;
+            $emp['manager'] = $mngr;
+
+            $salary = Salary::where('employee_id', $employee->id)->get();
+            $slry['day'] = $salary->day;
+            $slry['month'] = $salary->month;
+            $slry['wholesale'] = $salary->wholesale;
+            $emp['salary'] = $slry;
+
+            array_push($employees, $emp);
+        }
         return response()->json([
             'message' => 'Success',
-            'employees' => Employee::all(),
-            
+            'employees' => $employees,
+
         ], 200);
     }
 
@@ -50,6 +80,7 @@ class EmployeeController extends Controller
             'address' => 'required',
             'birth' => 'required',
             'gender' => 'required',
+            'job' => 'required',
         ]);
 
         $employee = Employee::create($validatedData);
@@ -68,9 +99,33 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
+        $emp['id'] = $employee->id;
+        $emp['manager_id'] = $employee->manager_id;
+        $emp['salary_id'] = $employee->salary_id;
+        $emp['name'] = $employee->name;
+        $emp['email'] = $employee->email;
+        $emp['address'] = $employee->address;
+        $emp['birth'] = $employee->birth;
+        $emp['gender'] = $employee->gender;
+        $emp['job'] = $employee->job;
+        $emp['position'] = $employee->position;
+        $emp['telp'] = $employee->telp;
+
+        $manager = Manager::find($employee->manager_id);
+        $mngr['name'] = $manager->name;
+        $mngr['address'] = $manager->address;
+        $mngr['telp'] = $manager->telp;
+        $emp['manager'] = $mngr;
+
+        $salary = Salary::find($employee->salary_id);
+        $slry['day'] = $salary->day;
+        $slry['month'] = $salary->month;
+        $slry['wholesale'] = $salary->wholesale;
+        $emp['salary'] = $slry;
+
         return response()->json([
             'message' => 'Success',
-            'employee' => $employee,
+            'employee' => $emp,
 
         ], 200);
     }
@@ -83,7 +138,6 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        
     }
 
     /**
@@ -119,17 +173,17 @@ class EmployeeController extends Controller
             'password_new' => 'required',
             'password_repass' => 'required',
         ]);
-        if (!Hash::check($validatedData['password_old'], $employee->password)){
+        if (!Hash::check($validatedData['password_old'], $employee->password)) {
             return response()->json([
                 'message' => 'Unauthorized',
                 'error' => 'Password_old salah!'
-            ],401);
+            ], 401);
         }
-        if ($validatedData['password_new'] != $validatedData['password_repass']){
+        if ($validatedData['password_new'] != $validatedData['password_repass']) {
             return response()->json([
                 'message' => 'Failed',
                 'error' => 'Password_new dan password_repass tidak sama!',
-            ],402);
+            ], 402);
         }
         $employee->update([
             'password' => Hash::make($validatedData['password_new'])
@@ -138,7 +192,6 @@ class EmployeeController extends Controller
             'message' => 'Success',
             'password_new' => $employee->password,
         ], 200);
-
     }
 
     /**

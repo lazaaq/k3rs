@@ -20,10 +20,9 @@ class B3sController extends Controller
 
     public function show($id)
     {
-        $b3s = B3s::with(['action', 'detail'])->find($id);
         return response()->json([
             'message' => 'Success',
-            'pcra' => $b3s
+            'pcra' => B3s::with(['action', 'detail'])->find($id),
         ]);
     }
 

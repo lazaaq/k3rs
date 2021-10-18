@@ -15,8 +15,8 @@ class CreateBriefingsTable extends Migration
     {
         Schema::create('briefings', function (Blueprint $table) {
             $table->id();
-            $table->date('time');
-            $table->text('result');
+            $table->date('time')->nullable();
+            $table->text('result')->nullable();
             $table->timestamps();
         });
     }

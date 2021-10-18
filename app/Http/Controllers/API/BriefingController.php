@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Briefing;
 use App\Models\BriefingPresence;
-use Faker\Provider\Lorem;
 use Illuminate\Http\Request;
 
 class BriefingController extends Controller
@@ -19,8 +18,7 @@ class BriefingController extends Controller
     {
         return response()->json([
             'message' => 'Success',
-            'briefings' => Briefing::all(),
-
+            'briefings' => Briefing::with(['briefing_presence'])->get(),
         ], 200);
     }
 
@@ -55,9 +53,7 @@ class BriefingController extends Controller
     {
         return response()->json([
             'message' => 'Success',
-            'briefing' => $briefing,
-            'presences' => BriefingPresence::where('briefing_id', $briefing->id)->get(),
-
+            'briefings' => Briefing::with(['briefing_presence'])->find($briefing->id),
         ], 200);
     }
 

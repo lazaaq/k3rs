@@ -31,6 +31,9 @@ class EmployeeFactory extends Factory
             'address' => $this->faker->paragraph(3),
             'birth' => $this->faker->date(),
             'gender' => $this->faker->randomElement(['L', 'P']),
+            'job' => $this->faker->jobTitle(),
+            'position' => $this->faker->sentence(),
+            'telp' => $this->faker->phoneNumber()
         ];
     }
 }

@@ -15,11 +15,14 @@ use App\Http\Controllers\AccidentVictimEmployeeController;
 use App\Http\Controllers\AccidentVictimNonEmployeeController;
 use App\Http\Controllers\AccidentWitnessEmployeeController;
 use App\Http\Controllers\AccidentWitnessNonEmployeeController;
+use App\Http\Controllers\B3sController;
 use App\Http\Controllers\DiseaseController;
 use App\Http\Controllers\DiseaseVictimEmployeeController;
 use App\Http\Controllers\DiseaseVictimNonEmployeeController;
 use App\Http\Controllers\DiseaseWitnessEmployeeController;
 use App\Http\Controllers\DiseaseWitnessNonEmployeeController;
+use App\Http\Controllers\PcraController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,12 +37,6 @@ use App\Http\Controllers\DiseaseWitnessNonEmployeeController;
 Route::get('/', function () {
     return view('index');
 });
-// Route::get('/about', function () {
-//     return view('about');
-// });
-// Route::get('/contact', function () {
-//     return view('contact');
-// });
 
 // Login & Logout
 Route::middleware(['guest'])->group(function () {
@@ -82,6 +79,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/disease/{disease}/vne/{victim}', [DiseaseVictimNonEmployeeController::class, 'index']);
     Route::get('/dashboard/disease/{disease}/we/{witness}', [DiseaseWitnessEmployeeController::class, 'index']);
     Route::get('/dashboard/disease/{disease}/wne/{witness}', [DiseaseWitnessNonEmployeeController::class, 'index']);
+
+    //pcras
+    Route::resource('/dashboard/pcra', PcraController::class);
+
+    //b3s
+    Route::resource('/dashboard/b3s', B3sController::class);
 
     //profil user admin
     Route::get('/profil', [ProfilController::class, 'index']);

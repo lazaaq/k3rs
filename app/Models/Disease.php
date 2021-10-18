@@ -15,4 +15,20 @@ class Disease extends Model
     {
         return $this->belongsTo(Employee::class);
     }
+    public function disease_victim_employee()
+    {
+        return $this->hasMany(DiseaseVictimEmployee::class);
+    }
+    public function disease_victim_non_employee()
+    {
+        return $this->hasMany(DiseaseVictimNonEmployee::class);
+    }
+    public function disease_witness_employee()
+    {
+        return $this->hasMany(DiseaseWitnessEmployee::class);
+    }
+    public function disease_witness_non_employee()
+    {
+        return $this->hasMany(DiseaseWitnessNonEmployee::class);
+    }
 }
