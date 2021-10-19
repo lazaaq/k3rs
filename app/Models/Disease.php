@@ -31,4 +31,8 @@ class Disease extends Model
     {
         return $this->hasMany(DiseaseWitnessNonEmployee::class);
     }
+    public function detail()
+    {
+        return $this->hasOne(DiseaseDetail::class);
+    }
 }

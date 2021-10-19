@@ -22,7 +22,7 @@ class BriefingPresenceFactory extends Factory
     public function definition()
     {
         return [
-            'presence' => 1,
+            
         ];
     }
 }

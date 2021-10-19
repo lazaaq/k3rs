@@ -16,7 +16,8 @@ class PcraController extends Controller
     public function index()
     {
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'Berhasil mendapatkan semua PCRA',
             'pcras' => Pcras::with(['construction', 'access_areas', 'traffic', 'detail', 'documentation'])->get(),
         ]);
     }
@@ -24,7 +25,8 @@ class PcraController extends Controller
     public function show($id)
     {
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'Berhasil mendapatkan satu PCRA',
             'pcra' => Pcras::with(['construction', 'access_areas', 'traffic', 'detail', 'documentation'])->find($id)
         ]);
     }
@@ -121,15 +123,28 @@ class PcraController extends Controller
             'accordance' => $validatedData['detail_accordance'],
             'further_action' => $validatedData['detail_further_action'],
         ]);
+
+        //store image
+        $folderPath = "storage/pcraImage/";
+
+        $image_parts = explode(";base64,", $validatedData['docs_image']);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        $image_base64 = base64_decode($image_parts[1]);
+        $file = $folderPath . uniqid() . '.' . $image_type;
+
+        file_put_contents($file, $image_base64);
+
+        $validatedData['docs_image'] = $file;
         PcrasDocumentation::create([
             'pcras_id' => $pcra->id,
             'image' => $validatedData['docs_image'],
             'keterangan' => $validatedData['docs_keterangan'],
         ]);
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'data PCRA berhasil disimpan',
             'pcra' => Pcras::with(['construction', 'access_areas', 'traffic', 'detail', 'documentation'])->find($pcra->id)
         ]);
     }
 }
-

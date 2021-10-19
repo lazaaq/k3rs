@@ -17,7 +17,6 @@ class CreateBriefingPresencesTable extends Migration
             $table->id();
             $table->foreignId('briefing_id');
             $table->foreignId('employee_id');
-            $table->boolean('presence')->nullable();
             $table->timestamps();
         });
     }

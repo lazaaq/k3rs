@@ -19,7 +19,8 @@ class AparController extends Controller
     public function index()
     {
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'Berhasil mendapatkan semua apar',
             'apars' => Apar::with(['history'])->get(),
 
         ], 200);
@@ -52,7 +53,8 @@ class AparController extends Controller
 
         $apar = Apar::create($validatedData);
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'data Apar berhasil disimpan',
             'apar' => $apar,
 
         ], 200);
@@ -67,7 +69,8 @@ class AparController extends Controller
     public function show(Apar $apar)
     {
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'Berhasil mendapatkan satu apar',
             'apar' => Apar::with(['history'])->find($apar->id),
 
         ], 200);
@@ -120,7 +123,8 @@ class AparController extends Controller
         ]);
 
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'data Apar berhasil di update',
             'apar' => Apar::with(['history'])->find($apar->id),
 
         ], 200);
@@ -136,7 +140,8 @@ class AparController extends Controller
     {
         $apar->delete();
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'data apar berhasil dihapus',
 
         ], 200);
     }

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\News;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class NewsFactory extends Factory
 {
@@ -23,6 +24,7 @@ class NewsFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence(),
+            'slug' => Str::of('Laravel Framework')->slug('-'),
             'author' => $this->faker->name(),
             'image' => '/img/placeholder/document.jpg',
             'excerpt' => $this->faker->paragraph(5),

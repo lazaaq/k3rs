@@ -20,7 +20,7 @@ class BriefingSeeder extends Seeder
             Briefing::factory(1)->create();
 
             for($j=1; $j<=mt_rand(1, Employee::all()->count()); $j++){
-                BriefingPresence::factory(1)->create([
+                BriefingPresence::create([
                     'briefing_id' => $i,
                     'employee_id' => $j,
                 ]);

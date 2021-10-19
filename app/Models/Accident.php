@@ -35,4 +35,9 @@ class Accident extends Model
     {
         return $this->hasMany(AccidentWitnessNonEmployee::class);
     }
+
+    public function detail()
+    {
+        return $this->hasOne(AccidentDetail::class);
+    }
 }

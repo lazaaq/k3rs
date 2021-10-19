@@ -15,4 +15,8 @@ class BriefingPresence extends Model
     {
         return $this->belongsTo(Employee::class);
     }
+    public function briefing()
+    {
+        return $this->belongsTo(Briefing::class);
+    }
 }

@@ -13,7 +13,8 @@ class B3sController extends Controller
     public function index()
     {
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'Berhasil mendapatkan semua B3',
             'b3s' => B3s::with(['action', 'detail'])->get(),
         ]);
     }
@@ -21,7 +22,8 @@ class B3sController extends Controller
     public function show($id)
     {
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'Berhasil mendapatkan satu B3',
             'pcra' => B3s::with(['action', 'detail'])->find($id),
         ]);
     }
@@ -72,9 +74,9 @@ class B3sController extends Controller
         ]);
 
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'data B3 berhasil disimpan',
             'b3s' => B3s::with(['action', 'detail'])->find($b3s->id)
         ]);
     }
 }
-

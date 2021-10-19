@@ -16,7 +16,8 @@ class ManagerController extends Controller
     public function index()
     {
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'Berhasil mendapatkan semua manager',
             'manager' => Manager::with(['employee', 'salary'])->get(),
             
         ], 200);
@@ -53,7 +54,8 @@ class ManagerController extends Controller
         $manager = Manager::create($validatedData);
 
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'data Manager berhasil disimpan',
             'manager' => Manager::with(['employee', 'salary'])->find($manager->id),
             
         ], 200);
@@ -68,7 +70,8 @@ class ManagerController extends Controller
     public function show(Manager $manager)
     {
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'Berhasil mendapatkan satu manager',
             'manager' => Manager::with(['employee', 'salary'])->find($manager->id),
 
         ], 200);
@@ -104,7 +107,8 @@ class ManagerController extends Controller
         ]);
         $manager->update($validatedData);
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'data Manager berhasil diupdate',
             'manager' => $manager,
 
         ], 200);
@@ -120,7 +124,8 @@ class ManagerController extends Controller
     {
         $manager->delete();
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'data Manager berhasil dihapus',
 
         ], 200);
     }

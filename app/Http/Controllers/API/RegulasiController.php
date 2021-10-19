@@ -16,7 +16,8 @@ class RegulasiController extends Controller
     public function index()
     {
         return response()->json([
-            'message' => 'success',
+            'success' => true,
+            'message' => 'Berhasil mendapatkan semua Regulasi',
             'regulasis' => Regulasi::all(),
 
         ], 200);
@@ -48,7 +49,8 @@ class RegulasiController extends Controller
         ]);
         $regulasi = Regulasi::create($validatedData);
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'data Regulasi berhasil disimpan',
             'regulasi' => $regulasi,
 
         ], 200);
@@ -63,7 +65,8 @@ class RegulasiController extends Controller
     public function show(Regulasi $regulasi)
     {
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'Berhasil mendapatkan satu Regulasi',
             'regulasi' => $regulasi,
 
         ], 200);
@@ -98,7 +101,8 @@ class RegulasiController extends Controller
 
         $regulasi->update($validatedData);
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'data Regulasi berhasil diupdate',
             'regulasi' => $regulasi,
 
         ], 200);
@@ -114,7 +118,8 @@ class RegulasiController extends Controller
     {
         $regulasi->delete();
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'data Regulasi berhasil dihapus',
 
         ], 200);
     }

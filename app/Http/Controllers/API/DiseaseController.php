@@ -23,8 +23,9 @@ class DiseaseController extends Controller
     public function index()
     {
         return response()->json([
-            'message' => 'Success',
-            'diseases' => Disease::with(['employee', 'disease_victim_employee', 'disease_victim_non_employee', 'disease_witness_employee', 'disease_witness_non_employee'])->get(),
+            'success' => true,
+            'message' => 'Berhasil mendapatkan semua disease',
+            'diseases' => Disease::with(['employee', 'disease_victim_employee', 'disease_victim_non_employee', 'disease_witness_employee', 'disease_witness_non_employee', 'detail'])->get(),
         ], 200);
     }
 
@@ -64,7 +65,7 @@ class DiseaseController extends Controller
 
         file_put_contents($file, $image_base64);
 
-        $validatedData['image'] = $file;
+        $diseaseValidate['image'] = $file;
 
         $disease = Disease::create([
             'employee_id' => $diseaseValidate['employee_id'],
@@ -128,22 +129,21 @@ class DiseaseController extends Controller
         }
 
         if ($request->has('detail')) {
-            for ($i = 0; $i < count($request->detail); $i++) {
-                $det = $request->detail[$i];
+            $det = $request->detail;
 
-                DiseaseDetail::create([
-                    'disease_id' => $disease->id,
-                    'chronology' => $det['chronology'] ?? NULL,
-                    'faskes' => $det['faskes'] ?? NULL,
-                    'cause' => $det['cause'] ?? NULL,
-                    'effect' => $det['effect'] ?? NULL
-                ]);
-            }
+            DiseaseDetail::create([
+                'disease_id' => $disease->id,
+                'chronology' => $det['chronology'] ?? NULL,
+                'faskes' => $det['faskes'] ?? NULL,
+                'cause' => $det['cause'] ?? NULL,
+                'effect' => $det['effect'] ?? NULL
+            ]);
         }
 
         return response()->json([
-            'message' => 'Success',
-            'diseases' => Disease::with(['employee', 'disease_victim_employee', 'disease_victim_non_employee', 'disease_witness_employee', 'disease_witness_non_employee'])->find($disease->id),
+            'success' => true,
+            'message' => 'data Disease berhasil disimpan',
+            'diseases' => Disease::with(['employee', 'disease_victim_employee', 'disease_victim_non_employee', 'disease_witness_employee', 'disease_witness_non_employee', 'detail'])->find($disease->id),
         ], 200);
     }
 
@@ -156,8 +156,9 @@ class DiseaseController extends Controller
     public function show(Disease $disease)
     {
         return response()->json([
-            'message' => 'Success',
-            'diseases' => Disease::with(['employee', 'disease_victim_employee', 'disease_victim_non_employee', 'disease_witness_employee', 'disease_witness_non_employee'])->find($disease->id),
+            'success' => true,
+            'message' => 'berhasil mendapatkan satu disease',
+            'diseases' => Disease::with(['employee', 'disease_victim_employee', 'disease_victim_non_employee', 'disease_witness_employee', 'disease_witness_non_employee', 'detail'])->find($disease->id),
         ], 200);
     }
 
@@ -280,7 +281,8 @@ class DiseaseController extends Controller
     {
         $disease->delete();
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'data Disease berhasil dihapus',
 
         ], 200);
     }

@@ -17,7 +17,8 @@ class NewsController extends Controller
     public function index()
     {
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'Berhasil mendapatkan semua News',
             'newss' => News::all(),
 
         ], 200);
@@ -51,7 +52,8 @@ class NewsController extends Controller
         $validatedData['slug'] = Str::of($validatedData['title'])->slug('-');
         $news = News::create($validatedData);
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'data News berhasil disimpan',
             'news' => $news,
 
         ], 200);
@@ -66,7 +68,8 @@ class NewsController extends Controller
     public function show(News $news)
     {
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'Berhasil mendapatkan satu News',
             'news' => $news,
 
         ], 200);
@@ -101,7 +104,8 @@ class NewsController extends Controller
         ]);
         $news->update($validatedData);
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'data News berhasil diupdate',
             'news' => $news,
 
         ], 200);
@@ -117,7 +121,8 @@ class NewsController extends Controller
     {
         $news->delete();
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'data News berhasil dihapus',
 
         ],200);
     }

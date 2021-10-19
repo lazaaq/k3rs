@@ -18,36 +18,10 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = array();
-        foreach (Employee::all() as $employee) {
-            $emp['id'] = $employee->id;
-            $emp['manager_id'] = $employee->manager_id;
-            $emp['salary_id'] = $employee->salary_id;
-            $emp['name'] = $employee->name;
-            $emp['email'] = $employee->email;
-            $emp['address'] = $employee->address;
-            $emp['birth'] = $employee->birth;
-            $emp['gender'] = $employee->gender;
-            $emp['job'] = $employee->job;
-            $emp['position'] = $employee->position;
-            $emp['telp'] = $employee->telp;
-
-            $manager = Manager::where('employee_id', $employee->id)->get();
-            $mngr['name'] = $manager->name;
-            $mngr['address'] = $manager->address;
-            $mngr['telp'] = $manager->telp;
-            $emp['manager'] = $mngr;
-
-            $salary = Salary::where('employee_id', $employee->id)->get();
-            $slry['day'] = $salary->day;
-            $slry['month'] = $salary->month;
-            $slry['wholesale'] = $salary->wholesale;
-            $emp['salary'] = $slry;
-
-            array_push($employees, $emp);
-        }
+        $employees = Employee::with('manager', 'salary')->get();
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'Berhasil mendapatkan semua employee',
             'employees' => $employees,
 
         ], 200);
@@ -85,7 +59,8 @@ class EmployeeController extends Controller
 
         $employee = Employee::create($validatedData);
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'data Employee berhasil disimpan',
             'employee' => $employee,
 
         ], 200);
@@ -124,7 +99,8 @@ class EmployeeController extends Controller
         $emp['salary'] = $slry;
 
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'Berhasil mendapatkan satu employee',
             'employee' => $emp,
 
         ], 200);
@@ -160,7 +136,8 @@ class EmployeeController extends Controller
             'address' => $validatedData['address']
         ]);
         return response()->json([
-            'message' => 'Success',
+            'success' => 'true',
+            'message' => 'data employee berhasil diupdate',
             'employee' => $employee,
 
         ], 200);
@@ -189,8 +166,8 @@ class EmployeeController extends Controller
             'password' => Hash::make($validatedData['password_new'])
         ]);
         return response()->json([
-            'message' => 'Success',
-            'password_new' => $employee->password,
+            'success' => true,
+            'message' => 'data password employee berhasil diupdate'
         ], 200);
     }
 
@@ -204,7 +181,8 @@ class EmployeeController extends Controller
     {
         $employee->delete();
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'data Employee berhasil dihapusd',
 
         ], 200);
     }

@@ -21,8 +21,9 @@ class AccidentController extends Controller
     public function index()
     {
         return response()->json([
-            'message' => 'Success',
-            'accidents' => Accident::with(['employee', 'accident_victim_employee', 'accident_victim_non_employee', 'accident_witness_employee', 'accident_witness_non_employee'])->get(),
+            'success' => true,
+            'message' => 'Berhasil mendapatkan semua accident',
+            'accidents' => Accident::with(['employee', 'accident_victim_employee', 'accident_victim_non_employee', 'accident_witness_employee', 'accident_witness_non_employee', 'detail'])->get(),
 
         ], 200);
     }
@@ -59,7 +60,7 @@ class AccidentController extends Controller
 
         file_put_contents($file, $image_base64);
 
-        $validatedData['image'] = $file;
+        $accidentValidate['image'] = $file;
 
         $accident = Accident::create([
             'employee_id' => $accidentValidate['employee_id'],
@@ -75,12 +76,7 @@ class AccidentController extends Controller
 
                 AccidentVictimEmployee::create([
                     'accident_id' => $accident->id,
-                    'employee_id' => $victim['employee_id'],
-                    'salary_range' => $victim['salary_range'] ?? NULL,
-                    'chronology' => $victim['chronology'] ?? NULL,
-                    'first_aid' => $victim['first_aid'] ?? NULL,
-                    'effect' => $victim['effect'] ?? NULL,
-                    'condition' => $victim['condition'] ?? NULL,
+                    'employee_id' => $victim['employee_id']
                 ]);
             }
         }
@@ -132,22 +128,21 @@ class AccidentController extends Controller
 
         // Detail PAK
         if ($request->has('detail')) {
-            for ($i = 0; $i < count($request->detail); $i++) {
-                $det = $request->detail[$i];
+            $det = $request->detail;
 
-                AccidentDetail::create([
-                    'accident_id' => $accident->id,
-                    'chronology' => $det['chronology'] ?? NULL,
-                    'faskes' => $det['faskes'] ?? NULL,
-                    'effect' => $det['effect'] ?? NULL,
-                    'condition' => $det['condition'] ?? NULL,
-                ]);
-            }
+            AccidentDetail::create([
+                'accident_id' => $accident->id,
+                'chronology' => $det['chronology'] ?? NULL,
+                'faskes' => $det['faskes'] ?? NULL,
+                'effect' => $det['effect'] ?? NULL,
+                'condition' => $det['condition'] ?? NULL,
+            ]);
         }
 
         return response()->json([
-            'message' => 'Success',
-            'accident' => Accident::with(['employee', 'accident_victim_employee', 'accident_victim_non_employee', 'accident_witness_employee', 'accident_witness_non_employee'])->find($accident->id),
+            'success' => true,
+            'message' => 'data accident berhasil disimpan',
+            'accident' => Accident::with(['employee', 'accident_victim_employee', 'accident_victim_non_employee', 'accident_witness_employee', 'accident_witness_non_employee', 'detail'])->find($accident->id),
 
         ], 200);
     }
@@ -161,8 +156,9 @@ class AccidentController extends Controller
     public function show(Accident $accident)
     {
         return response()->json([
-            'message' => 'Success',
-            'accidents' => Accident::with(['employee', 'accident_victim_employee', 'accident_victim_non_employee', 'accident_witness_employee', 'accident_witness_non_employee'])->find($accident->id),
+            'success' => true,
+            'message' => 'Berhasil mendapatkan satu accident',
+            'accidents' => Accident::with(['employee', 'accident_victim_employee', 'accident_victim_non_employee', 'accident_witness_employee', 'accident_witness_non_employee', 'detail'])->find($accident->id),
 
         ], 200);
     }
@@ -275,7 +271,8 @@ class AccidentController extends Controller
     {
         $accident->delete();
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'data accident berhasil dihapus',
 
         ], 200);
     }

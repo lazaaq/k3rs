@@ -17,7 +17,8 @@ class BriefingController extends Controller
     public function index()
     {
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'Berhasil mendapatkan semua data briefing',
             'briefings' => Briefing::with(['briefing_presence'])->get(),
         ], 200);
     }
@@ -52,7 +53,8 @@ class BriefingController extends Controller
     public function show(Briefing $briefing)
     {
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'Berhasil mendapatkan satu data briefing',
             'briefings' => Briefing::with(['briefing_presence'])->find($briefing->id),
         ], 200);
     }
@@ -78,18 +80,17 @@ class BriefingController extends Controller
     public function update(Request $request, Briefing $briefing)
     {
         $validatedData = $request->validate([
-            'employee_id' => 'required',
-            'presence' => 'required',
+            'employee_id' => 'required'
         ]);
 
         BriefingPresence::create([
             'briefing_id' => $briefing->id,
-            'employee_id' => $validatedData['employee_id'],
-            'presence' => "1"
+            'employee_id' => $validatedData['employee_id']
         ]);
 
         return response()->json([
-            'messsage' => 'Success'
+            'success' => true,
+            'messsage' => 'data Briefing berhasil di update'
         ], 200);
     }
 
@@ -103,7 +104,8 @@ class BriefingController extends Controller
     {
         $briefing->delete();
         return response()->json([
-            'message' => 'Success',
+            'success' => true,
+            'message' => 'data briefing berhasil dihapus',
         ],200);
     }
 }
