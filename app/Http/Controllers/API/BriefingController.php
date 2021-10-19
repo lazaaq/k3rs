@@ -39,9 +39,31 @@ class BriefingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Briefing $briefing)
+    public function store(Request $request)
     {
-        
+        $validatedData = $request->validate([
+            'time' => 'required',
+            'result' => 'required',
+            'presences' => 'required'
+        ]);
+        $briefing = Briefing::create([
+            'time' => $validatedData['time'],
+            'result' => $validatedData['result']
+        ]);
+
+        foreach($request->presences as $presence){
+            BriefingPresence::create([
+                'briefing_id' => $briefing->id,
+                'employee_id' => $presence['employee_id']
+            ]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'messsage' => 'data Briefing berhasil di update',
+            'briefing' => Briefing::with(['briefing_presence'])->find($briefing->id),
+
+        ], 200);
     }
 
     /**
@@ -79,19 +101,6 @@ class BriefingController extends Controller
      */
     public function update(Request $request, Briefing $briefing)
     {
-        $validatedData = $request->validate([
-            'employee_id' => 'required'
-        ]);
-
-        BriefingPresence::create([
-            'briefing_id' => $briefing->id,
-            'employee_id' => $validatedData['employee_id']
-        ]);
-
-        return response()->json([
-            'success' => true,
-            'messsage' => 'data Briefing berhasil di update'
-        ], 200);
     }
 
     /**
@@ -106,6 +115,6 @@ class BriefingController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'data briefing berhasil dihapus',
-        ],200);
+        ], 200);
     }
 }

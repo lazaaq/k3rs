@@ -38,7 +38,7 @@ Route::group(['middleware => auth:sanctum'], function(){
     Route::resource('/employee', EmployeeController::class)->only(['index', 'show', 'update']);
     Route::put('/employee/{employee}/change_password', [EmployeeController::class, 'change_password']);
     Route::resource('/manager', ManagerController::class)->only(['index', 'show']);
-    Route::resource('/briefing', BriefingController::class)->only(['index', 'show', 'update']);
+    Route::resource('/briefing', BriefingController::class)->only(['store']);
     Route::resource('/accident', AccidentController::class)->only(['index', 'show', 'store']);
     Route::resource('/disease', DiseaseController::class)->only(['index', 'show', 'store']);
     Route::resource('/pcra', PcraController::class)->only(['index', 'show', 'store']);
