@@ -33,11 +33,15 @@ class NotifController extends Controller
         }
         $results = collect(array_merge($accidents, $diseases));
         $sorted = $results->sortByDesc('created_at');
+        $array = array();
+        foreach($sorted as $sort){
+            array_push($array, $sort);
+        }
 
         return response()->json([
             'success' => true,
             'message' => 'Berhasil mendapatkan semua Notif',
-            'history' => $sorted,
+            'history' => $array,
 
         ]);
     }
