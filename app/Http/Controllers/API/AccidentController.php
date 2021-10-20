@@ -153,8 +153,16 @@ class AccidentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Accident $accident)
+    public function show($id)
     {
+        if ($id > Accident::all()->count() || $id <= 0){
+            return response()->json([
+                'success' => true,
+                'message' => 'tidak ada accident dengan id itu',
+                'diseases' => array()
+            ], 200);
+        }
+        $accident = Accident::find($id);
         return response()->json([
             'success' => true,
             'message' => 'Berhasil mendapatkan satu accident',

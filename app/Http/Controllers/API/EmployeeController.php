@@ -72,8 +72,18 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Employee $employee)
+    public function show($id)
     {
+        if ($id > Employee::all()->count() || $id <= 0){
+            return response()->json([
+                'success' => true,
+                'message' => 'tidak ada employee dengan id itu',
+                'diseases' => array()
+            ], 200);
+        }
+
+        $employee = Employee::find($id);
+        
         $emp['id'] = $employee->id;
         $emp['manager_id'] = $employee->manager_id;
         $emp['salary_id'] = $employee->salary_id;

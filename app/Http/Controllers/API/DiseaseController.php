@@ -154,8 +154,16 @@ class DiseaseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Disease $disease)
+    public function show($id)
     {
+        if ($id > Disease::all()->count() || $id <= 0){
+            return response()->json([
+                'success' => true,
+                'message' => 'tidak ada disease dengan id itu',
+                'diseases' => array()
+            ], 200);
+        }
+        $disease = Disease::find($id);
         return response()->json([
             'success' => true,
             'message' => 'berhasil mendapatkan satu disease',
