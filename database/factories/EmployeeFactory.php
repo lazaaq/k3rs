@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Employee;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class EmployeeFactory extends Factory
 {
@@ -33,7 +34,8 @@ class EmployeeFactory extends Factory
             'gender' => $this->faker->randomElement(['L', 'P']),
             'job' => $this->faker->jobTitle(),
             'position' => $this->faker->sentence(),
-            'telp' => $this->faker->phoneNumber()
+            'telp' => $this->faker->phoneNumber(),
+            'remember_token' => Str::random(10)
         ];
     }
 }

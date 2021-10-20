@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PcraSeeder::class);
         $this->call(B3sSeeder::class);
 
-        User::create([
+        Employee::factory(1)->create([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin')
