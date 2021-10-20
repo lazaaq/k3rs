@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDiseaseDetailsTable extends Migration
+class CreateDiseaseListsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreateDiseaseDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('disease_details', function (Blueprint $table) {
+        Schema::create('disease_lists', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('disease_id');
-            $table->text('chronology')->nullable();
-            $table->string('faskes')->nullable();
-            $table->text('cause')->nullable();
-            $table->foreignId('effect_id')->nullable();
+            $table->string('disease_name');
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ class CreateDiseaseDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('disease_details');
+        Schema::dropIfExists('disease_lists');
     }
 }

@@ -52,7 +52,7 @@ class AccidentController extends Controller
         //store image
         $folderPath = "storage/accidentImage/";
 
-        $image_parts = explode(";base64,", $request->image);
+        $image_parts = explode(";base64,", $accidentValidate['image']);
         $image_type_aux = explode("image/", $image_parts[0]);
         $image_type = $image_type_aux[1];
         $image_base64 = base64_decode($image_parts[1]);

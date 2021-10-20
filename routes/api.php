@@ -41,6 +41,7 @@ Route::group(['middleware => auth:sanctum'], function(){
     Route::resource('/briefing', BriefingController::class)->only(['store']);
     Route::resource('/accident', AccidentController::class)->only(['index', 'show', 'store']);
     Route::resource('/disease', DiseaseController::class)->only(['index', 'show', 'store']);
+    Route::get('/list_disease', [DiseaseController::class, 'list_disease']);
     Route::resource('/pcra', PcraController::class)->only(['index', 'show', 'store']);
     Route::resource('/b3s', B3sController::class)->only(['index', 'show', 'store']);
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Disease;
 use App\Models\DiseaseDetail;
+use App\Models\DiseaseList;
 use App\Models\DiseaseVictimEmployee;
 use App\Models\DiseaseVictimNonEmployee;
 use App\Models\DiseaseWitnessEmployee;
@@ -170,6 +171,13 @@ class DiseaseController extends Controller
      */
     public function edit(Disease $disease)
     {
+    }
+
+    public function list_disease()
+    {
+        return response()->json([
+            'diseases' => DiseaseList::all(),
+        ]);
     }
 
     /**

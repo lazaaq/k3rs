@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Disease;
+use App\Models\DiseaseList;
 use App\Models\DiseaseVictimEmployee;
 use App\Models\DiseaseVictimNonEmployee;
 use App\Models\DiseaseWitnessEmployee;
@@ -46,5 +47,15 @@ class DiseaseSeeder extends Seeder
 
             ]);
         }
+
+        DiseaseList::create([
+            'disease_name' => 'Patah Tulang'
+        ]);
+        DiseaseList::create([
+            'disease_name' => 'Covid 19'
+        ]);
+        DiseaseList::create([
+            'disease_name' => 'Serangan Jantung'
+        ]);
     }
 }
