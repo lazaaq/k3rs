@@ -36,11 +36,15 @@ class HistoryController extends Controller
 
         $results = collect(array_merge($accidents, $diseases, $pcras, $b3s));
         $sorted = $results->sortByDesc('created_at');
+        $array = array();
+        foreach($sorted as $sort){
+            array_push($array, $sort);
+        }
         
         return response()->json([
             'success' => true,
             'message' => 'Berhasil mendapatkan riwayat laporan',
-            'history' => $sorted,
+            'history' => $array,
 
         ]);
     }
