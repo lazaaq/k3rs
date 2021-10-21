@@ -19,6 +19,7 @@ class CreateAparsTable extends Migration
             $table->text('location')->nullable();
             $table->string('code', 2)->nullable();
             $table->date('expired')->nullable();
+            $table->string('last_image')->nullable();
             $table->timestamps();
         });
     }

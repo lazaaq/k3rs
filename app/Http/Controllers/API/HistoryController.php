@@ -14,24 +14,24 @@ class HistoryController extends Controller
 {
     public function index(Employee $employee)
     {
-        $accidents = Accident::where('employee_id', $employee->id)->get()->toArray();
+        $accidents = Accident::select('created_at')->where('employee_id', $employee->id)->get()->toArray();
         foreach( $accidents as &$accident) {
-            $accident['type'] = 'Kecelakaan Kerja';
+            $accident['title'] = 'Kecelakaan Kerja';
         }
 
-        $diseases = Disease::where('employee_id', $employee->id)->get()->toArray();
+        $diseases = Disease::select('created_at')->where('employee_id', $employee->id)->get()->toArray();
         foreach( $diseases as &$disease) {
-            $disease['type'] = 'Penyakit Akibat Kerja';
+            $disease['title'] = 'Penyakit Akibat Kerja';
         }
 
-        $pcras = Pcras::where('employee_id', $employee->id)->get()->toArray();
+        $pcras = Pcras::select('created_at')->where('employee_id', $employee->id)->get()->toArray();
         foreach( $pcras as &$pcra) {
-            $pcra['type'] = 'Laporan PCRA';
+            $pcra['title'] = 'Laporan PCRA';
         }
 
-        $b3s = B3s::where('employee_id', $employee->id)->get()->toArray();
+        $b3s = B3s::select('created_at')->where('employee_id', $employee->id)->get()->toArray();
         foreach( $b3s as &$b3) {
-            $b3['type'] = 'Laporan Kejadian B3';
+            $b3['title'] = 'Laporan Kejadian B3';
         }
 
         $results = collect(array_merge($accidents, $diseases, $pcras, $b3s));

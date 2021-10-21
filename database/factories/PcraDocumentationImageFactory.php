@@ -2,18 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Pcras;
-use App\Models\PcrasDocumentation;
+use App\Models\PcraDocumentationImage;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class PcrasDocumentationFactory extends Factory
+class PcraDocumentationImageFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = PcrasDocumentation::class;
+    protected $model = PcraDocumentationImage::class;
 
     /**
      * Define the model's default state.
@@ -23,9 +22,7 @@ class PcrasDocumentationFactory extends Factory
     public function definition()
     {
         return [
-            'pcras_id' => mt_rand(1, Pcras::all()->count()),
-            'keterangan' => $this->faker->text(),
-            
+            //
         ];
     }
 }

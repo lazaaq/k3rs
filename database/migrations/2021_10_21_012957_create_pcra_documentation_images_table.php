@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class PcrasDocumentation extends Migration
+class CreatePcraDocumentationImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class PcrasDocumentation extends Migration
      */
     public function up()
     {
-        Schema::create('pcras_documentation', function (Blueprint $table) {
+        Schema::create('pcra_documentation_images', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pcras_id');
-            $table->text('keterangan')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class PcrasDocumentation extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pcras_documentation');
+        Schema::dropIfExists('pcra_documentation_images');
     }
 }

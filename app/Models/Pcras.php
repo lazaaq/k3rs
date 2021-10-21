@@ -31,4 +31,8 @@ class Pcras extends Model
     {
         return $this->hasOne(PcrasDocumentation::class);
     }
+    public function documentationImage()
+    {
+        return $this->hasMany(PcraDocumentationImage::class);
+    }
 }

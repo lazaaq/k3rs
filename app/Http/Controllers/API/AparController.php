@@ -122,6 +122,10 @@ class AparController extends Controller
             'image' => $validatedData['image']
         ]);
 
+        $apar->update([
+            'last_image' => $validatedData['image']
+        ]);
+
         return response()->json([
             'success' => true,
             'message' => 'data Apar berhasil di update',
