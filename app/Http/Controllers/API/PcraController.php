@@ -71,8 +71,7 @@ class PcraController extends Controller
             'detail_surveyor' => 'required',
             'detail_accordance' => 'required',
             'detail_further_action' => 'required',
-            'docs_image' => 'required',
-            'docs_keterangan' => 'required',
+            'docs' => 'required',
         ]);
         $pcra = Pcras::create([
             'employee_id' => $validatedData['employee_id'],
@@ -124,26 +123,26 @@ class PcraController extends Controller
             'accordance' => $validatedData['detail_accordance'],
             'further_action' => $validatedData['detail_further_action'],
         ]);
-        
-        foreach($validatedData['docs_image'] as $data){
+        foreach ($validatedData['docs'] as $data) {
             //store image
             $folderPath = "storage/pcraImage/";
-            
+
             $image_parts = explode(";base64,", $data['image']);
             $image_type_aux = explode("image/", $image_parts[0]);
             $image_type = $image_type_aux[1];
             $image_base64 = base64_decode($image_parts[1]);
             $file = $folderPath . uniqid() . '.' . $image_type;
-            
+
             file_put_contents($file, $image_base64);
-            
+
             PcrasDocumentation::create([
                 'pcras_id' => $pcra->id,
                 'image' => $file,
-                'keterangan' => $validatedData['docs_keterangan'],
+                'keterangan' => $data['keterangan'],
             ]);
-            
         }
+
+
         return response()->json([
             'success' => true,
             'message' => 'data PCRA berhasil disimpan',

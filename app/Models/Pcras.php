@@ -29,10 +29,6 @@ class Pcras extends Model
     }
     public function documentation()
     {
-        return $this->hasOne(PcrasDocumentation::class);
-    }
-    public function documentationImage()
-    {
-        return $this->hasMany(PcraDocumentationImage::class);
+        return $this->hasMany(PcrasDocumentation::class);
     }
 }
