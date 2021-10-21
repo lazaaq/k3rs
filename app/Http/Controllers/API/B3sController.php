@@ -47,6 +47,7 @@ class B3sController extends Controller
             'detail_tool' => 'required',
             'detail_effect' => 'required',
             'detail_follow_up' => 'required',
+            'detail_opname' => 'required',
         ]);
         $b3s = B3s::create([
             'employee_id' => $validatedData['employee_id'],
@@ -71,6 +72,7 @@ class B3sController extends Controller
             'tool' => $validatedData['detail_tool'],
             'effect' => $validatedData['detail_effect'],
             'follow_up' => $validatedData['detail_follow_up'],
+            'opname' => $validatedData['detail_opname']
         ]);
 
         return response()->json([
