@@ -15,6 +15,7 @@ class AuthController extends Controller
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
+                'success' => false,
                 'message' => 'Unauthorized',
             ],401);
         }
@@ -22,6 +23,7 @@ class AuthController extends Controller
         $token = $user->createToken('token');
 
         return response()->json([
+            'success' => true,
             'message' => 'Authorized',
             'user' => Employee::select('name', 'email', 'address')->where('email', $request->email)->first(),
             'token' => $token
