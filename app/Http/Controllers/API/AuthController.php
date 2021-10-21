@@ -17,7 +17,7 @@ class AuthController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Unauthorized',
-            ],401);
+            ], 401);
         }
 
         $token = $user->createToken('token');
@@ -26,7 +26,7 @@ class AuthController extends Controller
             'success' => true,
             'message' => 'Authorized',
             'user' => Employee::select('name', 'email', 'address')->where('email', $request->email)->first(),
-            'token' => $token
+            'token' => $token->plainTextToken,
         ], 200);
     }
 
