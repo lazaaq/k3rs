@@ -24,12 +24,12 @@ class PcrasConstructionFactory extends Factory
     {
         return [
             'pcras_id' => mt_rand(1, Pcras::all()->count()),
-            'dust' => $this->faker->randomElement(['ya', 'tidak', 'lainnya']),
-            'barrier' => $this->faker->randomElement(['ya', 'tidak', 'lainnya']),
-            'door_access' => $this->faker->randomElement(['ya', 'tidak', 'lainnya']),
-            'dusty_area' => $this->faker->randomElement(['ya', 'tidak', 'lainnya']),
-            'sign_door' => $this->faker->randomElement(['ya', 'tidak', 'lainnya']),
-            'vent' => $this->faker->randomElement(['ya', 'tidak', 'lainnya']),
+            'dust' => $this->faker->randomElement(['ada', 'tidak', 'lainnya']),
+            'barrier' => $this->faker->randomElement(['ada', 'tidak', 'lainnya']),
+            'door_access' => $this->faker->randomElement(['ada', 'tidak', 'lainnya']),
+            'dusty_area' => $this->faker->randomElement(['ada', 'tidak', 'lainnya']),
+            'sign_door' => $this->faker->randomElement(['ada', 'tidak', 'lainnya']),
+            'vent' => $this->faker->randomElement(['ada', 'tidak', 'lainnya']),
             'comment' => $this->faker->text(),
             
         ];

@@ -19,6 +19,7 @@ class B3sDetail extends Migration
             $table->text('human')->nullable();
             $table->enum('wash', ['ya', 'tidak'])->nullable();
             $table->enum('injury', ['ya', 'tidak'])->nullable();
+            $table->enum('opname', ['ya', 'tidak'])->nullable();
             $table->string('tool')->nullable();
             $table->string('effect')->nullable();
             $table->text('follow_up')->nullable();

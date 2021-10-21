@@ -22,9 +22,9 @@ class Pcras extends Migration
             $table->dateTime('time_start')->nullable();
             $table->dateTime('time_end')->nullable();
             $table->string('dept')->nullable();
-            $table->enum('plan', ['ya', 'tidak', 'lainnya'])->nullable();
-            $table->enum('apd', ['ya', 'tidak', 'lainnya'])->nullable();
-            $table->enum('warning', ['ya', 'tidak', 'lainnya'])->nullable();
+            $table->text('plan')->nullable();
+            $table->text('apd')->nullable();
+            $table->text('warning')->nullable();
             $table->timestamps();
         });
     }

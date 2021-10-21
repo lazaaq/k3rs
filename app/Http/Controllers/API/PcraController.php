@@ -19,7 +19,7 @@ class PcraController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Berhasil mendapatkan semua PCRA',
-            'pcras' => Pcras::with(['construction', 'access_areas', 'traffic', 'detail', 'documentation'])->get(),
+            'pcras' => Pcras::with(['construction', 'access_areas', 'traffic', 'detail', 'documentation', 'documentationImage'])->get(),
         ]);
     }
 
@@ -28,7 +28,7 @@ class PcraController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Berhasil mendapatkan satu PCRA',
-            'pcra' => Pcras::with(['construction', 'access_areas', 'traffic', 'detail', 'documentation'])->find($id)
+            'pcra' => Pcras::with(['construction', 'access_areas', 'traffic', 'detail', 'documentation', 'documentationImage'])->find($id)
         ]);
     }
 
@@ -133,7 +133,7 @@ class PcraController extends Controller
             //store image
             $folderPath = "storage/pcraImage/";
             
-            $image_parts = explode(";base64,", $data->image);
+            $image_parts = explode(";base64,", $data['image']);
             $image_type_aux = explode("image/", $image_parts[0]);
             $image_type = $image_type_aux[1];
             $image_base64 = base64_decode($image_parts[1]);
@@ -142,7 +142,7 @@ class PcraController extends Controller
             file_put_contents($file, $image_base64);
             
             PcraDocumentationImage::create([
-                'pcra_id' => $pcra->id,
+                'pcras_id' => $pcra->id,
                 'image' => $file
             ]);
             
@@ -150,7 +150,7 @@ class PcraController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'data PCRA berhasil disimpan',
-            'pcra' => Pcras::with(['construction', 'access_areas', 'traffic', 'detail', 'documentation'])->find($pcra->id)
+            'pcra' => Pcras::with(['construction', 'access_areas', 'traffic', 'detail', 'documentation', 'documentationImage'])->find($pcra->id)
         ]);
     }
 }

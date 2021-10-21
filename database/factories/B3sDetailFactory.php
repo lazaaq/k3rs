@@ -27,6 +27,7 @@ class B3sDetailFactory extends Factory
             'human' => $this->faker->text(),
             'wash' => $this->faker->randomElement(['ya','tidak']),
             'injury' => $this->faker->randomElement(['ya','tidak']),
+            'injury' => $this->faker->randomElement(['ya','tidak']),
             'tool' => $this->faker->sentence(),
             'effect' => $this->faker->sentence(),
             'follow_up' => $this->faker->text(),

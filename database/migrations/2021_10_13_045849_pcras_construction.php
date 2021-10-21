@@ -16,12 +16,12 @@ class PcrasConstruction extends Migration
         Schema::create('pcras_construction', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pcras_id');
-            $table->enum('dust',['ya', 'tidak', 'lainnya'])->nullable();
-            $table->enum('barrier',['ya', 'tidak', 'lainnya'])->nullable();
-            $table->enum('door_access',['ya', 'tidak', 'lainnya'])->nullable();
-            $table->enum('dusty_area',['ya', 'tidak', 'lainnya'])->nullable();
-            $table->enum('sign_door',['ya', 'tidak', 'lainnya'])->nullable();
-            $table->enum('vent',['ya', 'tidak', 'lainnya'])->nullable();
+            $table->text('dust')->nullable();
+            $table->text('barrier')->nullable();
+            $table->text('door_access')->nullable();
+            $table->text('dusty_area')->nullable();
+            $table->text('sign_door')->nullable();
+            $table->text('vent')->nullable();
             $table->text('comment')->nullable();
             $table->timestamps();
         });
