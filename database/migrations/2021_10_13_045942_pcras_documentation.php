@@ -16,6 +16,7 @@ class PcrasDocumentation extends Migration
         Schema::create('pcras_documentation', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pcras_id');
+            $table->string('image')->nullable();
             $table->text('keterangan')->nullable();
             $table->timestamps();
         });

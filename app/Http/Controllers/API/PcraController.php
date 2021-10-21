@@ -19,7 +19,7 @@ class PcraController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Berhasil mendapatkan semua PCRA',
-            'pcras' => Pcras::with(['construction', 'access_areas', 'traffic', 'detail', 'documentation', 'documentationImage'])->get(),
+            'pcras' => Pcras::with(['construction', 'access_areas', 'traffic', 'detail', 'documentation'])->get(),
         ]);
     }
 
@@ -28,7 +28,7 @@ class PcraController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Berhasil mendapatkan satu PCRA',
-            'pcra' => Pcras::with(['construction', 'access_areas', 'traffic', 'detail', 'documentation', 'documentationImage'])->find($id)
+            'pcra' => Pcras::with(['construction', 'access_areas', 'traffic', 'detail', 'documentation'])->find($id)
         ]);
     }
 
@@ -124,11 +124,7 @@ class PcraController extends Controller
             'accordance' => $validatedData['detail_accordance'],
             'further_action' => $validatedData['detail_further_action'],
         ]);
-        PcrasDocumentation::create([
-            'pcras_id' => $pcra->id,
-            'keterangan' => $validatedData['docs_keterangan'],
-        ]);
-
+        
         foreach($validatedData['docs_image'] as $data){
             //store image
             $folderPath = "storage/pcraImage/";
@@ -141,16 +137,17 @@ class PcraController extends Controller
             
             file_put_contents($file, $image_base64);
             
-            PcraDocumentationImage::create([
+            PcrasDocumentation::create([
                 'pcras_id' => $pcra->id,
-                'image' => $file
+                'image' => $file,
+                'keterangan' => $validatedData['docs_keterangan'],
             ]);
             
         }
         return response()->json([
             'success' => true,
             'message' => 'data PCRA berhasil disimpan',
-            'pcra' => Pcras::with(['construction', 'access_areas', 'traffic', 'detail', 'documentation', 'documentationImage'])->find($pcra->id)
+            'pcra' => Pcras::with(['construction', 'access_areas', 'traffic', 'detail', 'documentation'])->find($pcra->id)
         ]);
     }
 }

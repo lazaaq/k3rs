@@ -24,8 +24,8 @@ class PcrasDocumentationFactory extends Factory
     {
         return [
             'pcras_id' => mt_rand(1, Pcras::all()->count()),
+            'image' => $this->faker->sentence(),
             'keterangan' => $this->faker->text(),
-            
         ];
     }
 }
