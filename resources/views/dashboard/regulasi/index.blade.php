@@ -67,7 +67,7 @@
         <div class="card-body">
             <h6>{{ $regulasi->description  }}</h6>
             <div class="row">
-                <a href="{{ $regulasi->file }}" class="btn btn-primary">
+                <a href="/{{ $regulasi->file }}" class="btn btn-primary">
                     <i class="bi bi-eye"></i>
                     Lihat File
                 </a>

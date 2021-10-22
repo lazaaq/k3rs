@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Apar;
 use App\Models\AparHistory;
+use Illuminate\Support\Facades\File;
 
 class AparController extends Controller
 {
@@ -18,23 +19,10 @@ class AparController extends Controller
         return view('dashboard/apar/index', [
             'apars' => Apar::latest()->paginate(10),
             'active' => 'apar',
-            
+
         ]);
     }
 
-    public function add(Request $request)
-    {
-        $validatedData = $request->validate([
-            'image' => 'required',
-            'time' => 'required',
-            'location' => 'required',
-            'code' => 'required',
-            'expired' => 'required',
-        ]);
- 
-        Apar::create($validatedData);
-        return redirect('/dashboard/apar')->with('success_added', 'Data berhasil ditambahkan!');
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -57,23 +45,29 @@ class AparController extends Controller
     public function store(Request $request)
     {
 
-        $validatedData = $request->validate(
-            [
-                'time' => 'required',
-                'location' => 'required',
-                'code' => 'required',
-                'expired' => 'required',
-            ]
-        );
+        $validatedData = $request->validate([
+            'time' => 'required',
+            'location' => 'required',
+            'code' => 'required',
+            'expired' => 'required',
+        ]);
 
-        Apar::where('id', $request->id)->update([
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $folder_tujuan = 'storage/aparImage';
+            $filename = time() . "_" . $file->getClientOriginalName();
+            $validatedData['image'] = $file->move($folder_tujuan, $filename);
+        }
+        
+        Apar::create([
             'time' => $validatedData['time'],
             'location' => $validatedData['location'],
             'code' => $validatedData['code'],
             'expired' => $validatedData['expired'],
+            'last_image' => $validatedData['image']
         ]);
 
-        return redirect('/dashboard/apar/' . $request->id)->with('success_update', 'Data Berhasil Diubah!');
+        return redirect('/dashboard/apar')->with('success_added', 'Apar Berhasil Disimpan!');
     }
 
     /**
@@ -114,7 +108,33 @@ class AparController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $apar = Apar::find($id);
+        $validatedData = $request->validate([
+            'time' => 'required',
+            'location' => 'required',
+            'code' => 'required',
+            'expired' => 'required',
+        ]);
+
+        // if ($request->hasFile('image')) {
+        //     $file = $request->file('image');
+        //     $folder_tujuan = 'storage/aparImage';
+        //     $filename = time() . "_" . $file->getClientOriginalName();
+        //     $validatedData['image'] = $file->move($folder_tujuan, $filename);
+        //     File::delete($apar->image);
+        //     $apar->update([
+        //         'image' => $validatedData['image']
+        //     ]);
+        // }
+
+        $apar->update([
+            'time' => $validatedData['time'],
+            'location' => $validatedData['location'],
+            'code' => $validatedData['code'],
+            'expired' => $validatedData['expired'],
+        ]);
+
+        return redirect('/dashboard/apar/' . $request->id)->with('success_updated', 'Data Berhasil Diubah!');
     }
 
     /**
@@ -125,8 +145,14 @@ class AparController extends Controller
      */
     public function destroy($id)
     {
-        $selectedData = Apar::find($id);
-        $selectedData->delete();
+        $apar = Apar::find($id);
+        $history_apar = AparHistory::where('apar_id', $apar->id)->get();
+        foreach($history_apar as $history){
+            File::delete($history->image);
+            $history->delete();
+        }
+        File::delete($apar->last_image);
+        $apar->delete();
         return redirect()->route('apar.index')->with('success_delete', 'Data berhasil dihapus');
     }
 }

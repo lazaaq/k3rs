@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
 // use Illuminate\Foundation\Auth\User as Authenticatable;
+// use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class Employee extends Model
 {

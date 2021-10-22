@@ -28,8 +28,8 @@
         </button>
     </div>
     @endif
-    <div class="row justify-content-center my-5">
-        <img src="{{ $apar->image }}" alt="Image" width="80%" height="auto">
+    <div class="row justify-content-center my-5"> 
+        <img src="{{ asset($apar->last_image) }}" alt="Image" width="50%" height="auto">
     </div>
     <div class="row py-2">
         <div class="col-2">
@@ -44,7 +44,7 @@
             <b>Gambar</b>
         </div>
         <div class="col-10">
-            {{ $apar->image }}
+            {{ $apar->last_image }}
         </div>
     </div>
     <div class="row py-2">

@@ -17,7 +17,11 @@ class AparHistorySeeder extends Seeder
     {
         for ($i = 1; $i <= Apar::all()->count(); $i++){
             AparHistory::factory(3)->create([
-                'apar_id' => $i
+                'apar_id' => $i,
+                'image' => 'storage\aparImage\default.jpg'
+            ]);
+            Apar::find($i)->update([
+                'last_image' => 'storage\aparImage\default.jpg'
             ]);
         }
     }

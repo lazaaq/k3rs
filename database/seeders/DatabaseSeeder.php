@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::factory(20)->create();
-        Regulasi::factory(20)->create();
+        // Regulasi::factory(20)->create();
         Apar::factory(20)->create();
         News::factory(20)->create();
         Employee::factory(20)->create();
@@ -48,6 +48,32 @@ class DatabaseSeeder extends Seeder
             'name' => 'admin',
             'email'=> 'admin@gmail.com',
             'password' => bcrypt('admin')
+        ]);
+
+        Regulasi::create([
+            'title' => 'UU No 1 tahun 1970',
+            'description' => 'tentang keselamatan kerja',
+            'file' => 'a'
+        ]);
+        Regulasi::create([
+            'title' => 'Undang-Undang Nomor 13 Tahun 2003',
+            'description' => 'tentang Ketenagakerjaan',
+            'file' => 'a'
+        ]);
+        Regulasi::create([
+            'title' => 'Permenkes No 66 tahun 2016',
+            'description' => 'tentang K3RS',
+            'file' => 'a'
+        ]);
+        Regulasi::create([
+            'title' => 'PP Nomor 88 tahun 2019',
+            'description' => 'tentang Kesehatan Kerja',
+            'file' => 'a'
+        ]);
+        Regulasi::create([
+            'title' => 'Kepmenkes  No 432/MENKES/SK/IV/ tahun 2007',
+            'description' => 'tentang Manajemen K3RS',
+            'file' => 'a'
         ]);
     }
 }

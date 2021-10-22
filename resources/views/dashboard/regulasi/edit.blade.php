@@ -26,8 +26,9 @@
 
 @section('contents')
 <div class="contents container pb-5">
-    <form action="{{ route('regulasi.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('regulasi.update', $regulasi->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
         <input type="hidden" name="id" id="id" value="{{ $regulasi->id }}">
         <div class="form-group">
             <label for="title">Judul</label>
@@ -40,7 +41,7 @@
         <div class="form-group">
             <label for="file">Pilih File</label>
             <br>
-            <input type="file" class="" id="file" name="file" value="{{ $regulasi->file }}" required>
+            <input type="file" class="" id="file" name="file">
         </div>
         <div class="row mt-5">
             <a href="/dashboard/regulasi" class="btn btn-secondary mr-2">Kembali</a>

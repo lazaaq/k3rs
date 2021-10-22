@@ -26,7 +26,7 @@
 
 @section('contents')
 <div class="contents container pb-5">
-    <form action="/dashboard/regulasi/create/store" method="POST" enctype="multipart/form-data">
+    <form action="{{route('regulasi.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Judul</label>
@@ -34,7 +34,7 @@
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Deskripsi</label>
-            <textarea type="text" class="form-control" id="description" name="description" rows="10" required></textarea>
+            <input type="text" class="form-control" id="description" name="description" required>
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Pilih File</label>

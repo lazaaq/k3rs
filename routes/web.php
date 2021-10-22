@@ -49,7 +49,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
     //regulasi
     Route::resource('/dashboard/regulasi', RegulasiController::class)->except(['show']);
-    Route::post('/dashboard/regulasi/create/store', [RegulasiController::class, 'add']);
     //apar
     Route::resource('/dashboard/apar', AparController::class);
     Route::post('/dashboard/apar/create/store', [AparController::class, 'add']);

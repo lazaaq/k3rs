@@ -21,7 +21,7 @@
 @section('contents')
 <section class="content pb-5 ">
     <div class="container">
-        <form action="/dashboard/apar/create/store" method="POST" enctype="multipart/form-data" class="mt-3">
+        <form action="{{route('apar.store')}}" method="POST" enctype="multipart/form-data" class="mt-3">
             @csrf
             <div class="mb-3">
                 <label for="image" class="form-label">Gambar</label>

@@ -21,8 +21,9 @@
 @section('contents')
 <section class="content pb-5 ">
     <div class="container">
-        <form action="{{ route('apar.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('apar.update', $apar->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <input type="hidden" name="id" id="id" value="{{ $apar->id }}">
             <div class="mb-3">
                 <label for="time" class="form-label">Waktu</label>

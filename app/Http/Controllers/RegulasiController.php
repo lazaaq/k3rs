@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Regulasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class RegulasiController extends Controller
 {
@@ -33,20 +34,6 @@ class RegulasiController extends Controller
         ]);
     }
 
-    public function add(Request $request)
-    {
-        $validatedData = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'file' => 'required',
-
-        ]);
-
-        Regulasi::create($validatedData);
-        
-        return redirect('/dashboard/regulasi')->with('success_added', 'Data berhasil ditambahkan!');
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -55,18 +42,18 @@ class RegulasiController extends Controller
      */
     public function store(Request $request)
     {
-
         $validatedData = $request->validate([
             'title' => 'required',
             'description' => 'required',
             'file' => 'required',
-
         ]);
 
-        $regulasi = Regulasi::find($request->id);
-        $regulasi->update($validatedData);
-        
-        return redirect('/dashboard/regulasi')->with('success_update', 'Data berhasil diubah!');
+        $file = $request->file('file');
+        $folder_tujuan = 'storage/regulasiFile';
+        $filename = time() . "_" . $file->getClientOriginalName();
+        $validatedData['file'] = $file->move($folder_tujuan, $filename);
+        Regulasi::create($validatedData);
+        return redirect('/dashboard/regulasi')->with('success_added', 'Regulasi baru berhasil disimpan!');
     }
 
     /**
@@ -106,10 +93,31 @@ class RegulasiController extends Controller
      * @param  \App\Models\Regulasi  $regulasi
      * @return \Illuminate\Http\Response
      */
-    // public function update(Request $request, Regulasi $regulasi)
-    // {
-        
-    // }
+    public function update(Request $request, Regulasi $regulasi)
+    {
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $folder_tujuan = 'storage/regulasiFile';
+            $filename = time() . "_" . $file->getClientOriginalName();
+            $validatedData['file'] = $file->move($folder_tujuan, $filename);
+            File::delete($regulasi->file);
+            $regulasi->update([
+                'file' => $validatedData['file']
+            ]);
+        }
+
+        $regulasi->update([
+            'title' => $validatedData['title'],
+            'description' => $validatedData['description']
+        ]);
+
+        return redirect('/dashboard/regulasi')->with('success_update', 'Data berhasil diubah!');
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -119,6 +127,7 @@ class RegulasiController extends Controller
      */
     public function destroy(Regulasi $regulasi)
     {
+        File::delete($regulasi->file);
         $regulasi->delete();
         return redirect('/dashboard/regulasi')->with('success_delete', 'Data berhasil dihapus!');
     }

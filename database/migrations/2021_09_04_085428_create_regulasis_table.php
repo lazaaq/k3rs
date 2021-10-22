@@ -17,6 +17,7 @@ class CreateRegulasisTable extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->string('description')->nullable();
+            $table->string('slug')->nullable();
             $table->string('file')->nullable();
             $table->timestamps();
         });
