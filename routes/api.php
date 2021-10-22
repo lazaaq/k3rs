@@ -31,7 +31,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware => auth:sanctum'], function(){ 
+// Route::group(['middleware => auth:sanctum'], function () {
+    
+// });
+
+Route::middleware('api_auth')->group(function () {
     Route::resource('/regulasi', RegulasiController::class)->only(['index', 'show']);
     Route::resource('/apar', AparController::class)->only(['index', 'show', 'update']);
     Route::resource('/news', NewsController::class)->only(['index', 'show']);
