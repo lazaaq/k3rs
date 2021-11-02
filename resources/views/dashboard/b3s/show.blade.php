@@ -1,6 +1,6 @@
 @extends('layouts/dashboard')
 
-@section('title', 'Berita | Detail')
+@section('title', 'B3 | Detail')
 
 @section('css')
 <style>
@@ -24,12 +24,12 @@
 </style>
 @endsection
 
-@section('page-name', 'Pcra | Detail')
+@section('page-name', 'B3 | Detail')
 
 @section('breadcrumb')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="/dashboard/pcra">Pcra</a></li>
+    <li class="breadcrumb-item"><a href="/dashboard/b3s">B3</a></li>
     <li class="breadcrumb-item active">Detail</li>
 </ol>
 @endsection
@@ -45,14 +45,14 @@
     </div>
     @endif
     <div class="container mt-5">
-        <h1 class="mb-3">{{ $pcra->name }}</h1>
+        <h3 class="mb-3">B3</h3>
         <hr>
         <div class="row">
             <div class="col-lg-2 col-md-3 col-sm-4">
                 <p>Pegawai yang melaporkan</p>
             </div>
             <div class="col-lg-10 col-md-9 col-sm-8">
-                <a href="/dashboard/employee/{{$pcra->employee_id}}" class="btn btn-info">{{$pcra->employee->name}}</a>
+                <a href="/dashboard/employee/{{$b3->employee_id}}" class="btn btn-info">{{$b3->employee->name}}</a>
             </div>
         </div>
         <div class="row">
@@ -60,68 +60,136 @@
                 <p>Lokasi</p>
             </div>
             <div class="col-lg-10 col-md-9 col-sm-8">
-                <b>{{$pcra->location}}</b>
+                <b>{{$b3->location}}</b>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-2 col-md-3 col-sm-4">
-                <p>Surveyor</p>
+                <p>Waktu</p>
             </div>
             <div class="col-lg-10 col-md-9 col-sm-8">
-                <b>{{$pcra->surveyor}}</b>
+                <b>{{Carbon\Carbon::parse($b3->datetime)->format('d F Y H:i:s')}}</b>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-2 col-md-3 col-sm-4">
-                <p>Tanggal dan Waktu Pelaksanaan</p>
+                <p>Jenis</p>
             </div>
             <div class="col-lg-10 col-md-9 col-sm-8">
-                <b>{{ Carbon\Carbon::parse($pcra->time_start)->format('d F Y') }}</b>
+                <b>{{$b3->type}}</b>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-2 col-md-3 col-sm-4">
-                <p>Tanggal Selesai Proyek</p>
+                <p>Chronology</p>
             </div>
             <div class="col-lg-10 col-md-9 col-sm-8">
-                <b>{{ Carbon\Carbon::parse($pcra->time_end)->format('d F Y') }}</b>
+                <b>{{$b3->chronology}}</b>
+            </div>
+        </div>
+        <h3 class="mt-5">B3 - TIndakan Yang Dilakukan</h3>
+        <hr>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Lapor Supervisor Ruangan</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$b3->action->supervisor_room}}</b>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-2 col-md-3 col-sm-4">
-                <p>Departemen</p>
+                <p>Lapor Supervisor/petugas Sanitasi</p>
             </div>
             <div class="col-lg-10 col-md-9 col-sm-8">
-                <b>{{$pcra->dept}}</b>
+                <b>{{$b3->action->supervisor_sanitasi}}</b>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-2 col-md-3 col-sm-4">
-                <p>Rancangan Proyek</p>
+                <p>Mengeliminasi tumpahan dengan spil kit</p>
             </div>
             <div class="col-lg-10 col-md-9 col-sm-8">
-                <b>{{$pcra->plan}}</b>
+                <b>{{$b3->action->eliminate}}</b>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-2 col-md-3 col-sm-4">
-                <p>Kelengkapan APD</p>
+                <p>Menggunakan Sarung tangan</p>
             </div>
             <div class="col-lg-10 col-md-9 col-sm-8">
-                <b>{{$pcra->apd}}</b>
+                <b>{{$b3->action->glove}}</b>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-2 col-md-3 col-sm-4">
-                <p>Tanda Peringatan</p>
+                <p>Membuang limbah pembersih di tempat sampah infeksius</p>
             </div>
             <div class="col-lg-10 col-md-9 col-sm-8">
-                <b>{{$pcra->warning}}</b>
+                <b>{{$b3->action->waste}}</b>
+            </div>
+        </div>
+        <h3 class="mt-5">B3 - Detail</h3>
+        <hr>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Manusia (Jenis Luka dan Lokasi Tubuh)</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$b3->detail->human}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Cuci bersih dengan air mengalir</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$b3->detail->wash}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Obati luka sesuai dengan kondisi</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$b3->detail->injury}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Perlu Opname</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$b3->detail->opname}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Alat/Sarana</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$b3->detail->tool}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Dampak terhadap lingkungan</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$b3->detail->effect}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Tindak Lanjut</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$b3->detail->follow_up}}</b>
             </div>
         </div>
         <div class="row mt-5">
-            <a href="/dashboard/pcra" class="btn btn-secondary mr-2">Back</a>
-            <a class="btn btn-warning mr-2" href="/dashboard/pcra/{{ $pcra->id }}/edit">
+            <a href="/dashboard/b3s" class="btn btn-secondary mr-2">Back</a>
+            <a class="btn btn-warning mr-2" href="/dashboard/b3s/{{ $b3->id }}/edit">
                 <!-- <ion-icon name="pencil-outline"></ion-icon> -->
                 Edit
             </a>
@@ -133,17 +201,17 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Delete Pcra</h5>
+                            <h5 class="modal-title">Delete B3</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="document.getElementById('modal').style.display='none'">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>Are you sure to delete this pcra?</p>
+                            <p>Are you sure to delete this B3?</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="document.getElementById('modal').style.display='none'">Cancel</button>
-                            <form style="width: fit-content;" action="{{route('pcra.destroy', $pcra->id)}}" method="POST">
+                            <form style="width: fit-content;" action="/dashboard/b3s/{{ $b3->id }}/destroy" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-primary" type="submit" title="Hapus" id="hapus">

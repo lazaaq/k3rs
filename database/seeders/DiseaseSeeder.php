@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Disease;
+use App\Models\DiseaseDetail;
 use App\Models\DiseaseList;
 use App\Models\DiseaseVictimEmployee;
 use App\Models\DiseaseVictimNonEmployee;
@@ -20,21 +21,30 @@ class DiseaseSeeder extends Seeder
      */
     public function run()
     {
-        for($i=1; $i<=20; $i++){
+        DiseaseList::create([
+            'disease_name' => 'Patah Tulang'
+        ]);
+        DiseaseList::create([
+            'disease_name' => 'Covid 19'
+        ]);
+        DiseaseList::create([
+            'disease_name' => 'Serangan Jantung'
+        ]);
+        for ($i = 1; $i <= 20; $i++) {
             Disease::factory(1)->create();
 
             // Victim Employee
-            DiseaseVictimEmployee::factory(mt_rand(1,5))->create([
+            DiseaseVictimEmployee::factory(mt_rand(1, 5))->create([
                 'disease_id' => $i,
 
             ]);
 
             // Victim Non Employee
-            DiseaseVictimNonEmployee::factory(mt_rand(1,5))->create([
+            DiseaseVictimNonEmployee::factory(mt_rand(1, 5))->create([
                 'disease_id' => $i,
 
             ]);
-            
+
             // Witness Employee
             DiseaseWitnessEmployee::factory(1)->create([
                 'disease_id' => $i,
@@ -46,16 +56,10 @@ class DiseaseSeeder extends Seeder
                 'disease_id' => $i,
 
             ]);
-        }
 
-        DiseaseList::create([
-            'disease_name' => 'Patah Tulang'
-        ]);
-        DiseaseList::create([
-            'disease_name' => 'Covid 19'
-        ]);
-        DiseaseList::create([
-            'disease_name' => 'Serangan Jantung'
-        ]);
+            DiseaseDetail::factory(1)->create([
+                'disease_id' => $i
+            ]);
+        }
     }
 }

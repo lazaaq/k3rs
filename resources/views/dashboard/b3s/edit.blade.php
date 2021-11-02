@@ -1,6 +1,6 @@
 @extends('layouts/dashboard')
 
-@section('title', 'Pcra | Edit')
+@section('title', 'B3 | Edit')
 
 @section('css')
 <style>
@@ -14,39 +14,39 @@
 </style>
 @endsection
 
-@section('page-name', 'Pcra | Edit')
+@section('page-name', 'B3 | Edit')
 
 @section('breadcrumb')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="/dashboard/pcra">Pcra</a></li>
+    <li class="breadcrumb-item"><a href="/dashboard/b3s">B3</a></li>
     <li class="breadcrumb-item active">Edit</li>
 </ol>
 @endsection
 
 @section('contents')
 <div class="contents container pb-5">
-    <form action="{{route('pcra.update', $pcra->id)}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('b3s.update', $b3->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Edit PCRA</h3>
+                <h3 class="card-title">Edit B3</h3>
             </div>
             <form>
                 <div class="card-body">
                     <div class="form-group">
                         <label for="name">Nama</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{$pcra->name}}" placeholder="Masukkan Nama Pcra.." required>
+                        <input type="text" class="form-control" id="name" name="name" value="{{$b3->name}}" placeholder="Masukkan Nama B3.." required>
                     </div>
                     <div class="form-group">
                         <label for="surveyor">Surveyor</label>
-                        <input type="text" class="form-control" id="surveyor" name="surveyor" value="{{$pcra->surveyor}}" placeholder="Masukkan nama Surveyor.." required>
+                        <input type="text" class="form-control" id="surveyor" name="surveyor" value="{{$b3->surveyor}}" placeholder="Masukkan nama B3.." required>
                     </div>
                     <div class="form-group">
                         <label>Tanggal dan Waktu Pelaksanaan</label>
                         <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime" value="{{ Carbon\Carbon::parse($pcra->time_start)->format('d m Y H:i:s') }}" />
+                            <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime" value="{{ Carbon\Carbon::parse($b3->time_start)->format('d m Y H:i:s') }}" />
                             <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
@@ -55,7 +55,7 @@
                     <div class="form-group">
                         <label>Tanggal dan Waktu Selesai</label>
                         <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime" value="{{ Carbon\Carbon::parse($pcra->time_end)->format('d m Y H:i:s') }}" />
+                            <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime" value="{{ Carbon\Carbon::parse($b3->time_end)->format('d m Y H:i:s') }}" />
                             <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
@@ -63,11 +63,11 @@
                     </div>
                     <div class="form-group">
                         <label for="surveyor">Surveyor</label>
-                        <input type="text" class="form-control" id="surveyor" name="surveyor" value="{{$pcra->surveyor}}" placeholder="Masukkan nama Surveyor.." required>
+                        <input type="text" class="form-control" id="surveyor" name="surveyor" value="{{$b3->surveyor}}" placeholder="Masukkan nama Surveyor.." required>
                     </div>
                     <div class="form-group">
                         <label for="dept">Departemen</label>
-                        <input type="text" class="form-control" id="dept" name="dept" value="{{$pcra->dept}}" placeholder="Masukkan nama Departemen.." required>
+                        <input type="text" class="form-control" id="dept" name="dept" value="{{$b3->dept}}" placeholder="Masukkan nama Departemen.." required>
                     </div>
                     <div class="row">
                         <div class="col-4">

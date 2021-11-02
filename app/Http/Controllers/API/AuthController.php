@@ -28,7 +28,7 @@ class AuthController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Authorized',
-            'user' => Employee::select('name', 'email', 'address')->where('email', $request->email)->first(),
+            'user' => $user,
             'token' => $personal_access_token->token,
         ], 200);
     }

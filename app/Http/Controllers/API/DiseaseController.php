@@ -184,6 +184,8 @@ class DiseaseController extends Controller
     public function list_disease()
     {
         return response()->json([
+            'success' => true,
+            'message' => 'Data List Penyakit berhasil didapatkan!',
             'diseases' => DiseaseList::all(),
         ]);
     }

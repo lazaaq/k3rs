@@ -11,6 +11,10 @@ class Pcras extends Model
     
     protected $guarded = ['id'];
 
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
     public function construction()
     {
         return $this->hasOne(PcrasConstruction::class);

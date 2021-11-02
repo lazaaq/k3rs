@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Accident;
+use App\Models\AccidentDetail;
 use App\Models\AccidentVictimEmployee;
 use App\Models\AccidentVictimNonEmployee;
 use App\Models\AccidentWitnessEmployee;
@@ -44,6 +45,9 @@ class AccidentSeeder extends Seeder
             AccidentWitnessNonEmployee::factory(1)->create([
                 'accident_id' => $i,
 
+            ]);
+            AccidentDetail::factory(1)->create([
+                'accident_id' => $i
             ]);
         }
     }

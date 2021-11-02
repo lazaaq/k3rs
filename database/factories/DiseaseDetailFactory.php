@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Disease;
 use App\Models\DiseaseDetail;
+use App\Models\DiseaseList;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class DiseaseDetailFactory extends Factory
@@ -27,7 +28,7 @@ class DiseaseDetailFactory extends Factory
             'chronology' => $this->faker->text(),
             'faskes' => $this->faker->sentence(),
             'cause' => $this->faker->sentence(),
-            'effect' => $this->faker->randomElement(['patah tulang', 'covid', 'serangan jantung', 'lainnya']),
+            'effect_id' => mt_rand(1, DiseaseList::all()->count()),
         ];
     }
 }

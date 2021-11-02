@@ -13,6 +13,10 @@ class B3s extends Model
 
     protected $guarded = [];
 
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
     public function action()
     {
         return $this->hasOne(B3sAction::class);
