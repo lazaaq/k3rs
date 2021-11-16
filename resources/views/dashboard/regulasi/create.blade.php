@@ -26,25 +26,32 @@
 
 @section('contents')
 <div class="contents container pb-5">
-    <form action="{{route('regulasi.store')}}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <div class="mb-3">
-            <label for="title" class="form-label">Judul</label>
-            <input type="text" class="form-control" id="title" name="title" required>
+    <div class="card card-primary">
+        <div class="card-header">
+            Create Regulasi
         </div>
-        <div class="mb-3">
-            <label for="description" class="form-label">Deskripsi</label>
-            <input type="text" class="form-control" id="description" name="description" required>
+        <div class="card-body">
+            <form action="{{route('regulasi.store')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="mb-3">
+                    <label for="title" class="form-label">Judul</label>
+                    <input type="text" class="form-control" id="title" name="title" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Deskripsi</label>
+                    <input type="text" class="form-control" id="description" name="description" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Pilih File</label>
+                    <br>
+                    <input type="file" class="form-control" name="file" required>
+                </div>
+                <div class="row">
+                    <a href="/dashboard/regulasi" class="btn btn-secondary mr-2">Kembali</a>
+                    <button class="btn btn-primary">Submit</button>
+                </div>
+            </form>
         </div>
-        <div class="mb-3">
-            <label for="description" class="form-label">Pilih File</label>
-            <br>
-            <input type="file" class="" name="file" required>
-        </div>
-        <div class="row">
-            <a href="/dashboard/regulasi" class="btn btn-secondary mr-2">Back</a>
-            <button class="btn btn-primary">Submit</button>
-        </div>
-    </form>
+    </div>
 </div>
 @endsection
