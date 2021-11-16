@@ -45,7 +45,8 @@
     </div>
     @endif
     <div class="container mt-5">
-        <h3 class="mb-3">B3</h3>
+        {{-- B3 --}}
+        <h3 class="">B3</h3>
         <hr>
         <div class="row">
             <div class="col-lg-2 col-md-3 col-sm-4">
@@ -87,7 +88,8 @@
                 <b>{{$b3->chronology}}</b>
             </div>
         </div>
-        <h3 class="mt-5">B3 - TIndakan Yang Dilakukan</h3>
+        {{-- Tindakan yang dilakukan --}}
+        <h3 class="mt-5">B3 - Tindakan Yang Dilakukan</h3>
         <hr>
         <div class="row">
             <div class="col-lg-2 col-md-3 col-sm-4">

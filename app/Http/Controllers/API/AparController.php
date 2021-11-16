@@ -123,7 +123,9 @@ class AparController extends Controller
         ]);
 
         $apar->update([
-            'last_image' => $validatedData['image']
+            'last_image' => $validatedData['image'],
+            'last_condition'=> $validatedData['condition'],
+            'last_detail' => $validatedData['detail']
         ]);
 
         return response()->json([

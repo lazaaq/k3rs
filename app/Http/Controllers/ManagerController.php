@@ -43,7 +43,7 @@ class ManagerController extends Controller
     public function create()
     {
         return view('dashboard/manager/create', [
-            'active' => '',
+            'active' => 'manager',
             'salaries' => Salary::all()->sortBy('salary_amount'),
 
         ]);
@@ -81,7 +81,7 @@ class ManagerController extends Controller
     public function show(Manager $manager)
     {
         return view('dashboard/manager/show', [
-            'active' => '',
+            'active' => 'manager',
             'manager' => $manager,
 
         ]);
@@ -96,7 +96,7 @@ class ManagerController extends Controller
     public function edit(Manager $manager)
     {
         return view('dashboard/manager/edit', [
-            'active' => '',
+            'active' => 'manager',
             'manager' => $manager,
             'salaries' => Salary::all()->sortBy('salary_amount'),
 

@@ -63,7 +63,7 @@ class DiseaseController extends Controller
     public function show(Disease $disease)
     {
         return view('dashboard/disease/show', [
-            'active' => '',
+            'active' => 'disease',
             'disease' => Disease::with('employee')->find($disease->id), 
             'victim_employees' => DiseaseVictimEmployee::with('disease', 'employee')->where('disease_id', $disease->id)->get(),
             'victim_non_employees' => DiseaseVictimNonEmployee::with('disease')->where('disease_id', $disease->id)->get(),
@@ -82,7 +82,7 @@ class DiseaseController extends Controller
     public function edit(Disease $disease)
     {
         return view('dashboard/disease/edit', [
-            'active' => '',
+            'active' => 'disease',
             'disease' => $disease,
 
         ]);

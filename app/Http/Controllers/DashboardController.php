@@ -19,7 +19,7 @@ class DashboardController extends Controller
     public function index()
     {
         return view('dashboard/index', [
-            'title' => 'BADASS | Dashboard',
+            'title' => 'K3RS | Dashboard',
             'active' => 'dashboard',
             'regulasi_count' => Regulasi::all()->count(),
             'apar_count' => Apar::all()->count(),

@@ -20,6 +20,8 @@ class CreateAparsTable extends Migration
             $table->string('code', 2)->nullable();
             $table->date('expired')->nullable();
             $table->string('last_image')->nullable();
+            $table->enum('last_condition', ['baik', 'tidak baik'])->nullable();
+            $table->text('last_detail')->nullable();
             $table->timestamps();
         });
     }

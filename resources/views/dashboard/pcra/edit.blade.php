@@ -33,7 +33,7 @@
             <div class="card-header">
                 <h3 class="card-title">Edit PCRA</h3>
             </div>
-            <form>
+            <form name="form1">
                 <div class="card-body">
                     <div class="form-group">
                         <label for="name">Nama</label>
@@ -45,18 +45,18 @@
                     </div>
                     <div class="form-group">
                         <label>Tanggal dan Waktu Pelaksanaan</label>
-                        <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime" value="{{ Carbon\Carbon::parse($pcra->time_start)->format('d m Y H:i:s') }}" />
-                            <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
+                        <div class="input-group date" id="reservationdatetime1" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime1" name="time_start" id="time_start" value="{{ $pcra->time_start }}"/>
+                            <div class="input-group-append" data-target="#reservationdatetime1" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Tanggal dan Waktu Selesai</label>
-                        <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime" value="{{ Carbon\Carbon::parse($pcra->time_end)->format('d m Y H:i:s') }}" />
-                            <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
+                        <div class="input-group date" id="reservationdatetime2" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime2" value="{{ Carbon\Carbon::parse($pcra->time_end)->format('d m Y H:i:s') }}" name="time_end" />
+                            <div class="input-group-append" data-target="#reservationdatetime2" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
                         </div>
@@ -106,6 +106,7 @@
 
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
+                    <a href="{{ route('pcra.show', $pcra->id) }}" class="btn btn-danger">Batal</a>
                 </div>
             </form>
         </div>
@@ -115,10 +116,17 @@
 
 @section('js')
 <script>
-    $('#reservationdatetime').datetimepicker({
+    $('#reservationdatetime1').datetimepicker({
         icons: {
             time: 'far fa-clock'
         }
     });
+    $('#reservationdatetime2').datetimepicker({
+        icons: {
+            time: 'far fa-clock'
+        }
+    });
+    var Myelement = document.getElementById('time_start');
+    Myelement.setAttribute('value','12:12:12');
 </script>
 @endsection

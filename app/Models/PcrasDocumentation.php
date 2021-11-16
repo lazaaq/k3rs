@@ -12,4 +12,6 @@ class PcrasDocumentation extends Model
     protected $table = 'pcras_documentation';
 
     protected $guarded = ['id'];
+
+    protected $hidden = [];
 }

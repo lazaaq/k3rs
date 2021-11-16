@@ -13,7 +13,7 @@ class ProfilController extends Controller
     public function index()
     {
         return view('dashboard/user/index', [
-            'active' => '',
+            'active' => 'profil',
             'user' => Auth::User(),
 
         ]);
@@ -22,7 +22,7 @@ class ProfilController extends Controller
     public function change()
     {
         return view('dashboard/user/change', [
-            'active' => '',
+            'active' => 'profil',
             'user' => Auth::user(),
 
         ]);
@@ -41,7 +41,7 @@ class ProfilController extends Controller
     public function check()
     {
         return view('dashboard/user/check', [
-            'active' => '',
+            'active' => 'profil',
             'user' => Auth::user(),
 
         ]);

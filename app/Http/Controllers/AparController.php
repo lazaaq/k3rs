@@ -31,7 +31,7 @@ class AparController extends Controller
     public function create()
     {
         return view('dashboard/apar/create', [
-            'active' => '',
+            'active' => 'apar',
 
         ]);
     }
@@ -79,7 +79,7 @@ class AparController extends Controller
     public function show($id)
     {
         return view('dashboard/apar/show', [
-            'active' => '',
+            'active' => 'apar',
             'apar' => Apar::find($id),
             'history_apar' => AparHistory::where('apar_id', $id)->get()
         ]);
@@ -94,7 +94,7 @@ class AparController extends Controller
     public function edit($id)
     {
         return view('dashboard/apar/edit', [
-            'active' => '',
+            'active' => 'apar',
             'apar' => Apar::find($id),
         ]);
     }

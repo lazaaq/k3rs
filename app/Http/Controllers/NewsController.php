@@ -43,7 +43,7 @@ class NewsController extends Controller
     public function create()
     {
         return view('dashboard/news/create', [
-            'active' => '',
+            'active' => 'news',
 
         ]);
     }
@@ -80,7 +80,7 @@ class NewsController extends Controller
     public function show($id)
     {
         return view('dashboard/news/show', [
-            'active' => '',
+            'active' => 'news',
             'news' => News::find($id),
 
         ]);
@@ -95,7 +95,7 @@ class NewsController extends Controller
     public function edit($id)
     {
         return view('dashboard/news/edit', [
-            'active' => '',
+            'active' => 'news',
             'news' => News::find($id),
         ]);
     }

@@ -45,7 +45,7 @@
     </div>
     @endif
     <div class="container mt-5">
-        <h1 class="mb-3">{{ $pcra->name }}</h1>
+        <h3 class="mb-3">PCRA</h3>
         <hr>
         <div class="row">
             <div class="col-lg-2 col-md-3 col-sm-4">
@@ -53,6 +53,14 @@
             </div>
             <div class="col-lg-10 col-md-9 col-sm-8">
                 <a href="/dashboard/employee/{{$pcra->employee_id}}" class="btn btn-info">{{$pcra->employee->name}}</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Name</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->name}}</b>
             </div>
         </div>
         <div class="row">
@@ -119,6 +127,272 @@
                 <b>{{$pcra->warning}}</b>
             </div>
         </div>
+        {{-- Pembatas Konstruksi --}}
+        <h3 class="mt-5">PCRA - Pembatas Konstruksi</h3>
+        <hr>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Celah Penghalang Debu</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->construction->dust}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Ada Pembatas</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->construction->barrier}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Akses Pintu Tertutup</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->construction->door_access}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Tanda Area Berdebu</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->construction->dusty_area}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Tanda Pintu Harus Tertutup</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->construction->sign_door}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Ventilasi Tertutup</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->construction->vent}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Komentar</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->construction->comment}}</b>
+            </div>
+        </div>
+        {{-- Daerah Akses Staff Pasien --}}
+        <h3 class="mt-5">PCRA - Daerah Akses Staff Pasien</h3>
+        <hr>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Plafon Tertutup & Kering</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->access_areas->plafon}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Lantai Bersih</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->access_areas->floor_clean}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Dinding Utuh dan Kering</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->access_areas->wall}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Permukaan Lantai/Dinding Bebas Debu</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->access_areas->floor_dustfree}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Pipa Ventilasi Ditutup</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->access_areas->vent}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Tidak Ada Gangguan Binatang Kecil</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->access_areas->insect}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Komentar</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->access_areas->comment}}</b>
+            </div>
+        </div>
+        {{-- Arus Lalu Lintas --}}
+        <h3 class="mt-5">PCRA - Arus Lalu Lintas</h3>
+        <hr>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Pekerja Tidak Memasuki Daerah Perawatan</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->traffic->barrier}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Tempat Pembuangan Puing Tertutup</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->traffic->remove_puing}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Rute & Waktu Pembuangan Terjadwal</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->traffic->route}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Akses Bebas Hambatan</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->traffic->access}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Komentar</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->traffic->comment}}</b>
+            </div>
+        </div>
+        {{-- Detail --}}
+        <h3 class="mt-5">PCRA - Detail</h3>
+        <hr>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Hal Hal Yang Tidak Memenuhi Syarat</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->detail->not_eligible}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Dilaporkan Kepada</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->detail->reported}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Tanggal Laporan</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->detail->reporting_date}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Tanggal Survey Ulang</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->detail->re_survey_date}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Surveyor</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->detail->surveyor}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Sesuai Pencapaian</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->detail->accordance}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>Tindakan Lebih Lanjut</p>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8">
+                <b>{{$pcra->detail->further_action}}</b>
+            </div>
+        </div>
+        {{-- Dokumentasi Renovasi --}}
+        <h3 class="mt-5">PCRA - Dokumentasi Renovasi</h3>
+        <hr>
+        <div class="row">
+            <table class="table table-hover table-striped">
+                <tr>
+                    <th>No</th>
+                    <th>Image</th>
+                    <th>Keterangan</th>
+                </tr>
+                @foreach($pcra->documentation as $docs)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{ 'documentation_image_' . $docs->id }}">
+                            Lihat Gambar
+                        </button>
+                        
+                        <!-- Modal -->
+                        <div class="modal fade" id="{{ 'documentation_image_' . $docs->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="{{ asset($docs->image) }}" alt="" width="100%">
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>{{ $docs->keterangan }}</td>
+                </tr>
+                @endforeach
+            </table>
+        </div>
+        {{-- Tombol --}}
         <div class="row mt-5">
             <a href="/dashboard/pcra" class="btn btn-secondary mr-2">Back</a>
             <a class="btn btn-warning mr-2" href="/dashboard/pcra/{{ $pcra->id }}/edit">

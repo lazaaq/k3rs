@@ -40,7 +40,7 @@ class BriefingController extends Controller
     public function create()
     {
         return view('dashboard/briefing/create',[
-            'active' => '',
+            'active' => 'briefing',
 
         ]);
     }
@@ -71,7 +71,7 @@ class BriefingController extends Controller
     public function show(Briefing $briefing)
     {
         return view('dashboard/briefing/show', [
-            'active' => '',
+            'active' => 'briefing',
             'briefing' => $briefing,
             'briefing_presence' => BriefingPresence::with('employee')->where('briefing_id', $briefing->id)->get(),
             'employees' => Employee::all(),
@@ -88,7 +88,7 @@ class BriefingController extends Controller
     public function edit($id)
     {
         return view('dashboard/briefing/edit', [
-            'active' => '',
+            'active' => 'briefing',
             'briefing' => Briefing::find($id),
 
         ]);

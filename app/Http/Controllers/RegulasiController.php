@@ -29,7 +29,7 @@ class RegulasiController extends Controller
     public function create()
     {
         return view('dashboard/regulasi/create', [
-            'active' => '',
+            'active' => 'regulasi',
 
         ]);
     }
@@ -80,7 +80,7 @@ class RegulasiController extends Controller
     public function edit(Regulasi $regulasi)
     {
         return view('dashboard/regulasi/edit', [
-            'active' => '',
+            'active' => 'regulasi',
             'regulasi' => $regulasi,
 
         ]);

@@ -11,7 +11,7 @@ class DiseaseVictimEmployeeController extends Controller
     public function index(Disease $disease, DiseaseVictimEmployee $victim)
     {
         return view('dashboard/disease/victim_employee/index',[
-            'active' => '',
+            'active' => 'disease',
             'disease' => $disease,
             'victim' => DiseaseVictimEmployee::with('employee')->find($victim->id),
 

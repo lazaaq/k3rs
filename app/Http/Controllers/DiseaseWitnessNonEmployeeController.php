@@ -11,7 +11,7 @@ class DiseaseWitnessNonEmployeeController extends Controller
     public function index(Disease $disease, DiseaseWitnessNonEmployee $witness)
     {
         return view('dashboard/disease/witness_non_employee/index',[
-            'active' => '',
+            'active' => 'disease',
             'disease' => $disease,
             'witness' => $witness
         ]);

@@ -46,7 +46,7 @@ class EmployeeController extends Controller
     public function create()
     {
         return view('dashboard/employee/create', [
-            'active' => '',
+            'active' => 'employee',
             'managers' => Manager::all(),
             'salaries' => Salary::all()->sortBy('salary_amount'),
 
@@ -83,7 +83,7 @@ class EmployeeController extends Controller
     public function show($id)
     {
         return view('dashboard/employee/show', [
-            'active' => '',
+            'active' => 'employee',
             'employee' => Employee::with(['manager', 'salary'])->find($id),
         ]);
     }
@@ -97,7 +97,7 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         return view('dashboard/employee/edit', [
-            'active' => '',
+            'active' => 'employee',
             'employee' => Employee::with(['manager', 'salary'])->find($id),
             'managers' => Manager::all(),
             'salaries' => Salary::all()->sortBy('salary_amount'),

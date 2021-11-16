@@ -63,7 +63,7 @@ class AccidentController extends Controller
     public function show(Accident $accident)
     {
         return view('dashboard/accident/show', [
-            'active' => '',
+            'active' => 'accident',
             'accident' => Accident::with('employee')->find($accident->id),
             'victim_employees' => AccidentVictimEmployee::with('accident', 'employee')->where('accident_id', $accident->id)->get(),
             'victim_non_employees' => AccidentVictimNonEmployee::with('accident')->where('accident_id', $accident->id)->get(),
@@ -82,7 +82,7 @@ class AccidentController extends Controller
     public function edit(Accident $accident)
     {
         return view('dashboard/accident/edit', [
-            'active' => '',
+            'active' => 'accident',
             'accident' => $accident,
 
         ]);

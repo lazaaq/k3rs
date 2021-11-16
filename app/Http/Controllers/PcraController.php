@@ -64,8 +64,9 @@ class PcraController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Pcras $pcra)
+    public function show($id)
     {
+        $pcra = Pcras::with(['construction', 'access_areas', 'traffic', 'detail', 'documentation'])->find($id);
         return view('dashboard/pcra/show', [
             'active' => 'pcra',
             'pcra' => $pcra
