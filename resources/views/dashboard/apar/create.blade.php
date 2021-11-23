@@ -39,11 +39,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="location" class="form-label">Lokasi</label>
-                        <input type="text" class="form-control" id="location" name="location" required>
+                        <input type="text" class="form-control" id="location" name="location" required placeholder="Lokasi">
                     </div>
                     <div class="mb-3">
                         <label for="code" class="form-label">Kode</label>
-                        <input type="text" class="form-control" id="code" name="code" required>
+                        <input type="text" class="form-control" id="code" name="code" required placeholder="Kode Apar">
                     </div>
                     <div class="mb-3">
                         <label for="expired" class="form-label">Kadaluwarsa</label>

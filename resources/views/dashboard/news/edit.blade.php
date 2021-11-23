@@ -36,11 +36,11 @@
                 <input type="hidden" name="id" id="id" value="{{ $news->id }}">
                 <div class="form-group">
                     <label for="title">Judul</label>
-                    <input type="text" class="form-control" id="title" name="title" value="{{ $news->title }}" required>
+                    <input type="text" class="form-control" id="title" name="title" value="{{ $news->title }}" required placeholder="Judul">
                 </div>
                 <div class="form-group">
                     <label for="author">Author</label>
-                    <input type="text" class="form-control" id="author" name="author" value="{{ $news->author }}" required>
+                    <input type="text" class="form-control" id="author" name="author" value="{{ $news->author }}" required placeholder="Author">
                 </div>
                 <div class="form-group">
                     <label for="image">Gambar</label>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="form-group">
                     <label for="body">Body</label>
-                    <textarea type="text" class="form-control" id="body" name="body" cols="30" rows="10" required>{{ $news->body }}</textarea>
+                    <textarea type="text" class="form-control" id="body" name="body" cols="30" rows="10" required placeholder="Body">{{ $news->body }}</textarea>
                 </div>
                 <div class="row">
                     <a href="/dashboard/news/{{ $news->id }}" class="btn btn-secondary mx-2">Kembali</a>

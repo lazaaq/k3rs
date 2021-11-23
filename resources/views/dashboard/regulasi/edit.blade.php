@@ -37,11 +37,11 @@
                 <input type="hidden" name="id" id="id" value="{{ $regulasi->id }}">
                 <div class="form-group">
                     <label for="title">Judul</label>
-                    <input type="text" class="form-control" id="title" name="title" value="{{ $regulasi->title }}" required>
+                    <input type="text" class="form-control" id="title" name="title" value="{{ $regulasi->title }}" required placeholder="Judul">
                 </div>
                 <div class="form-group">
                     <label for="description">Deskripsi</label>
-                    <input type="text" class="form-control" id="description" name="description" value="{{ $regulasi->description }}" required>
+                    <input type="text" class="form-control" id="description" name="description" value="{{ $regulasi->description }}" required placeholder="Deskripsi">
                 </div>
                 <div class="form-group">
                     <label for="file">Pilih File</label>

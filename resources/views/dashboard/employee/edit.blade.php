@@ -31,7 +31,7 @@
                     <input type="hidden" name="id" id="id" value="{{ $employee->id }}">
                     <div class="mb-3">
                         <label for="name" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{ $employee->name }}" required>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ $employee->name }}" required placeholder="Nama Lengkap">
                     </div>
                     <div class="form-group mb-3">
                         <label for="manager_id" class="form-label">Manager</label>
@@ -52,11 +52,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" value="{{ $employee->email }}" required>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ $employee->email }}" required placeholder="Alamat Email">
                     </div>
                     <div class="mb-3">
-                        <label for="address" class="form-label">Alamat</label>
-                        <textarea class="form-control" id="address" name="address" rows="5" required>{{ $employee->address }}</textarea>
+                        <label for="address" class="form-label">Alamat Rumah</label>
+                        <textarea class="form-control" id="address" name="address" rows="5" required placeholder="Alamat Rumah">{{ $employee->address }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="birth" class="form-label">Tanggal Lahir</label>

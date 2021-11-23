@@ -29,7 +29,7 @@
             </div>
             <div class="mb-3">
                 <label for="result" class="form-label">Hasil</label>
-                <textarea class="form-control" id="result" name="result" rows="10" required></textarea>
+                <textarea class="form-control" id="result" name="result" rows="10" required placeholder="Hasil Briefing"></textarea>
             </div>
             <div class="row">
                 <a class="btn btn-secondary ml-3 mr-2" href="/dashboard/briefing">Back</a>

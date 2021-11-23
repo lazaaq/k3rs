@@ -35,11 +35,11 @@
                 @csrf
                 <div class="mb-3">
                     <label for="title" class="form-label">Judul</label>
-                    <input type="text" class="form-control" id="title" name="title" required>
+                    <input type="text" class="form-control" id="title" name="title" required placeholder="Judul">
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Deskripsi</label>
-                    <input type="text" class="form-control" id="description" name="description" required>
+                    <input type="text" class="form-control" id="description" name="description" required placeholder="Deskripsi">
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Pilih File</label>

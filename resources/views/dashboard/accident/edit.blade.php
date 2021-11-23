@@ -29,11 +29,11 @@
         </div>
         <div class="mb-3">
             <label for="location" class="form-label">Location</label>
-            <input type="text" class="form-control" id="location" name="location" value="{{ $accident->location }}" required>
+            <input type="text" class="form-control" id="location" name="location" value="{{ $accident->location }}" required placeholder="Lokasi">
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Image</label>
-            <input type="text" class="form-control" id="image" name="image" value="{{ $accident->image }}" required>
+            <input type="file" class="form-control" id="image" name="image" value="{{ $accident->image }}" required>
         </div>
         <div class="row">
             <a href="/dashboard/accident/{{ $accident->id }}" class="btn btn-secondary mx-2">Back</a>
