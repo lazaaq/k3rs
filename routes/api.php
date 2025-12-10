@@ -28,14 +28,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware => auth:sanctum'], function () {
-    Route::resource('/regulasi_api', RegulasiController::class);
-    Route::resource('/apar', AparController::class);
-    Route::resource('/news', NewsController::class);
-    Route::resource('/employee', EmployeeController::class);
-    Route::resource('/manager', ManagerController::class);
-    Route::resource('/briefing', BriefingController::class);
-    Route::resource('/accident', AccidentController::class);
-    Route::resource('/disease', DiseaseController::class);
+    // Route::resource('/regulasi', RegulasiController::class);
+    // Route::resource('/apar', AparController::class);
+    // Route::resource('/news', NewsController::class);
+    // Route::resource('/employee', EmployeeController::class);
+    // Route::resource('/manager', ManagerController::class);
+    // Route::resource('/briefing', BriefingController::class);
+    // Route::resource('/accident', AccidentController::class);
+    // Route::resource('/disease', DiseaseController::class);
 });
 
 Route::post('/login', [AuthController::class, 'login']);
