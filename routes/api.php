@@ -8,6 +8,7 @@ use App\Http\Controllers\API\ManagerController;
 use App\Http\Controllers\API\BriefingController;
 use App\Http\Controllers\API\AccidentController;
 use App\Http\Controllers\API\DiseaseController;
+use App\Http\Controllers\API\NewsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,8 +27,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware => auth:sanctum'], function(){
-    Route::resource('/regulasi', RegulasiController::class);
+Route::group(['middleware => auth:sanctum'], function () {
+    Route::resource('/regulasi_api', RegulasiController::class);
     Route::resource('/apar', AparController::class);
     Route::resource('/news', NewsController::class);
     Route::resource('/employee', EmployeeController::class);
